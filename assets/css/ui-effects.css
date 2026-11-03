@@ -1,0 +1,84 @@
+/* Hiệu ứng giao diện. Không thay đổi kích thước hay logic mua hàng. */
+.btn, .action-icon, .category-card, .product-card, .auth-social-button {
+  transition: transform 250ms ease, box-shadow 250ms ease,
+    background-color 250ms ease, border-color 250ms ease, color 250ms ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--color-secondary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms ease;
+}
+.nav-link.active::after, .nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.btn .material-symbols-outlined, .category-card .material-symbols-outlined {
+  transition: transform 250ms ease;
+}
+.product-thumb img, .category-card img {
+  transition: transform 600ms ease;
+}
+.category-card { overflow: hidden; }
+.footer-links a { display: inline-block; transition: color 200ms ease, transform 200ms ease; }
+.form-control { transition: border-color 200ms ease, box-shadow 200ms ease; }
+.form-control:focus { box-shadow: 0 0 0 3px var(--color-secondary-light); }
+.btn:focus-visible, .category-card:focus-visible, .action-icon:focus-visible {
+  outline: 2px solid var(--color-secondary-hover);
+  outline-offset: 4px;
+}
+
+/* Chỉ áp dụng chuyển động hover trên thiết bị có chuột. */
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover::after { transform: scaleX(1); }
+  .btn:not(:disabled):not([aria-disabled="true"]):hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card);
+  }
+  .btn:hover .material-symbols-outlined, .category-card:hover .material-symbols-outlined {
+    transform: translateX(4px);
+  }
+  .action-icon:hover { transform: translateY(-3px); }
+  .category-card:hover, .product-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-secondary);
+    box-shadow: var(--shadow-card);
+  }
+  .product-card:hover .product-thumb img, .category-card:hover img { transform: scale(1.06); }
+  .auth-social-button:hover { transform: translateY(-2px); }
+  .footer-links a:hover { transform: translateX(4px); }
+}
+.btn:not(:disabled):active { transform: translateY(0); }
+
+/* Hero xuất hiện lần lượt, không chạy lặp liên tục. */
+.home-hero .max-w-2xl > * { animation: ui-enter 700ms ease backwards; }
+.home-hero .max-w-2xl > :nth-child(2) { animation-delay: 100ms; }
+.home-hero .max-w-2xl > :nth-child(3) { animation-delay: 200ms; }
+.home-hero .max-w-2xl > :nth-child(4) { animation-delay: 300ms; }
+.ui-reveal { animation: ui-enter 650ms ease backwards; }
+@keyframes ui-enter {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tôn trọng chế độ giảm chuyển động; nội dung luôn đọc được. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .btn:hover, .action-icon:hover, .category-card:hover, .product-card:hover,
+  .auth-social-button:hover, .footer-links a:hover,
+  .product-card:hover .product-thumb img, .category-card:hover img,
+  .btn:hover .material-symbols-outlined, .category-card:hover .material-symbols-outlined {
+    transform: none;
+  }
+}

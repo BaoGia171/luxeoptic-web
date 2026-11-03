@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/ui-effects.css">
 </head>
 <body class="bg-main text-primary antialiased">
 
@@ -137,7 +138,7 @@
     <!-- 5. CATEGORY SHOWCASE -->
     <section class="py-20">
       <div class="container">
-        <div class="flex flex-col small-flex-row small-items-end justify-between mb-12">
+        <div data-ui-reveal class="flex flex-col small-flex-row small-items-end justify-between mb-12">
           <div>
             <span class="uppercase-spaced text-muted text-xs">Danh mục chế tác</span>
             <h2 class="font-headline text-3xl small-text-4xl font-normal mt-1">Kiến Trúc Tầm Nhìn</h2>
@@ -149,7 +150,7 @@
 
         <div class="grid grid-cols-1 small-grid-cols-2 desktop-grid-cols-4 gap-6">
           <!-- Category 1 -->
-          <a href="products.html?category=kinh-ram" class="group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
+          <a href="products.html?category=kinh-ram" class="category-card group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
             <div class="aspect-4-3 bg-surface-low overflow-hidden mb-4">
               <img src="assets/images/cat-sunglasses.jpg" alt="Kính Râm" class="w-full h-full object-cover group-hover-scale-105 transition-transform duration-500">
             </div>
@@ -162,7 +163,7 @@
           </a>
 
           <!-- Category 2 -->
-          <a href="products.html?category=gong-kinh-can" class="group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
+          <a href="products.html?category=gong-kinh-can" class="category-card group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
             <div class="aspect-4-3 bg-surface-low overflow-hidden mb-4">
               <img src="assets/images/cat-optical.jpg" alt="Gọng Kính Cận" class="w-full h-full object-cover group-hover-scale-105 transition-transform duration-500">
             </div>
@@ -175,7 +176,7 @@
           </a>
 
           <!-- Category 3 -->
-          <a href="products.html?category=chong-anh-sang-xanh" class="group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
+          <a href="products.html?category=chong-anh-sang-xanh" class="category-card group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
             <div class="aspect-4-3 bg-surface-low overflow-hidden mb-4">
               <img src="assets/images/cat-blueblock.jpg" alt="Chống Ánh Sáng Xanh" class="w-full h-full object-cover group-hover-scale-105 transition-transform duration-500">
             </div>
@@ -188,7 +189,7 @@
           </a>
 
           <!-- Category 4 -->
-          <a href="products.html?category=unisex" class="group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
+          <a href="products.html?category=unisex" class="category-card group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
             <div class="aspect-4-3 bg-surface-low overflow-hidden mb-4">
               <img src="assets/images/cat-unisex.jpg" alt="Kính Unisex" class="w-full h-full object-cover group-hover-scale-105 transition-transform duration-500">
             </div>
@@ -206,7 +207,7 @@
     <!-- 6. FEATURED PRODUCTS (SẢN PHẨM NỔI BẬT) -->
     <section class="py-16 bg-surface-low border-t border-light">
       <div class="container">
-        <div class="text-center max-w-xl mx-auto mb-12">
+        <div data-ui-reveal class="text-center max-w-xl mx-auto mb-12">
           <span class="uppercase-spaced text-muted">Dòng sản phẩm tiêu biểu</span>
           <h2 class="font-headline text-3xl small-text-4xl font-normal mt-1 mb-3">Sản Phẩm Nổi Bật</h2>
           <p class="text-sm text-muted">Các thiết kế kính mắt được chế tác thủ công tinh xảo, đồng bộ giá niêm yết trên toàn hệ thống LuxeOptic.</p>
@@ -432,5 +433,6 @@
   <script src="assets/js/cart-store.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/page-index.js"></script>
+  <script src="assets/js/ui-effects.js"></script>
 </body>
 </html>
