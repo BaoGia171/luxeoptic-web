@@ -1,0 +1,11 @@
+/config/database.php
+/.env
+/vendor/
+/uploads/products/*
+!/uploads/products/.gitkeep
+!/uploads/products/.htaccess
+/node_modules/
+*.log
+*.zip
+Thumbs.db
+.DS_Store

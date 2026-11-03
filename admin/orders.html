@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Lý Đơn Hàng | LuxeOptic Admin Portal</title>
+
+  <!-- Google Fonts & Material Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body class="admin-body">
+
+  <!-- ADMIN SIDEBAR -->
+  <button type="button" class="sidebar-backdrop" aria-label="Đóng menu" hidden></button>
+  <aside class="admin-sidebar" id="adminMenu">
+    <button type="button" class="sidebar-close" aria-label="Đóng menu">×</button>
+    <div class="sidebar-brand">
+      <div class="brand-logo-badge">L</div>
+      <div class="flex flex-col">
+        <span class="brand-name">LuxeOptic</span>
+        <span class="portal-sub">Admin Portal</span>
+      </div>
+    </div>
+
+    <!-- User Badge -->
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">
+        <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
+        <span class="status-dot"></span>
+      </div>
+      <div class="sidebar-user-info">
+        <span class="sidebar-user-name">Super Admin</span>
+        <span class="sidebar-user-role">admin@luxeoptic.vn</span>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Điều hướng quản trị</div>
+      <a href="products.html" class="sidebar-nav-item">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-lg">eyeglasses</span>
+          <span>Quản lý Kính mắt</span>
+        </div>
+      </a>
+      <a href="categories.html" class="sidebar-nav-item">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-lg">category</span>
+          <span>Quản lý Danh mục</span>
+        </div>
+      </a>
+      <a href="orders.html" class="sidebar-nav-item active">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-lg">shopping_bag</span>
+          <span>Quản lý Đơn hàng</span>
+        </div>
+        <span class="badge badge-gold text-10px">5 mới</span>
+      </a>
+      <a href="users.html" class="sidebar-nav-item">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-lg">manage_accounts</span>
+          <span>Quản lý Tài khoản & Phân quyền</span>
+        </div>
+      </a>
+    </nav>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer space-y-1">
+      <a href="../index.html" class="sidebar-nav-item text-gray-400 hover-text-white">
+        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">arrow_back</span> Xem trang bán hàng</span>
+      </a>
+      <a href="../auth.html" class="sidebar-nav-item text-red-400 hover-text-red-300">
+        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">logout</span> Đăng xuất</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <div class="admin-main">
+    
+    <!-- TOPBAR -->
+    <header class="admin-topbar">
+      <button type="button" class="admin-menu-toggle" aria-controls="adminMenu" aria-expanded="false" aria-label="Mở menu quản trị">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <!-- Breadcrumb đã sửa đúng: Admin / Quản lý đơn hàng (Sửa lỗi phản hồi QA) -->
+      <div class="admin-breadcrumbs">
+        <span>Admin</span>
+        <span>/</span>
+        <span class="active">Quản lý đơn hàng</span>
+      </div>
+
+      <div class="flex items-center gap-3 small-gap-4">
+        <button type="button" class="btn btn-outline btn-sm flex items-center gap-1_5 py-2 text-xs" data-action="admin-orders-action-1">
+          <span class="material-symbols-outlined text-sm">file_download</span> Xuất Báo Cáo
+        </button>
+        <button class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover-bg-gray-200 relative">
+          <span class="material-symbols-outlined text-lg">notifications</span>
+          <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+        </button>
+        <div class="flex items-center gap-2 pl-2 border-l border-gray-200">
+          <div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-xs">A</div>
+          <span class="text-xs font-semibold hidden small-inline">Executive Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT BODY -->
+    <div class="admin-content-inner">
+      
+      <!-- BENTO METRIC STATS (Đã chuẩn hoá layout tách số liệu, nhãn và so sánh riêng dòng, không bị đè chữ) -->
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Doanh thu tháng này</span>
+            <span class="material-symbols-outlined text-secondary">payments</span>
+          </div>
+          <div class="metric-number">458.200.000₫</div>
+          <div class="metric-footer text-emerald-700">
+            <span class="font-bold flex items-center"><span class="material-symbols-outlined text-xs">trending_up</span> +18.4%</span>
+            <span>so với tháng trước</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Tổng đơn hàng</span>
+            <span class="material-symbols-outlined text-gray-400">shopping_bag</span>
+          </div>
+          <div class="metric-number">148 đơn</div>
+          <div class="metric-footer text-amber-700">
+            <span class="font-bold">5 đơn mới</span> cần xác nhận & đóng gói
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Đang vận chuyển</span>
+            <span class="material-symbols-outlined text-blue-600">local_shipping</span>
+          </div>
+          <div class="metric-number">24 đơn</div>
+          <div class="metric-footer text-gray-500">
+            <span>Đối tác GHTK Express & ViettelPost</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Tỷ lệ hoàn tất</span>
+            <span class="material-symbols-outlined text-emerald-600">verified</span>
+          </div>
+          <div class="metric-number">98.2%</div>
+          <div class="metric-footer text-emerald-700">
+            <span>Chỉ 2 đơn đổi trả kỹ thuật / bảo hành</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTER & TOOLBAR -->
+      <div class="bg-white border border-light p-4 mb-6 shadow-sm">
+        <div class="flex flex-col desktop-flex-row desktop-items-center justify-between gap-4">
+          <!-- Status Tabs -->
+          <div class="flex items-center gap-1 overflow-x-auto pb-1 desktop-pb-0 text-xs font-semibold">
+            <button class="px-3 py-1_5 bg-black text-white rounded-none">Tất cả (148)</button>
+            <button class="px-3 py-1_5 text-gray-600 hover-bg-gray-100">Chờ duyệt (5)</button>
+            <button class="px-3 py-1_5 text-gray-600 hover-bg-gray-100">Đang chuẩn bị (12)</button>
+            <button class="px-3 py-1_5 text-gray-600 hover-bg-gray-100">Đang giao (24)</button>
+            <button class="px-3 py-1_5 text-gray-600 hover-bg-gray-100">Đã giao (104)</button>
+            <button class="px-3 py-1_5 text-gray-600 hover-bg-gray-100">Đã hủy (3)</button>
+          </div>
+
+          <!-- Search & Selects -->
+          <div class="flex items-center gap-3 flex-wrap">
+            <div class="relative flex-1 small-w-64">
+              <span class="material-symbols-outlined absolute left-3 top-2_5 text-gray-400 text-sm">search</span>
+              <input type="text" placeholder="Tìm mã đơn, tên khách, SĐT..." class="h-9 pl-9 pr-3 text-xs bg-gray-50 border border-gray-200 outline-none w-full focus-border-black">
+            </div>
+            <select class="h-9 px-3 text-xs bg-gray-50 border border-gray-200 outline-none">
+              <option>Phương thức: Tất cả</option>
+              <option>VietQR Pro (Napas 247)</option>
+              <option>Thanh toán khi nhận (COD)</option>
+              <option>Thẻ Quốc tế (Visa/Master)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORDERS DATA TABLE (Có bọc .table-responsive chống tràn ngang, đầy đủ cột trạng thái & thao tác) -->
+      <div class="table-card">
+        <div class="table-header">
+          <div>
+            <h3 class="font-headline text-lg font-bold text-black">Danh Sách Đơn Hàng LuxeOptic</h3>
+            <p class="text-xs text-gray-500 mt-0_5">Quản lý trạng thái, tiến độ xử lý và thanh toán đơn hàng toàn hệ thống</p>
+          </div>
+          <div class="text-xs text-gray-500 font-medium">
+            Hiển thị <span class="font-bold text-black">5</span> đơn trên trang <span class="font-bold text-black">1/30</span>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th class="table-column-110">Mã Đơn</th>
+                <th class="table-column-140">Thời Gian</th>
+                <th class="table-column-220">Khách Hàng & Liên Hệ</th>
+                <th class="table-column-240">Sản Phẩm & SL</th>
+                <th class="table-column-130">Tổng Thanh Toán</th>
+                <th class="table-column-140">Phương Thức</th>
+                <th class="table-column-150">Trạng Thái Đơn</th>
+                <th class="table-column-120-right">Thao Tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1: Đơn hàng khớp với giỏ hàng khách Nguyễn Hoàng Minh Triết -->
+              <tr class="bg-amber-50-30">
+                <td>
+                  <span class="font-mono font-bold text-black text-sm hover-underline cursor-pointer" data-action="admin-orders-action-2">#LX-8891</span>
+                  <span class="block text-10px text-amber-700 font-semibold uppercase">Mới đặt</span>
+                </td>
+                <td class="text-xs">
+                  <span class="font-medium text-black">02/11/2026</span>
+                  <span class="block text-gray-400 text-11px">10:25 AM</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full bg-black text-white text-xs flex items-center justify-center font-bold">T</div>
+                    <div>
+                      <b class="text-black text-xs block">Nguyễn Hoàng Minh Triết</b>
+                      <span class="text-11px text-gray-500 font-mono">0908 123 456 &bull; Q.1, TP.HCM</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-xs">
+                  <div class="space-y-0_5">
+                    <div class="font-medium text-black truncate max-w-xs">&bull; Aviator Titanium Gold 01 (x1)</div>
+                    <div class="text-gray-500 truncate max-w-xs">&bull; Round Noir Acetate Classic (x1)</div>
+                    <span class="inline-block text-10px bg-gray-100 text-gray-600 px-1_5 rounded">Mã LUXE10 (-220.000₫)</span>
+                  </div>
+                </td>
+                <td>
+                  <b class="text-black font-semibold text-sm">1.980.000₫</b>
+                  <span class="block text-10px text-emerald-700 font-medium">Đã thanh toán 100%</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-1_5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="text-xs font-semibold text-gray-800">VietQR Napas</span>
+                  </div>
+                  <span class="text-10px text-gray-400 font-mono">Giao dịch #VQR9921</span>
+                </td>
+                <td>
+                  <span class="px-2_5 py-1 bg-blue-100 text-blue-800 text-11px font-bold rounded inline-flex items-center gap-1">
+                    <span class="w-1_5 h-1_5 rounded-full bg-blue-600"></span> ĐANG CHUẨN BỊ
+                  </span>
+                </td>
+                <td>
+                  <div class="action-btn-group justify-end">
+                    <button class="action-btn" title="Xem chi tiết đơn" data-action="admin-orders-action-3">
+                      <span class="material-symbols-outlined text-sm">visibility</span>
+                    </button>
+                    <button class="action-btn bg-black text-white hover-bg-gray-800" title="Duyệt bàn giao vận chuyển" data-action="admin-orders-action-4">
+                      <span class="material-symbols-outlined text-sm">local_shipping</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 2 -->
+              <tr>
+                <td>
+                  <span class="font-mono font-bold text-black text-sm hover-underline cursor-pointer" data-action="admin-orders-action-5">#LX-8890</span>
+                </td>
+                <td class="text-xs">
+                  <span class="font-medium text-black">02/11/2026</span>
+                  <span class="block text-gray-400 text-11px">09:14 AM</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full bg-gray-200 text-gray-700 text-xs flex items-center justify-center font-bold">T</div>
+                    <div>
+                      <b class="text-black text-xs block">Lê Thị Thanh Thảo</b>
+                      <span class="text-11px text-gray-500 font-mono">0912 345 678 &bull; Cầu Giấy, Hà Nội</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-xs">
+                  <div class="font-medium text-black truncate max-w-xs">&bull; Cat-Eye Acetate Silk Edition (x1)</div>
+                  <span class="text-10px text-gray-400">Tròng lọc ánh sáng xanh 1.60</span>
+                </td>
+                <td>
+                  <b class="text-black font-semibold text-sm">1.450.000₫</b>
+                  <span class="block text-10px text-emerald-700 font-medium">Đã thanh toán</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-1_5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="text-xs font-semibold text-gray-800">Chuyển khoản</span>
+                  </div>
+                  <span class="text-10px text-gray-400 font-mono">Techcombank</span>
+                </td>
+                <td>
+                  <span class="px-2_5 py-1 bg-amber-100 text-amber-800 text-11px font-bold rounded inline-flex items-center gap-1">
+                    <span class="w-1_5 h-1_5 rounded-full bg-amber-600"></span> CHỜ XÁC NHẬN
+                  </span>
+                </td>
+                <td>
+                  <div class="action-btn-group justify-end">
+                    <button class="action-btn" title="Xem chi tiết đơn" data-action="admin-orders-action-6">
+                      <span class="material-symbols-outlined text-sm">visibility</span>
+                    </button>
+                    <button class="action-btn" title="In phiếu đóng gói" data-action="admin-orders-action-7">
+                      <span class="material-symbols-outlined text-sm">print</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 3 -->
+              <tr>
+                <td>
+                  <span class="font-mono font-bold text-black text-sm hover-underline cursor-pointer" data-action="admin-orders-action-8">#LX-8889</span>
+                </td>
+                <td class="text-xs">
+                  <span class="font-medium text-black">01/11/2026</span>
+                  <span class="block text-gray-400 text-11px">06:40 PM</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full bg-gray-200 text-gray-700 text-xs flex items-center justify-center font-bold">P</div>
+                    <div>
+                      <b class="text-black text-xs block">Trần Đình Phong</b>
+                      <span class="text-11px text-gray-500 font-mono">0987 654 321 &bull; Hải Châu, Đà Nẵng</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-xs">
+                  <div class="font-medium text-black truncate max-w-xs">&bull; Square Titanium Minimalist (x1)</div>
+                  <span class="text-10px text-gray-400">Tròng Polarized chống chói</span>
+                </td>
+                <td>
+                  <b class="text-black font-semibold text-sm">1.650.000₫</b>
+                  <span class="block text-10px text-amber-600 font-medium">Thu hộ COD khi nhận</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-1_5">
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                    <span class="text-xs font-semibold text-gray-800">Thanh toán COD</span>
+                  </div>
+                  <span class="text-10px text-gray-400">Giao hàng thu tiền</span>
+                </td>
+                <td>
+                  <span class="px-2_5 py-1 bg-purple-100 text-purple-800 text-11px font-bold rounded inline-flex items-center gap-1">
+                    <span class="w-1_5 h-1_5 rounded-full bg-purple-600"></span> ĐANG GIAO HÀNG
+                  </span>
+                </td>
+                <td>
+                  <div class="action-btn-group justify-end">
+                    <button class="action-btn" title="Xem chi tiết đơn" data-action="admin-orders-action-9">
+                      <span class="material-symbols-outlined text-sm">visibility</span>
+                    </button>
+                    <button class="action-btn" title="Định vị bưu gửi GHTK" data-action="admin-orders-action-10">
+                      <span class="material-symbols-outlined text-sm">track_changes</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 4 -->
+              <tr>
+                <td>
+                  <span class="font-mono font-bold text-black text-sm hover-underline cursor-pointer" data-action="admin-orders-action-11">#LX-8888</span>
+                </td>
+                <td class="text-xs">
+                  <span class="font-medium text-black">01/11/2026</span>
+                  <span class="block text-gray-400 text-11px">02:15 PM</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full bg-gray-200 text-gray-700 text-xs flex items-center justify-center font-bold">M</div>
+                    <div>
+                      <b class="text-black text-xs block">Vũ Mai Phương</b>
+                      <span class="text-11px text-gray-500 font-mono">0934 567 890 &bull; Q.7, TP.HCM</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-xs">
+                  <div class="space-y-0_5">
+                    <div class="font-medium text-black truncate max-w-xs">&bull; Blue-Light Shield Sabae (x1)</div>
+                    <div class="text-gray-500 truncate max-w-xs">&bull; Hộp bảo quản da thuộc thủ công (x1)</div>
+                  </div>
+                </td>
+                <td>
+                  <b class="text-black font-semibold text-sm">1.150.000₫</b>
+                  <span class="block text-10px text-emerald-700 font-medium">Đã thanh toán</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-1_5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="text-xs font-semibold text-gray-800">Visa / Mastercard</span>
+                  </div>
+                  <span class="text-10px text-gray-400 font-mono">Thẻ **** 4092</span>
+                </td>
+                <td>
+                  <span class="px-2_5 py-1 bg-emerald-100 text-emerald-800 text-11px font-bold rounded inline-flex items-center gap-1">
+                    <span class="w-1_5 h-1_5 rounded-full bg-emerald-600"></span> HOÀN TẤT
+                  </span>
+                </td>
+                <td>
+                  <div class="action-btn-group justify-end">
+                    <button class="action-btn" title="Xem chi tiết đơn" data-action="admin-orders-action-12">
+                      <span class="material-symbols-outlined text-sm">visibility</span>
+                    </button>
+                    <button class="action-btn" title="Hóa đơn VAT" data-action="admin-orders-action-13">
+                      <span class="material-symbols-outlined text-sm">receipt_long</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 5 -->
+              <tr>
+                <td>
+                  <span class="font-mono font-bold text-black text-sm hover-underline cursor-pointer" data-action="admin-orders-action-14">#LX-8887</span>
+                </td>
+                <td class="text-xs">
+                  <span class="font-medium text-black">01/11/2026</span>
+                  <span class="block text-gray-400 text-11px">11:02 AM</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-full bg-gray-200 text-gray-700 text-xs flex items-center justify-center font-bold">B</div>
+                    <div>
+                      <b class="text-black text-xs block">Phạm Quốc Bảo</b>
+                      <span class="text-11px text-gray-500 font-mono">0903 999 888 &bull; Ninh Kiều, Cần Thơ</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-xs">
+                  <div class="font-medium text-black truncate max-w-xs">&bull; Aviator Titanium Gold 01 (x1)</div>
+                  <span class="text-10px text-gray-400">Tròng Gradient Tráng Vàng 18K</span>
+                </td>
+                <td>
+                  <b class="text-black font-semibold text-sm">1.350.000₫</b>
+                  <span class="block text-10px text-emerald-700 font-medium">Đã thanh toán</span>
+                </td>
+                <td>
+                  <div class="flex items-center gap-1_5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="text-xs font-semibold text-gray-800">VietQR Napas</span>
+                  </div>
+                  <span class="text-10px text-gray-400 font-mono">Giao dịch #VQR9890</span>
+                </td>
+                <td>
+                  <span class="px-2_5 py-1 bg-emerald-100 text-emerald-800 text-11px font-bold rounded inline-flex items-center gap-1">
+                    <span class="w-1_5 h-1_5 rounded-full bg-emerald-600"></span> HOÀN TẤT
+                  </span>
+                </td>
+                <td>
+                  <div class="action-btn-group justify-end">
+                    <button class="action-btn" title="Xem chi tiết đơn" data-action="admin-orders-action-15">
+                      <span class="material-symbols-outlined text-sm">visibility</span>
+                    </button>
+                    <button class="action-btn" title="Hóa đơn VAT" data-action="admin-orders-action-16">
+                      <span class="material-symbols-outlined text-sm">receipt_long</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PAGINATION: Đã sửa đúng chuẩn toán học: 148 đơn, 5 đơn/trang = 30 trang (Fix QA Comment #4) -->
+        <div class="admin-pagination p-4 border-t border-light flex flex-col small-flex-row items-center justify-between gap-3 text-xs text-gray-500">
+          <div>
+            Hiển thị <span class="font-bold text-black">1 - 5</span> của <span class="font-bold text-black">148</span> đơn hàng 
+            <span class="text-gray-400">|</span> 
+            Tổng số: <span class="font-bold text-secondary">30 trang</span> (mỗi trang 5 đơn)
+          </div>
+
+          <div class="flex items-center gap-1">
+            <button class="px-2_5 py-1_5 border border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed text-xs">&laquo; Trước</button>
+            <button class="px-3 py-1_5 border border-black bg-black text-white font-bold text-xs">1</button>
+            <button class="px-3 py-1_5 border border-gray-200 hover-bg-gray-100 text-black text-xs">2</button>
+            <button class="px-3 py-1_5 border border-gray-200 hover-bg-gray-100 text-black text-xs">3</button>
+            <button class="px-2 py-1_5 text-gray-400 text-xs">...</button>
+            <button class="px-3 py-1_5 border border-gray-200 hover-bg-gray-100 text-black text-xs">29</button>
+            <button class="px-3 py-1_5 border border-gray-200 hover-bg-gray-100 text-black text-xs">30</button>
+            <button class="px-2_5 py-1_5 border border-gray-200 hover-bg-gray-100 text-black text-xs">Sau &raquo;</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: CHI TIẾT ĐƠN HÀNG TOÀN DIỆN (#LX-8891) -->
+  <div id="orderDetailModal" class="modal-overlay">
+    <div class="modal-container max-w-3xl">
+      <div class="modal-header">
+        <div>
+          <div class="flex items-center gap-3">
+            <h3 class="font-headline text-xl text-black">Chi Tiết Đơn Hàng #LX-8891</h3>
+            <span class="px-2_5 py-0_5 bg-blue-100 text-blue-800 text-11px font-bold rounded">ĐANG CHUẨN BỊ</span>
+          </div>
+          <span class="text-xs text-gray-500">Thời gian tạo: 02/11/2026 - 10:25:40 AM (Khớp giỏ hàng Khách hàng)</span>
+        </div>
+        <button type="button" class="text-gray-400 hover-text-black text-2xl" data-action="admin-orders-action-17">&times;</button>
+      </div>
+
+      <div class="modal-body space-y-6">
+        <!-- Progress Steps -->
+        <div class="p-4 bg-gray-50 border border-gray-200">
+          <div class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Tiến trình đơn hàng</div>
+          <div class="grid grid-cols-4 gap-2 text-center text-xs">
+            <div class="p-2 bg-emerald-50 border border-emerald-200 rounded">
+              <span class="material-symbols-outlined text-emerald-600 block text-lg mb-1">check_circle</span>
+              <b class="text-emerald-800 block">Đã đặt hàng</b>
+              <span class="text-10px text-gray-500">10:25 02/11</span>
+            </div>
+            <div class="p-2 bg-emerald-50 border border-emerald-200 rounded">
+              <span class="material-symbols-outlined text-emerald-600 block text-lg mb-1">payments</span>
+              <b class="text-emerald-800 block">Đã thanh toán</b>
+              <span class="text-10px text-gray-500">VietQR Napas 247</span>
+            </div>
+            <div class="p-2 bg-blue-50 border-2 border-blue-600 rounded">
+              <span class="material-symbols-outlined text-blue-600 block text-lg mb-1">inventory_2</span>
+              <b class="text-blue-900 block">Đang đóng gói</b>
+              <span class="text-10px text-blue-600 font-semibold">Kho Sabae Q.1</span>
+            </div>
+            <div class="p-2 bg-gray-100 border border-gray-200 rounded text-gray-400">
+              <span class="material-symbols-outlined block text-lg mb-1">local_shipping</span>
+              <span class="block">Giao hàng</span>
+              <span class="text-10px">Chờ bưu tá lấy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Columns Info -->
+        <div class="grid grid-cols-1 tablet-grid-cols-2 gap-4 text-xs">
+          <div class="p-4 border border-light space-y-2">
+            <b class="text-black text-sm block mb-1">Thông Tin Khách Hàng</b>
+            <div><span class="text-gray-500">Họ và tên:</span> <b class="text-black">Nguyễn Hoàng Minh Triết</b></div>
+            <div><span class="text-gray-500">Số điện thoại:</span> <span class="font-mono text-black font-semibold">0908 123 456</span></div>
+            <div><span class="text-gray-500">Email:</span> <span class="text-black">triet.nguyen@example.com</span></div>
+            <div><span class="text-gray-500">Địa chỉ giao:</span> <span class="text-black font-medium">124 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</span></div>
+          </div>
+
+          <div class="p-4 border border-light space-y-2">
+            <b class="text-black text-sm block mb-1">Thanh Toán & Vận Chuyển</b>
+            <div><span class="text-gray-500">Hình thức:</span> <b class="text-black">VietQR Pro Napas 247</b></div>
+            <div><span class="text-gray-500">Trạng thái:</span> <span class="px-2 py-0_5 bg-emerald-100 text-emerald-800 font-bold rounded">Thành công</span></div>
+            <div><span class="text-gray-500">Mã giao dịch:</span> <span class="font-mono text-gray-700">VQR-20261102-8891</span></div>
+            <div><span class="text-gray-500">Đơn vị vận chuyển:</span> <span class="text-black font-medium">GHTK Express (Gói hỏa tốc bảo hiểm 100%)</span></div>
+          </div>
+        </div>
+
+        <!-- Itemized Products -->
+        <div class="border border-light">
+          <div class="p-3 bg-gray-50 font-bold text-xs uppercase tracking-wider text-black border-b border-light">
+            Danh Sách Kính Mắt Trong Đơn
+          </div>
+          <table class="w-full text-xs">
+            <thead class="bg-gray-100 text-gray-500">
+              <tr>
+                <th class="p-3 text-left">Sản Phẩm</th>
+                <th class="p-3 text-center">Đơn Giá</th>
+                <th class="p-3 text-center">Số Lượng</th>
+                <th class="p-3 text-right">Thành Tiền</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr>
+                <td class="p-3 flex items-center gap-3">
+                  <img src="../assets/images/aviator-main.jpg" class="w-12 h-10 object-contain border bg-gray-50 p-1">
+                  <div>
+                    <b class="text-black block">Aviator Titanium Gold 01</b>
+                    <span class="text-gray-400 text-11px">Titanium Beta Nhật Bản &bull; Bảo hành 24 tháng</span>
+                  </div>
+                </td>
+                <td class="p-3 text-center text-gray-700">1.350.000₫</td>
+                <td class="p-3 text-center font-bold">1</td>
+                <td class="p-3 text-right font-bold text-black">1.350.000₫</td>
+              </tr>
+              <tr>
+                <td class="p-3 flex items-center gap-3">
+                  <img src="../assets/images/round-noir.jpg" class="w-12 h-10 object-contain border bg-gray-50 p-1">
+                  <div>
+                    <b class="text-black block">Round Noir Acetate Classic</b>
+                    <span class="text-gray-400 text-11px">Acetate Đen Bóng &bull; Trọng lượng siêu nhẹ</span>
+                  </div>
+                </td>
+                <td class="p-3 text-center text-gray-700">850.000₫</td>
+                <td class="p-3 text-center font-bold">1</td>
+                <td class="p-3 text-right font-bold text-black">850.000₫</td>
+              </tr>
+            </tbody>
+            <tfoot class="bg-gray-50 text-xs border-t border-light">
+              <tr>
+                <td colspan="3" class="p-2 px-3 text-right text-gray-500">Tạm tính:</td>
+                <td class="p-2 px-3 text-right text-black font-medium">2.200.000₫</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="p-2 px-3 text-right text-emerald-700 font-medium">Voucher Khách VIP (LUXE10):</td>
+                <td class="p-2 px-3 text-right text-emerald-700 font-bold">-220.000₫</td>
+              </tr>
+              <tr>
+                <td colspan="3" class="p-2 px-3 text-right text-gray-500">Phí giao hàng bảo đảm:</td>
+                <td class="p-2 px-3 text-right text-emerald-700 font-semibold">Miễn phí</td>
+              </tr>
+              <tr class="border-t border-gray-300">
+                <td colspan="3" class="p-3 text-right text-sm font-bold text-black">TỔNG CỘNG THANH TOÁN:</td>
+                <td class="p-3 text-right text-base font-bold text-secondary">1.980.000₫</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline btn-sm flex items-center gap-1_5" data-action="admin-orders-action-18">
+          <span class="material-symbols-outlined text-sm">print</span> In Phiếu Gửi Hàng
+        </button>
+        <button type="button" class="btn btn-primary btn-sm flex items-center gap-1_5 font-bold" data-action="admin-orders-action-19">
+          <span class="material-symbols-outlined text-sm">local_shipping</span> Bàn Giao Vận Chuyển
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/admin.js"></script>
+  
+  <script src="../assets/js/page-admin-orders.js"></script>
+</body>
+</html>

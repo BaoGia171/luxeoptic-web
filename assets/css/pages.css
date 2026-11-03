@@ -1,0 +1,25 @@
+/* Ảnh nền, màu gọng kính và độ rộng cột bảng. */
+.auth-cover { background-image: linear-gradient(to top, var(--color-alpha-71) 0%, var(--color-alpha-72) 50%, var(--color-alpha-73) 100%), url('../images/editorial-paris.jpg'); }
+.home-hero { background-image: linear-gradient(to right, var(--color-alpha-74) 0%, var(--color-alpha-75) 60%, transparent 100%), url('../images/hero-banner.jpg'); }
+.swatch-secondary { background: var(--color-secondary); }
+.swatch-primary { background: var(--color-primary); }
+.swatch-silver { background: var(--color-silver); }
+.swatch-tortoise { background: var(--color-tortoise); }
+.home-showroom { background-image: linear-gradient(var(--color-alpha-76), var(--color-alpha-76)), url('../images/editorial-paris.jpg'); background-size: cover; background-position: center; }
+.swatch-navy { background: var(--color-navy); }
+.swatch-bronze { background: var(--color-bronze); }
+.swatch-brown { background: var(--color-brown); }
+.swatch-shade-e8eaed { background: var(--color-shade-e8eaed); }
+.swatch-wine { background: var(--color-wine); }
+.admin-redirect { font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: var(--color-black); color: var(--text-inverse); }
+.admin-redirect-link { color: var(--color-secondary); }
+.table-column-110 { min-width: 110px; }
+.table-column-140 { min-width: 140px; }
+.table-column-220 { min-width: 220px; }
+.table-column-240 { min-width: 240px; }
+.table-column-130 { min-width: 130px; }
+.table-column-150 { min-width: 150px; }
+.table-column-120-right { min-width: 120px; text-align: right; }
+.table-column-250 { min-width: 250px; }
+.table-column-170 { min-width: 170px; }
+.table-column-180 { min-width: 180px; }

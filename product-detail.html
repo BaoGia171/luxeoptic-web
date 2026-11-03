@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aviator Titanium Gold 01 | LuxeOptic Haute Lunetterie</title>
+
+  <!-- Google Fonts & Material Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="bg-main text-primary antialiased">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-mark">L</div>
+        <div class="flex flex-col">
+          <span class="logo-text">LuxeOptic</span>
+          <span class="text-9px uppercase tracking-widest text-muted font-semibold negative-mt-1">Haute Lunetterie</span>
+        </div>
+      </a>
+
+      <nav id="siteMenu" class="site-menu hidden desktop-flex items-center gap-8">
+        <a href="index.html" class="nav-link">Trang chủ</a>
+        <a href="products.html?cat=kinh-ram" class="nav-link active">Kính Râm</a>
+        <a href="products.html?cat=gong-kinh-can" class="nav-link">Gọng Kính Cận</a>
+        <a href="products.html?cat=chong-anh-sang-xanh" class="nav-link">Chống Ánh Sáng Xanh</a>
+        <a href="products.html" class="nav-link">Bộ Sưu Tập Mới</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="menu-toggle" aria-controls="siteMenu" aria-expanded="false" aria-label="Mở menu">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+        <div class="search-box">
+          <span class="material-symbols-outlined text-gray-500 text-lg">search</span>
+          <input type="text" placeholder="Tìm kiếm gọng kính...">
+        </div>
+        
+        <a href="auth.html" class="action-icon" title="Tài khoản">
+          <span class="material-symbols-outlined text-2xl">account_circle</span>
+        </a>
+
+        <a href="cart.html" class="action-icon" title="Giỏ hàng">
+          <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+          <span class="action-badge">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="py-8">
+    <div class="container">
+      
+      <!-- BREADCRUMBS -->
+      <div class="breadcrumb-bar mb-4">
+        <div class="breadcrumb-list">
+          <a href="index.html">TRANG CHỦ</a>
+          <span>/</span>
+          <a href="products.html">KÍNH RÂM</a>
+          <span>/</span>
+          <span id="detailBreadcrumb" class="text-primary font-semibold">AVIATOR TITANIUM GOLD 01</span>
+        </div>
+      </div>
+
+      <!-- MAIN PRODUCT SHOWCASE (2 COLUMNS: GALLERY & INFO) -->
+      <div class="grid grid-cols-1 desktop-grid-cols-12 gap-12 mb-16">
+        
+        <!-- LEFT: MULTI-IMAGE GALLERY (5 GÓC ẢNH CHỤP THẬT) -->
+        <div class="desktop-col-span-7 flex flex-col gap-4">
+          <!-- Ảnh lớn xem trước -->
+          <div class="relative bg-white border border-light p-6 aspect-16-11 flex items-center justify-center overflow-hidden">
+            <div class="absolute top-4 left-4 z-10 flex flex-col gap-1_5">
+              <span class="badge badge-gold">Best Seller</span>
+              <span class="badge badge-dark">Bảo Hành 24 Tháng</span>
+            </div>
+            <img id="mainProductImage" src="assets/images/aviator-main.jpg" alt="Aviator Titanium Gold 01" class="w-full h-full object-contain transition-all duration-300">
+          </div>
+
+          <!-- Dải 5 ảnh thumbnail bấm để đổi ảnh -->
+          <div class="grid grid-cols-5 gap-3">
+            <div class="gallery-thumb border-2 border-black p-1 bg-white cursor-pointer aspect-square" data-image="assets/images/aviator-main.jpg">
+              <img src="assets/images/aviator-main.jpg" alt="Góc chính diện" class="w-full h-full object-contain">
+            </div>
+            <div class="gallery-thumb border border-light hover-border-black p-1 bg-white cursor-pointer aspect-square" data-image="assets/images/aviator-angle.jpg">
+              <img src="assets/images/aviator-angle.jpg" alt="Góc nghiêng 45 độ" class="w-full h-full object-contain">
+            </div>
+            <div class="gallery-thumb border border-light hover-border-black p-1 bg-white cursor-pointer aspect-square" data-image="assets/images/aviator-side.jpg">
+              <img src="assets/images/aviator-side.jpg" alt="Càng kính gập" class="w-full h-full object-contain">
+            </div>
+            <div class="gallery-thumb border border-light hover-border-black p-1 bg-white cursor-pointer aspect-square" data-image="assets/images/aviator-hinge.jpg">
+              <img src="assets/images/aviator-hinge.jpg" alt="Bản lề vàng 18K" class="w-full h-full object-contain">
+            </div>
+            <div class="gallery-thumb border border-light hover-border-black p-1 bg-white cursor-pointer aspect-square" data-image="assets/images/aviator-model.jpg">
+              <img src="assets/images/aviator-model.jpg" alt="Người mẫu đeo thực tế" class="w-full h-full object-cover">
+            </div>
+          </div>
+
+          <!-- Thông điệp chế tác -->
+          <div class="product-craft-note bg-surface-low border border-light p-4 flex items-center justify-between text-xs text-muted">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-secondary text-xl">precision_manufacturing</span>
+              <span><b>Chế tác thủ công tại Sabae, Nhật Bản:</b> Beta-Titanium nhiệt luyện cho độ bền vĩnh cửu và trọng lượng siêu nhẹ 12.8g.</span>
+            </div>
+            <a href="#specs" class="text-black font-semibold underline whitespace-nowrap ml-4">Xem bản vẽ →</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: PRODUCT INFO & PURCHASE CONTROLS -->
+        <div class="desktop-col-span-5 flex flex-col justify-start">
+          <span id="detailSeries" class="font-label text-xs uppercase tracking-widest text-muted font-semibold">Atelier Titanium Series • Phiên Bản Giới Hạn 2026</span>
+          <h1 id="detailName" class="font-headline text-3xl small-text-4xl font-normal mt-2 mb-3 text-primary">Aviator Titanium Gold 01</h1>
+
+          <!-- Đánh giá & Mã SKU -->
+          <div class="product-rating flex items-center gap-3 text-xs text-muted mb-6 pb-4 border-b border-light">
+            <div class="flex items-center text-amber-500">
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="material-symbols-outlined text-sm">star</span>
+              <span class="text-black font-bold ml-1_5">4.9/5</span>
+            </div>
+            <span>•</span>
+            <a href="#reviews" class="hover-underline">42 Đánh giá xác thực</a>
+            <span>•</span>
+            <span>Mã SP: <b id="detailSku">LX-AT-AV01</b></span>
+          </div>
+
+          <!-- Giá bán (Đồng nhất 1.350.000đ) -->
+          <div class="product-detail-prices flex items-baseline gap-4 mb-2">
+            <span id="detailPrice" class="font-body text-3xl font-bold text-primary">1.350.000đ</span>
+            <span id="detailOldPrice" class="text-base text-muted line-through">1.650.000đ</span>
+            <span id="detailDiscount" class="badge badge-sale text-xs">-18% TIẾT KIỆM 300.000đ</span>
+          </div>
+          <p class="text-xs text-muted mb-6">Giá đã bao gồm VAT và gói chăm sóc tròng kính nano chống trầy trong 12 tháng.</p>
+
+          <!-- Chọn màu sắc -->
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-label text-xs uppercase tracking-wider font-bold">Màu Sắc: <span id="selectedColorName" class="font-normal text-muted">Vàng Gold Bóng (Polished 18K)</span></span>
+            </div>
+            <div class="flex gap-3">
+              <button class="swatch-secondary color-swatch-item active w-8 h-8 rounded-full border-2 border-white ring-2 ring-black" data-color-name="Vàng Gold Bóng (Polished 18K)"></button>
+              <button class="swatch-primary color-swatch-item w-8 h-8 rounded-full border-2 border-white ring-1 ring-gray-300" data-color-name="Đen Nhám (Matte Noir)"></button>
+              <button class="swatch-silver color-swatch-item w-8 h-8 rounded-full border-2 border-white ring-1 ring-gray-300" data-color-name="Bạc Platinum"></button>
+            </div>
+          </div>
+
+          <!-- Thông số kích thước kính (Optical Specs mm) -->
+          <div class="mb-6 bg-white border border-light p-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-label text-11px uppercase tracking-wider font-bold">Thông số khung kính (mm)</span>
+              <a href="#size-guide" class="text-11px text-amber-600 hover-underline">Hướng dẫn chọn size mắt</a>
+            </div>
+            <div class="grid grid-cols-4 gap-2 text-center">
+              <div class="bg-main p-2">
+                <span class="block text-10px text-muted uppercase">Mắt Kính</span>
+                <b class="text-sm">58 mm</b>
+              </div>
+              <div class="bg-main p-2">
+                <span class="block text-10px text-muted uppercase">Cầu Kính</span>
+                <b class="text-sm">14 mm</b>
+              </div>
+              <div class="bg-main p-2">
+                <span class="block text-10px text-muted uppercase">Càng Kính</span>
+                <b class="text-sm">145 mm</b>
+              </div>
+              <div class="bg-main p-2">
+                <span class="block text-10px text-muted uppercase">Chiều Cao</span>
+                <b class="text-sm">50 mm</b>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tình trạng kho & Chọn số lượng -->
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-2 text-xs">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-primary font-medium">Còn 15 sản phẩm sẵn sàng giao nhanh 2h</span>
+            </div>
+
+            <!-- Quantity counter -->
+            <div class="qty-control flex items-center border border-primary bg-white">
+              <button type="button" class="qty-btn qty-minus w-8 h-8 flex items-center justify-center hover-bg-gray-100 font-bold">-</button>
+              <input type="text" value="1" class="qty-input w-10 text-center text-sm font-semibold border-none outline-none" readonly>
+              <button type="button" class="qty-btn qty-plus w-8 h-8 flex items-center justify-center hover-bg-gray-100 font-bold">+</button>
+            </div>
+          </div>
+
+          <!-- Nút mua hàng -->
+          <div class="space-y-3 mb-8">
+            <a id="addToCart" href="cart.html" class="btn btn-primary btn-block text-center py-4 text-xs font-bold flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-base">shopping_bag</span> THÊM VÀO GIỎ HÀNG
+            </a>
+            <div class="grid grid-cols-2 gap-3">
+              <a id="buyNow" href="cart.html" class="btn btn-secondary text-center py-3 text-xs font-bold">MUA NGAY - GIAO 2H</a>
+              <button type="button" class="btn btn-outline text-center py-3 text-xs font-bold" data-action="product-detail-action-1">THỬ KÍNH TẠI NHÀ</button>
+            </div>
+          </div>
+
+          <!-- Đặc quyền chế tác -->
+          <div class="bg-ivory border border-light p-5 space-y-3 text-xs text-secondary">
+            <h4 class="font-label text-11px uppercase tracking-wider font-bold text-black mb-1">Đặc quyền chế tác đỉnh cao:</h4>
+            <div class="flex items-start gap-2_5">
+              <span class="material-symbols-outlined text-amber-600 text-sm mt-0_5">verified</span>
+              <span><b>Tròng Polarized cao cấp:</b> Loại bỏ 100% ánh sáng chói, ngăn 99.9% tia tử ngoại UVA/UVB 400.</span>
+            </div>
+            <div class="flex items-start gap-2_5">
+              <span class="material-symbols-outlined text-amber-600 text-sm mt-0_5">verified</span>
+              <span><b>Pure Beta-Titanium:</b> Trọng lượng siêu nhẹ chỉ 12.8g, chống ăn mòn bởi mồ hôi và không gây dị ứng da.</span>
+            </div>
+            <div class="flex items-start gap-2_5">
+              <span class="material-symbols-outlined text-amber-600 text-sm mt-0_5">verified</span>
+              <span><b>Hộp da thủ công Fullset:</b> Tặng kèm hộp da Atelier, khăn lau microfiber và thẻ bảo hành điện tử chính hãng 24 tháng.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TABS: CHI TIẾT & BẢNG THÔNG SỐ (RICH CONTENT) -->
+      <section id="specs" class="bg-white border border-light p-8 mb-16">
+        <div class="flex border-b border-light mb-8 overflow-x-auto gap-8 text-xs font-label uppercase tracking-widest font-semibold">
+          <button class="pb-3 border-b-2 border-black text-black">Mô tả chi tiết & Thông số quang học</button>
+          <button class="pb-3 text-gray-400 hover-text-black">Chính sách bảo hành 24 tháng & Đo mắt</button>
+          <button class="pb-3 text-gray-400 hover-text-black">Đánh giá từ khách hàng (42)</button>
+        </div>
+
+        <div class="grid grid-cols-1 tablet-grid-cols-12 gap-10">
+          <div class="tablet-col-span-7 space-y-4 text-sm text-secondary leading-relaxed">
+            <h3 class="font-headline text-2xl text-black">Tinh Thần Nghệ Nhân & Tuyên Ngôn Thẩm Mỹ Vượt Thời Gian</h3>
+            <p>
+              Lấy cảm hứng từ mẫu kính phi công huyền thoại thập niên 1970 và công nghệ luyện kim chuẩn xác từ vùng Sabae, tỉnh Fukui (Nhật Bản) — <b>Aviator Titanium Gold 01</b> là sự dung hòa giữa nghệ thuật thủ công truyền thống và thiết kế khí động học đương đại.
+            </p>
+            <p>
+              Mỗi bộ gọng trải qua hơn 180 công đoạn tiện phay, uốn nhiệt và đánh bóng bằng tay tỉ mỉ. Lớp mạ vàng PVD 18K nhiều tầng bảo vệ bề mặt chống trầy xước gấp 5 lần so với công nghệ xi mạ thông thường, giữ trọn ánh hoàng kim cao cấp theo năm tháng.
+            </p>
+            <div class="bg-main border-l-2 border-secondary p-4 text-xs italic text-black">
+              "Tròng kính Polarized cao cấp xử lý quang sai tuyệt đối, đem lại tầm nhìn sắc nét cho người lái xe và hoạt động ngoài trời nắng gắt."
+            </div>
+          </div>
+
+          <!-- Bảng thông số quang học kỹ thuật -->
+          <div class="tablet-col-span-5">
+            <h4 class="font-label text-xs uppercase tracking-wider font-bold mb-4">Bảng thông số kỹ thuật quang học</h4>
+            <table class="w-full text-xs border border-light">
+              <tbody>
+                <tr class="border-b border-light">
+                  <td class="p-2_5 bg-main text-muted font-medium w-1-2">Thương hiệu</td>
+                  <td class="p-2_5 font-semibold">LuxeOptic Atelier Series</td>
+                </tr>
+                <tr class="border-b border-light">
+                  <td class="p-2_5 bg-main text-muted font-medium">Xuất xứ gọng</td>
+                  <td class="p-2_5 font-semibold">Sabae, Fukui, Nhật Bản</td>
+                </tr>
+                <tr class="border-b border-light">
+                  <td class="p-2_5 bg-main text-muted font-medium">Chất liệu khung viền</td>
+                  <td class="p-2_5 font-semibold">Beta-Titanium mạ vàng PVD 18K</td>
+                </tr>
+                <tr class="border-b border-light">
+                  <td class="p-2_5 bg-main text-muted font-medium">Loại tròng kính</td>
+                  <td class="p-2_5 font-semibold">Polarized TAC đa lớp • UV400 Protection</td>
+                </tr>
+                <tr class="border-b border-light">
+                  <td class="p-2_5 bg-main text-muted font-medium">Trọng lượng tổng thể</td>
+                  <td class="p-2_5 font-semibold">12.8 gram (Siêu nhẹ)</td>
+                </tr>
+                <tr class="border-b border-light">
+                  <td class="p-2_5 bg-main text-muted font-medium">Thời gian bảo hành</td>
+                  <td class="p-2_5 font-bold text-amber-700">24 tháng chính hãng toàn quốc</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- RELATED PRODUCTS (SẢN PHẨM TƯƠNG TỰ - ẢNH KÍNH THẬT, KHÔNG CHỨA ẢNH WEBSITE) -->
+      <section class="mb-16">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <span class="uppercase-spaced text-muted text-xs">Gợi ý tinh hoa</span>
+            <h2 class="font-headline text-2xl small-text-3xl font-normal mt-1">Tuyệt Tác Cùng Phong Cách</h2>
+          </div>
+          <a href="products.html" class="font-label text-xs uppercase tracking-wider text-black hover-text-secondary font-semibold">
+            Xem Tất Cả (48 SP) →
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 small-grid-cols-2 desktop-grid-cols-4 gap-6">
+          <!-- Item 1 -->
+          <div class="product-card">
+            <div class="product-thumb">
+              <a href="product-detail.html?id=round-minimalist-noir"><img src="assets/images/round-noir.jpg" alt="Round Minimalist Noir"></a>
+            </div>
+            <div class="product-info">
+              <span class="product-series">Bauhaus Minimal</span>
+              <h3 class="product-title"><a href="product-detail.html?id=round-minimalist-noir">Round Minimalist Noir</a></h3>
+              <div class="product-price-row">
+                <span class="product-price">850.000đ</span>
+                <a href="product-detail.html?id=round-minimalist-noir" class="btn btn-outline btn-sm">Xem</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="product-card">
+            <div class="product-thumb">
+              <a href="product-detail.html?id=cat-eye-havana-acetate"><img src="assets/images/cat-eye.jpg" alt="Cat-Eye Havana Acetate"></a>
+            </div>
+            <div class="product-info">
+              <span class="product-series">Italian Acetate</span>
+              <h3 class="product-title"><a href="product-detail.html?id=cat-eye-havana-acetate">Cat-Eye Havana Acetate</a></h3>
+              <div class="product-price-row">
+                <span class="product-price">980.000đ</span>
+                <a href="product-detail.html?id=cat-eye-havana-acetate" class="btn btn-outline btn-sm">Xem</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="product-card">
+            <div class="product-thumb">
+              <a href="product-detail.html?id=pilot-master-18k-gold"><img src="assets/images/pilot-gold.jpg" alt="Pilot Master 18K Gold"></a>
+            </div>
+            <div class="product-info">
+              <span class="product-series">Haute Orfèvrerie</span>
+              <h3 class="product-title"><a href="product-detail.html?id=pilot-master-18k-gold">Pilot Master 18K Gold</a></h3>
+              <div class="product-price-row">
+                <span class="product-price">2.850.000đ</span>
+                <a href="product-detail.html?id=pilot-master-18k-gold" class="btn btn-outline btn-sm">Xem</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="product-card">
+            <div class="product-thumb">
+              <a href="product-detail.html?id=hexagon-ultra-thin-titanium"><img src="assets/images/hexagon-silver.jpg" alt="Hexagon Ultra Thin Titanium"></a>
+            </div>
+            <div class="product-info">
+              <span class="product-series">Featherweight Series</span>
+              <h3 class="product-title"><a href="product-detail.html?id=hexagon-ultra-thin-titanium">Hexagon Ultra Thin Titanium</a></h3>
+              <div class="product-price-row">
+                <span class="product-price">1.450.000đ</span>
+                <a href="product-detail.html?id=hexagon-ultra-thin-titanium" class="btn btn-outline btn-sm">Xem</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 LuxeOptic Atelier. Bản quyền thuộc về môn Lập trình Web - BTL Nhóm.</p>
+        
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/cart-store.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/products-data.js"></script>
+  <script src="assets/js/page-product-detail.js"></script>
+</body>
+</html>
