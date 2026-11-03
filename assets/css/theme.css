@@ -77,6 +77,12 @@
 [data-theme="dark"] :is(.btn-primary:hover, .btn-secondary:hover) { background: var(--color-secondary-hover); color: var(--theme-button-text); }
 [data-theme="dark"] .btn-outline { color: var(--text-primary); border-color: var(--border-dark); }
 [data-theme="dark"] .btn-outline:hover { background: var(--theme-button-bg); color: var(--theme-button-text); }
+/* Nút viền trắng trên ảnh: ghi đè đồng thời nền, chữ và viền khi hover. */
+[data-theme="dark"] .btn-outline.text-white:hover {
+  background: var(--theme-button-bg);
+  color: var(--theme-button-text);
+  border-color: var(--theme-button-bg);
+}
 [data-theme="dark"] .product-thumb { background: var(--theme-photo-bg); }
 [data-theme="dark"] .form-control::placeholder { color: var(--text-muted); opacity: 1; }
 
