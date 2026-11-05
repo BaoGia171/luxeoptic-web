@@ -19,8 +19,8 @@
       <header><span class="help-avatar" aria-hidden="true">L</span><h2>Hỏi LuxeOptic</h2><button type="button" class="help-close" aria-label="Đóng trợ giúp">×</button></header>
       <div class="help-thread" role="log" aria-label="Cuộc trò chuyện" aria-live="polite" aria-relevant="additions text" tabindex="0">
         <p class="help-bubble">Chào bạn! Bạn muốn tìm hiểu gì về gọng kính?</p>
+        <div class="help-options" role="group" aria-label="Câu hỏi gợi ý"></div>
       </div>
-      <div class="help-options" aria-label="Câu hỏi gợi ý"></div>
     </section>`;
   document.body.append(widget);
   const toggle = widget.querySelector('.help-toggle');
@@ -56,6 +56,12 @@
   question('Làm sao so sánh hai gọng?', message => {
     message.textContent = 'Mở danh sách kính và chọn hai mẫu khác nhau trong phần so sánh. Bạn có thể đổi từng mẫu để đối chiếu giá, màu và chất liệu.';
   });
+  question('Làm sao biết gọng đang đeo có vừa?', message => {
+    message.textContent = 'Khi cúi nhẹ đầu, gọng nên nằm yên trên mũi. Nếu hai bên thái dương bị ép hoặc càng kính tì sau tai, bạn nên thử mẫu khác để so sánh độ thoải mái.';
+  });
+  question('Có thể đổi số lượng trong giỏ không?', message => {
+    message.textContent = 'Có. Mở giỏ hàng rồi bấm dấu cộng hoặc trừ bên cạnh mẫu kính để đổi số lượng. Muốn bỏ hẳn mẫu đó, bạn bấm biểu tượng thùng rác.';
+  });
   async function productAnswer(field, message) {
     message.textContent = 'Đang tra thông tin mẫu kính…';
     const controller = new AbortController();
@@ -85,7 +91,7 @@
     if (!panel.hidden) return close();
     panel.hidden = false;
     toggle.setAttribute('aria-expanded', 'true');
-    options.firstElementChild.focus();
+    options.firstElementChild.focus({ preventScroll: true });
   });
   widget.querySelector('.help-close').addEventListener('click', close);
   widget.addEventListener('keydown', event => { if (event.key === 'Escape' && !panel.hidden) close(); });
