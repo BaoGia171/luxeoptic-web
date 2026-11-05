@@ -52,15 +52,15 @@
 .help-toggle[aria-expanded="false"]::after {
   content: '';
   position: absolute;
-  inset: -2px;
-  border: 1px solid var(--color-secondary);
+  inset: -3px;
+  border: 2px solid var(--color-secondary);
   border-radius: inherit;
   pointer-events: none;
   animation: help-pulse 3s ease-out infinite;
 }
 @keyframes help-pulse {
-  0% { opacity: .65; transform: scale(1); }
-  62%, 100% { opacity: 0; transform: scale(1.23); }
+  0% { opacity: .85; transform: scale(1); }
+  62%, 100% { opacity: 0; transform: scale(1.32); }
 }
 .help-panel {
   position: absolute;
@@ -75,9 +75,10 @@
   border: 1px solid var(--border-light);
   border-radius: 1.1rem;
   box-shadow: var(--shadow-card);
-  animation: chat-open 180ms ease-out;
+  transform-origin: bottom right;
+  animation: chat-open 230ms ease-out;
 }
-@keyframes chat-open { from { opacity: 0; translate: 0 6px; } }
+@keyframes chat-open { from { opacity: 0; transform: translateY(8px) scale(.97); } }
 .help-panel header {
   display: flex;
   align-items: center;
@@ -107,9 +108,19 @@
 }
 .help-options { display: flex; flex-wrap: wrap; gap: .4rem; flex-direction: column; align-items: flex-start; margin: .4rem 0 .85rem; }
 .help-options button { border-radius: 1rem; padding: .45rem .75rem; background: var(--bg-main); color: var(--text-primary); border: 1px solid var(--border-light); }
-.help-options button:hover { border-color: var(--border-focus); }
+.shopping-help button {
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+.help-close { border-radius: 50%; }
+@media (hover: hover) and (pointer: fine) {
+  .help-toggle:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 0 4px var(--color-secondary-light), var(--shadow-card); }
+  .help-options button:hover { transform: translateX(3px); background: var(--color-secondary-light); border-color: var(--border-focus); }
+  .help-close:hover { background: var(--bg-surface-container); }
+}
+.shopping-help button:active { transform: scale(.97); }
 .shopping-help :focus-visible { outline: 2px solid var(--border-focus); outline-offset: -2px; }
 @media (prefers-reduced-motion: reduce) {
   .help-toggle::after, .help-panel { animation: none; }
   .help-toggle::after { display: none; }
+  .shopping-help button:is(:hover, :active) { transform: none; }
 }
