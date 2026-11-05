@@ -9,30 +9,32 @@
   widget.className = 'shopping-help';
   widget.setAttribute('aria-label', 'Trợ giúp mua kính');
   widget.innerHTML = `
-    <button type="button" class="help-toggle" aria-controls="helpPanel" aria-expanded="false">Hỏi LuxeOptic</button>
+    <button type="button" class="help-toggle" aria-controls="helpPanel" aria-expanded="false" aria-label="Hỏi LuxeOptic" title="Hỏi LuxeOptic">
+      <svg width="27" height="27" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M20.5 11.5a8.5 8.5 0 0 1-12.4 7.6L3 20.5l1.5-5A8.5 8.5 0 1 1 20.5 11.5Z"/>
+        <path d="M8 10h8m-8 3.5h5" stroke-linecap="round"/>
+      </svg>
+    </button>
     <section id="helpPanel" class="help-panel" aria-label="Hỏi LuxeOptic" hidden>
-      <header><h2>Hỏi LuxeOptic</h2><button type="button" class="help-close" aria-label="Đóng trợ giúp">×</button></header>
-      <div class="help-options"></div>
-      <div class="help-answer" hidden><strong></strong><p role="status" aria-live="polite"></p>
-        <button type="button" class="help-back">Quay lại câu hỏi</button>
+      <header><span class="help-avatar" aria-hidden="true">L</span><h2>Hỏi LuxeOptic</h2><button type="button" class="help-close" aria-label="Đóng trợ giúp">×</button></header>
+      <div class="help-thread" role="log" aria-label="Cuộc trò chuyện" aria-live="polite" aria-relevant="additions text" tabindex="0">
+        <p class="help-bubble">Chào bạn! Bạn muốn tìm hiểu gì về gọng kính?</p>
       </div>
+      <div class="help-options" aria-label="Câu hỏi gợi ý"></div>
     </section>`;
   document.body.append(widget);
   const toggle = widget.querySelector('.help-toggle');
   const panel = widget.querySelector('.help-panel');
   const options = widget.querySelector('.help-options');
-  const answer = widget.querySelector('.help-answer');
-  const message = answer.querySelector('p');
-  const back = widget.querySelector('.help-back');
-  let lastQuestion;
-  let request;
-  function showOptions() {
-    request?.abort();
-    options.hidden = false;
-    answer.hidden = true;
+  const thread = widget.querySelector('.help-thread');
+  function addMessage(text, fromCustomer) {
+    const bubble = document.createElement('p');
+    bubble.className = fromCustomer ? 'help-bubble from-customer' : 'help-bubble';
+    bubble.textContent = text;
+    thread.append(bubble);
+    return bubble;
   }
   function close() {
-    showOptions();
     panel.hidden = true;
     toggle.setAttribute('aria-expanded', 'false');
     toggle.focus();
@@ -42,25 +44,22 @@
     button.type = 'button';
     button.textContent = title;
     button.addEventListener('click', function () {
-      lastQuestion = button;
-      options.hidden = true;
-      answer.hidden = false;
-      answer.querySelector('strong').textContent = title;
-      respond();
-      back.focus();
+      addMessage(title, true);
+      respond(addMessage('', false));
+      thread.scrollTop = thread.scrollHeight;
     });
     options.append(button);
   }
-  question('Cách đọc kích thước gọng?', () => {
+  question('Cách đọc kích thước gọng?', message => {
     message.textContent = 'Ví dụ 49 □ 20 145: tròng rộng 49 mm, cầu mũi rộng 20 mm và càng kính dài 145 mm. Bạn có thể đối chiếu với gọng đang đeo.';
   });
-  question('Làm sao so sánh hai gọng?', () => {
+  question('Làm sao so sánh hai gọng?', message => {
     message.textContent = 'Mở danh sách kính và chọn hai mẫu khác nhau trong phần so sánh. Bạn có thể đổi từng mẫu để đối chiếu giá, màu và chất liệu.';
   });
-  async function productAnswer(field) {
+  async function productAnswer(field, message) {
     message.textContent = 'Đang tra thông tin mẫu kính…';
     const controller = new AbortController();
-    request = controller;
+    const timeout = setTimeout(() => controller.abort(), 8000);
     try {
       if (!/^[1-9]\d*$/.test(id || '')) throw new Error();
       const url = new URL(endpoint, document.baseURI);
@@ -73,12 +72,14 @@
       if (field === 'stock') message.textContent = value ? 'Mẫu này còn hàng.' : 'Mẫu này hiện đã hết hàng.';
       else message.textContent = 'Giá hiện tại: ' + value.toLocaleString('vi-VN') + ' ₫.';
     } catch (error) {
-      if (!controller.signal.aborted) message.textContent = 'Không lấy được thông tin mẫu này. Bạn có thể quay lại và thử lại.';
+      message.textContent = 'Mình chưa tra được thông tin mẫu này. Bạn có thể thử lại sau.';
+    } finally {
+      clearTimeout(timeout);
     }
   }
   if (detail) {
-    question('Mẫu này giá bao nhiêu?', () => productAnswer('price'));
-    question('Mẫu này còn hàng không?', () => productAnswer('stock'));
+    question('Mẫu này giá bao nhiêu?', message => productAnswer('price', message));
+    question('Mẫu này còn hàng không?', message => productAnswer('stock', message));
   }
   toggle.addEventListener('click', function () {
     if (!panel.hidden) return close();
@@ -87,9 +88,5 @@
     options.firstElementChild.focus();
   });
   widget.querySelector('.help-close').addEventListener('click', close);
-  back.addEventListener('click', function () {
-    showOptions();
-    lastQuestion.focus();
-  });
   widget.addEventListener('keydown', event => { if (event.key === 'Escape' && !panel.hidden) close(); });
 })();

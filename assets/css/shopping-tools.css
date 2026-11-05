@@ -23,50 +23,93 @@
 }
 .frame-table img { width: 100%; max-height: 12rem; object-fit: contain; }
 .frame-table + p:not(:empty) { margin-top: .75rem; color: var(--text-secondary); }
+@media (max-width: 767px) {
+  .frame-table :is(th, td) { padding: .4rem .2rem; font-size: .85rem; }
+}
 .shopping-help {
   position: fixed;
   z-index: 60;
-  right: 1rem;
+  right: max(1rem, env(safe-area-inset-right));
   bottom: max(1rem, env(safe-area-inset-bottom));
   color: var(--text-primary);
 }
 .shopping-help [hidden] { display: none; }
-.shopping-help button {
-  cursor: pointer;
-  font: inherit;
-  color: inherit;
-}
-.shopping-help .help-toggle {
+.shopping-help button { cursor: pointer; font: inherit; }
+.help-toggle, .help-avatar {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
   background: var(--theme-button-bg);
   color: var(--theme-button-text);
-  border: 1px solid var(--border-dark);
-  padding: .7rem 1rem;
-  border-radius: 2rem;
+}
+.help-toggle {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border: 1px solid var(--color-secondary);
+  box-shadow: var(--shadow-card);
+}
+.help-toggle[aria-expanded="false"]::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px solid var(--color-secondary);
+  border-radius: inherit;
+  pointer-events: none;
+  animation: help-pulse 3s ease-out infinite;
+}
+@keyframes help-pulse {
+  0% { opacity: .65; transform: scale(1); }
+  62%, 100% { opacity: 0; transform: scale(1.23); }
 }
 .help-panel {
   position: absolute;
-  bottom: calc(100% + .6rem);
+  bottom: calc(100% + .7rem);
   right: 0;
-  width: min(22rem, calc(100vw - 2rem));
-  max-height: calc(100dvh - 6rem);
-  overflow-y: auto;
-  padding: 1rem;
+  width: min(23rem, calc(100vw - 2.5rem));
+  height: min(29rem, calc(100dvh - 6.5rem));
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
+  border-radius: 1.1rem;
   box-shadow: var(--shadow-card);
+  animation: chat-open 180ms ease-out;
 }
-.help-panel header { display: flex; align-items: center; justify-content: space-between; }
-.help-panel h2 { font: 1.45rem var(--font-headline); }
-.help-close { background: transparent; border: 0; min-width: 40px; min-height: 40px; }
-.help-options { display: grid; gap: .5rem; margin-top: .75rem; }
-.help-options button, .help-back {
-  text-align: left;
-  background: var(--bg-surface-low);
-  border: 1px solid var(--border-light);
-  padding: .65rem;
+@keyframes chat-open { from { opacity: 0; translate: 0 6px; } }
+.help-panel header {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .65rem .9rem;
+  border-bottom: 1px solid var(--border-light);
 }
-.help-options button:hover, .help-back:hover { border-color: var(--border-focus); }
-.help-answer p { margin: .65rem 0 1rem; }
-@media (max-width: 767px) {
-  .frame-table :is(th, td) { padding: .4rem .2rem; font-size: .85rem; }
+.help-avatar { width: 34px; height: 34px; font: 1.25rem var(--font-headline); }
+.help-panel h2 { font: 1.35rem var(--font-headline); }
+.help-close { margin-left: auto; background: transparent; color: inherit; border: 0; width: 40px; height: 40px; }
+.help-thread { flex: 1; min-height: 4rem; overflow: auto; overscroll-behavior: contain; padding: .9rem; }
+.help-bubble {
+  width: fit-content;
+  max-width: 88%;
+  margin: 0 0 .6rem;
+  padding: .6rem .8rem;
+  border-radius: 1rem 1rem 1rem .2rem;
+  background: var(--bg-surface-container);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+.help-bubble.from-customer {
+  margin-left: auto;
+  background: var(--theme-button-bg);
+  color: var(--theme-button-text);
+  border-radius: 1rem 1rem .2rem 1rem;
+}
+.help-options { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: flex-end; padding: .8rem; border-top: 1px solid var(--border-light); }
+.help-options button { border-radius: 1rem; padding: .45rem .75rem; background: var(--bg-main); color: var(--text-primary); border: 1px solid var(--border-light); }
+.help-options button:hover { border-color: var(--border-focus); }
+.shopping-help :focus-visible { outline: 2px solid var(--border-focus); outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) {
+  .help-toggle::after, .help-panel { animation: none; }
+  .help-toggle::after { display: none; }
 }
