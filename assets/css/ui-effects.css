@@ -90,23 +90,30 @@
   }
 }
 
+.page-start-marker {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
 .back-to-top {
-  position: fixed;
-  z-index: 59;
-  right: calc(max(1rem, env(safe-area-inset-right)) + 5px);
-  bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 66px);
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--border-light);
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--color-secondary);
   border-radius: 50%;
-  background: var(--bg-surface);
-  color: var(--text-primary);
+  background: var(--theme-button-bg);
+  color: var(--theme-button-text);
   box-shadow: var(--shadow-card);
-  font-size: 1.35rem;
   cursor: pointer;
 }
-.back-to-top[hidden], body:has(.help-toggle[aria-expanded="true"]) .back-to-top { display: none; }
+body > .back-to-top { position: fixed; bottom: 5.5rem; right: 1rem; z-index: 59; }
+.shopping-help .back-to-top { order: -2; margin-right: 3px; font-size: 24px; }
+.back-to-top[hidden] { display: none; }
 .back-to-top:focus-visible { outline: 2px solid var(--border-focus); }
 @media (hover: hover) {
-  .back-to-top:hover { background: var(--color-secondary-light); border-color: var(--border-focus); }
+  .back-to-top:hover { transform: translateY(-2px); }
 }

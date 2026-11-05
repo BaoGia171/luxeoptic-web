@@ -32,13 +32,24 @@ document.addEventListener('DOMContentLoaded', function () {
   button.title = 'Lên đầu trang';
   button.setAttribute('aria-label', button.title);
   button.textContent = '↑';
-  document.body.append(button);
+  const chat = document.querySelector('.shopping-help');
+  (chat || document.body).prepend(button);
 
   function updateVisibility() {
-    button.hidden = window.scrollY < Math.min(320, window.innerHeight / 2);
+    button.hidden = window.scrollY < 81;
   }
   updateVisibility();
-  window.addEventListener('scroll', updateVisibility, { passive: true });
+  if ('IntersectionObserver' in window) {
+    const marker = document.createElement('span');
+    marker.className = 'page-start-marker';
+    marker.setAttribute('aria-hidden', 'true');
+    document.body.prepend(marker);
+    new IntersectionObserver(function ([entry]) {
+      button.hidden = entry.boundingClientRect.bottom > 0;
+    }).observe(marker);
+  } else {
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+  }
   window.addEventListener('pageshow', updateVisibility);
   button.addEventListener('click', function () {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
