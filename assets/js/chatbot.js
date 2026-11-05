@@ -51,7 +51,7 @@
     options.append(button);
   }
   question('Cách đọc kích thước gọng?', message => {
-    message.textContent = 'Bạn hãy nhìn mặt trong càng kính. Nếu thấy 49 □ 20 145, bạn đọc như sau: mỗi tròng rộng 49 mm, phần nối giữa hai tròng (cầu mũi) rộng 20 mm và càng kính dài 145 mm. Dấu □ chỉ dùng để ngăn cách hai số đầu.';
+    message.textContent = 'Bạn có thể xem ba số ở mặt trong càng kính. Ví dụ, nếu thấy các số 49, 20 và 145, thì mỗi tròng kính rộng 49 mm, khoảng cách giữa hai tròng là 20 mm và càng kính dài 145 mm.';
   });
   question('Làm sao so sánh hai gọng?', message => {
     message.textContent = 'Mở danh sách kính và chọn hai mẫu khác nhau trong phần so sánh. Bạn có thể đổi từng mẫu để đối chiếu giá, màu và chất liệu.';
