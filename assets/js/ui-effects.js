@@ -24,3 +24,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'back-to-top';
+  button.title = 'Lên đầu trang';
+  button.setAttribute('aria-label', button.title);
+  button.textContent = '↑';
+  document.body.append(button);
+
+  function updateVisibility() {
+    button.hidden = window.scrollY < Math.min(320, window.innerHeight / 2);
+  }
+  updateVisibility();
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  window.addEventListener('pageshow', updateVisibility);
+  button.addEventListener('click', function () {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'instant' : 'smooth' });
+  });
+});
