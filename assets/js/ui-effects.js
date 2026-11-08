@@ -2,20 +2,27 @@ document.addEventListener('DOMContentLoaded', function () {
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (motion.matches || !('IntersectionObserver' in window)) return;
 
-  const elements = document.querySelectorAll('[data-ui-reveal], .category-card, .product-card');
+  const elements = document.querySelectorAll(
+    '[data-ui-reveal], .category-card, .product-card, .home-showroom > .container, .footer-grid > div, #specs'
+  );
   const observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
       entry.target.classList.remove('reveal-pending');
       observer.unobserve(entry.target);
     });
-  }, { rootMargin: '0px 0px 32px', threshold: 0 });
+  }, { rootMargin: '0px 0px -24px 0px', threshold: 0 });
 
   // Giữ nội dung đang nằm trong màn hình ở trạng thái hiển thị.
-  const upcoming = Array.from(elements).filter(element => element.getBoundingClientRect().top > innerHeight);
+  const upcoming = Array.from(elements).filter(element => element.getBoundingClientRect().top >= innerHeight);
+  // Đặt trạng thái bắt đầu trước một khung hình để trình duyệt chuyển động mượt.
   upcoming.forEach(function (element) {
     element.classList.add('reveal-item', 'reveal-pending');
-    observer.observe(element);
+  });
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      upcoming.forEach(element => observer.observe(element));
+    });
   });
   motion.addEventListener('change', function () {
     if (motion.matches) {

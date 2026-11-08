@@ -63,10 +63,10 @@
 .home-hero .max-w-2xl > :nth-child(3) { animation-delay: 200ms; }
 .home-hero .max-w-2xl > :nth-child(4) { animation-delay: 300ms; }
 .reveal-item {
-  transition: opacity 460ms ease-out, translate 460ms cubic-bezier(.2,.65,.3,1),
+  transition: opacity 700ms ease-out, translate 700ms cubic-bezier(.22,1,.36,1),
     transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
 }
-.reveal-pending:not(:focus-within) { opacity: 0; translate: 0 8px; }
+.reveal-pending:not(:focus-within) { opacity: 0; translate: 0 24px; }
 @media (prefers-reduced-motion: reduce) {
   .reveal-item.reveal-pending { opacity: 1; translate: none; }
 }
