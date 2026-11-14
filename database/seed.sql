@@ -112,3 +112,89 @@ VALUES
 'Đen','Titanium',
 '<p>Thiết kế tối giản Bauhaus.</p>',
 1,0);
+
+-- PRODUCT IMAGES
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/blue-blocker.jpg', 'Round Blue-Blocker Silver', 1
+FROM products
+WHERE sku='LX-BB-001';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/cat-eye.jpg', 'Cat-Eye Havana Acetate', 1
+FROM products
+WHERE sku='LX-CE-002';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/round-noir.jpg', 'Titanium Minimalist Noir', 1
+FROM products
+WHERE sku='LX-TM-003';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/aviator-main.jpg', 'Aviator Titanium Gold 01', 1
+FROM products
+WHERE sku='LX-AT-AV01';
+-- PRODUCT IMAGES CONTINUE
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/img39.jpg', 'Butterfly Glamour Acetate', 1
+FROM products
+WHERE sku='LX-BG-005';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/img38.jpg', 'Bold Rimless Horizon', 1
+FROM products
+WHERE sku='LX-BR-006';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/img37.jpg', 'Wayfarer Classic Polarized', 1
+FROM products
+WHERE sku='LX-WC-007';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/hexagon-silver.jpg', 'Hexagon Ultra Thin Titanium', 1
+FROM products
+WHERE sku='LX-HT-008';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/pilot-gold.jpg', 'Pilot Master 18K Gold', 1
+FROM products
+WHERE sku='LX-PM-009';
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/img34.jpg', 'Oval Blue Blocker Pure', 1
+FROM products
+WHERE sku='LX-OB-010';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/img33.jpg', 'Clubmaster Heritage Brown', 1
+FROM products
+WHERE sku='LX-CH-011';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/img32.jpg', 'Geometric Wireframe Bronze', 1
+FROM products
+WHERE sku='LX-GW-012';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/img31.jpg', 'Square Polarized Eclipse', 1
+FROM products
+WHERE sku='LX-SP-013';
+
+INSERT INTO product_images
+(product_id, image_path, alt_text, sort_order)
+SELECT id, 'assets/images/round-noir.jpg', 'Round Minimalist Noir', 1
+FROM products
+WHERE sku='LX-RM-014';
