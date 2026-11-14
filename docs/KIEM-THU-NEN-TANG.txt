@@ -1,0 +1,33 @@
+KẾT QUẢ KIỂM THỬ MỤC 1 VÀ 2 - 03/11/2026
+
+Môi trường thử riêng: Windows, PHP 8.2.35, MySQL Community Server 8.0.46.
+PHP/MySQL portable lấy từ nguồn chính thức, nằm ngoài D:\BTLWEB1.
+Không cài Windows service, không đổi PATH hoặc cấu hình hệ thống.
+Các tiến trình phục vụ kiểm thử đã dừng sau khi chạy xong.
+
+ĐÃ QUA:
+- Kiểm tra cú pháp cả 5 file PHP bàn giao.
+- Import schema vào database thử mới: đủ 6 bảng.
+- PDO dùng native prepared statements và FETCH_ASSOC.
+- Session bắt đầu với giỏ trống, không tự áp dụng voucher.
+- Format tiền và escape HTML; chặn URL ngoài và đường dẫn ../.
+- current_user trả thông tin tài khoản không kèm password_hash.
+- Tài khoản vừa bị khóa và ID tài khoản không tồn tại bị từ chối.
+- Khóa ngoại: chặn sản phẩm mồ côi, chặn xóa danh mục còn sản phẩm.
+- Xóa sản phẩm trong dữ liệu thử kéo theo ảnh đúng ON DELETE CASCADE.
+- Rollback hoàn tác thay đổi trong transaction thử.
+- CSRF giữ ổn định trong phiên; POST hợp lệ được chấp nhận.
+- HTTP: GET vào action CSRF trả 405; thiếu/sai/token dạng mảng trả 403.
+- HTTP: chưa đăng nhập chuyển auth.php; customer vào Admin trả 403;
+  admin hợp lệ được đi tiếp.
+- Cookie session có HttpOnly và SameSite=Lax khi chạy localhost HTTP.
+- Flash chỉ đọc một lần, POST redirect dùng mã 303.
+
+GIỚI HẠN:
+- Chưa kiểm thử MariaDB; không tuyên bố đã hỗ trợ mọi bản XAMPP.
+- Đây là kiểm thử nền tảng, không phải kiểm thử chức năng toàn website.
+- Chưa có seed 14 sản phẩm, action đăng nhập/CRUD/đặt hàng hoặc trang PHP.
+- config/database.php chưa tạo vì người dùng chưa cài môi trường DB.
+  Nhóm tự sao chép từ database.example.php và điền cấu hình máy mình.
+- Các kiểm thử dùng bản sao PHP và dữ liệu giả ở môi trường thử riêng;
+  không thêm tài khoản/sản phẩm thử vào source hoặc schema bàn giao.
