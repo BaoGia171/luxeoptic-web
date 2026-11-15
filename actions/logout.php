@@ -9,4 +9,4 @@ unset($_SESSION['user_id'], $_SESSION['checkout_token'], $_SESSION['form_state']
 session_regenerate_id(true);
 
 flash('success', 'Bạn đã đăng xuất.');
-redirect('auth.php');
+redirect('index.php');
