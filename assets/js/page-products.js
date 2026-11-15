@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     const sortSelect = document.querySelector('select');
-
+    let currentProducts = [...productCatalog];
 
     function formatPrice(price) {
         return price.toLocaleString('vi-VN') + 'đ';
@@ -127,10 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Hiển thị sản phẩm ban đầu
-    renderProducts(productCatalog);
-
-
-
+    renderProducts(currentProducts);
     // Sắp xếp sản phẩm
 
     if(sortSelect){
@@ -138,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
         sortSelect.addEventListener('change', function(){
 
 
-            let sortedProducts = [...productCatalog];
+            let sortedProducts = [...currentProducts];
 
 
             if(this.value === "price-asc"){
