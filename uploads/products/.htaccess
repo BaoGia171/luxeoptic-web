@@ -1,0 +1,11 @@
+Options -Indexes -ExecCGI
+<FilesMatch "(?i)^(?![a-f0-9]{32}\.(jpg|png|webp)$).*$">
+    Require all denied
+</FilesMatch>
+<FilesMatch "(?i)\.(jpg|png|webp)$">
+    SetHandler default-handler
+    RemoveHandler .jpg .png .webp
+    AddType image/jpeg .jpg
+    AddType image/png .png
+    AddType image/webp .webp
+</FilesMatch>

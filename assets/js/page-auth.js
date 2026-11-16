@@ -1,41 +1,83 @@
-// Tương tác riêng của trang auth
+/**
+ * LUXEOPTIC - TRANG ĐĂNG NHẬP / ĐĂNG KÝ (auth.php)
+ * Chỉ xử lý giao diện: chuyển tab, hiện/ẩn mật khẩu, nhắc lỗi trước khi gửi.
+ * Việc kiểm tra thật và tạo tài khoản do actions/login.php, actions/register.php làm.
+ *
+ * Logic chuyển tab này thay cho mục "4. Chuyển Tab Đăng nhập / Đăng ký" trong
+ * main.js. Khi PR gỡ mục đó khỏi main.js được merge thì file này là nơi duy nhất.
+ */
+document.addEventListener('DOMContentLoaded', function () {
+  var tabLogin = document.getElementById('tabLogin');
+  var tabRegister = document.getElementById('tabRegister');
+  var formLogin = document.getElementById('formLogin');
+  var formRegister = document.getElementById('formRegister');
+  if (!tabLogin || !tabRegister || !formLogin || !formRegister) return;
 
-function handleLoginSubmit() {
-  alert('Đây là giao diện mẫu đăng nhập khách hàng.');
-  window.location.href = 'index.html';
-}
+  var ACTIVE = ['border-b-2', 'border-black', 'font-bold', 'text-black', 'active'];
+  var IDLE = ['text-gray-400', 'font-medium'];
+  var LABELS = { login: 'Đăng Nhập', register: 'Đăng Ký Tài Khoản' };
 
-    function handleRegisterSubmit() {
-      const p1 = document.getElementById('regPass').value;
-      const p2 = document.getElementById('regConfirmPass').value;
-      if (p1 !== p2) {
-        alert('Lỗi: Mật khẩu xác nhận không khớp! Vui lòng nhập lại.');
+  function styleTab(tab, isActive, label) {
+    ACTIVE.forEach(function (name) { tab.classList.toggle(name, isActive); });
+    IDLE.forEach(function (name) { tab.classList.toggle(name, !isActive); });
+    tab.classList.remove('border-primary');
+    tab.textContent = (isActive ? '• ' : '') + label;
+    tab.setAttribute('aria-selected', String(isActive));
+  }
+
+  function showTab(name) {
+    var isLogin = name === 'login';
+    styleTab(tabLogin, isLogin, LABELS.login);
+    styleTab(tabRegister, !isLogin, LABELS.register);
+    formLogin.classList.toggle('hidden', !isLogin);
+    formRegister.classList.toggle('hidden', isLogin);
+  }
+
+  tabLogin.addEventListener('click', function () { showTab('login'); });
+  tabRegister.addEventListener('click', function () { showTab('register'); });
+
+  // Hiện/ẩn mật khẩu.
+  document.querySelectorAll('[data-toggle-password]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var input = document.getElementById(button.getAttribute('data-toggle-password'));
+      if (!input) return;
+      var show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      button.setAttribute('aria-label', show ? 'Ẩn mật khẩu' : 'Hiện mật khẩu');
+      var icon = button.querySelector('.material-symbols-outlined');
+      if (icon) icon.textContent = show ? 'visibility_off' : 'visibility';
+    });
+  });
+
+  // Nhắc ngay khi hai mật khẩu chưa khớp. Server vẫn kiểm tra lại khi gửi.
+  var pass = document.getElementById('regPass');
+  var confirm = document.getElementById('regConfirmPass');
+  if (pass && confirm) {
+    var hint = document.createElement('p');
+    hint.className = 'text-11px text-red-600 mt-1';
+    hint.setAttribute('role', 'status');
+    hint.hidden = true;
+    hint.style.display = 'none';
+    hint.textContent = 'Mật khẩu xác nhận chưa khớp.';
+    confirm.parentNode.appendChild(hint);
+
+    var check = function () {
+      var hide = confirm.value === '' || confirm.value === pass.value;
+      hint.hidden = hide;
+      hint.style.display = hide ? 'none' : '';
+    };
+    pass.addEventListener('input', check);
+    confirm.addEventListener('input', check);
+  }
+
+  // Chặn bấm gửi hai lần liên tiếp.
+  [formLogin, formRegister].forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (form.dataset.submitting === '1') {
+        event.preventDefault();
         return;
       }
-      const name = document.getElementById('regName').value;
-      alert(`Đăng ký tài khoản thành công cho: ${name}!\nChào mừng bạn gia nhập gia đình LuxeOptic Atelier.`);
-      window.location.href = 'index.html';
-    }
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelector('[data-action="auth-action-1"]').addEventListener('submit', function (event) {
-    event.preventDefault(); handleLoginSubmit();
-  });
-  document.querySelector('[data-action="auth-action-2"]').addEventListener('click', function (event) {
-    event.preventDefault(); alert('Vui lòng liên hệ quản trị viên hoặc kiểm tra email để đặt lại mật khẩu.')
-  });
-  document.querySelector('[data-action="auth-action-3"]').addEventListener('click', function (event) {
-    const p = document.getElementById('authPassword'); p.type = p.type === 'password' ? 'text' : 'password';
-    this.setAttribute('aria-label', p.type === 'password' ? 'Hiện mật khẩu' : 'Ẩn mật khẩu');
-    this.querySelector('span').textContent = p.type === 'password' ? 'visibility' : 'visibility_off';
-  });
-  document.querySelector('[data-action="auth-action-4"]').addEventListener('submit', function (event) {
-    event.preventDefault(); handleRegisterSubmit();
-  });
-  document.querySelector('[data-action="auth-action-5"]').addEventListener('click', function (event) {
-    alert('Đăng nhập Google chưa được kết nối trong bản giao diện này.');
-  });
-  document.querySelector('[data-action="auth-action-6"]').addEventListener('click', function (event) {
-    alert('Đăng nhập Apple chưa được kết nối trong bản giao diện này.');
+      form.dataset.submitting = '1';
+    });
   });
 });

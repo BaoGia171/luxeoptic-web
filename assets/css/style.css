@@ -419,6 +419,7 @@ button, input, select, textarea {
 }
 
 .product-info {
+  container-type: inline-size;
   padding: var(--spacing-md);
   display: flex;
   flex-direction: column;
@@ -461,12 +462,28 @@ button, input, select, textarea {
 }
 
 .product-price-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 8rem;
+  gap: .5rem;
+  align-items: end;
   margin-top: auto;
   padding-top: 10px;
   border-top: 1px dashed var(--border-light);
+}
+
+.product-price-row > div { display: grid; }
+.product-price-row .product-old-price { margin-left: 0; }
+.product-price-row > .btn {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 .4rem;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+@container (max-width: 15rem) {
+  .product-price-row { grid-template-columns: 1fr; }
 }
 
 .product-price {

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Real PHP executes outside uploads",
+    "result": "PASS"
+  },
+  {
+    "name": "probe.php is denied without execution/source disclosure",
+    "result": "PASS"
+  },
+  {
+    "name": "probe.phtml is denied without execution/source disclosure",
+    "result": "PASS"
+  },
+  {
+    "name": "probe.php.png is denied without execution/source disclosure",
+    "result": "PASS"
+  },
+  {
+    "name": "Valid random-name PNG still served",
+    "result": "PASS"
+  }
+]

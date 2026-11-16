@@ -1,0 +1,99 @@
+LUXEOPTIC - BÀN GIAO SCHEMA VÀ NỀN TẢNG PHP (NGƯỜI 1)
+
+1. PHẠM VI
+database/schema.sql: 6 bảng theo tài liệu nhóm, khóa ngoại và index.
+config/database.example.php: cấu hình mẫu.
+includes/db.php: kết nối PDO utf8mb4.
+includes/bootstrap.php: cấu hình, session, nạp kết nối và hàm chung.
+includes/functions.php: URL, escape, tiền, redirect, tài khoản, quyền,
+CSRF và thông báo dùng một lần.
+scripts/check-foundation.php: kiểm tra kết nối từ CLI, không sửa dữ liệu.
+
+Các trang HTML hiện tại vẫn là frontend. Chúng chưa tự dùng các file PHP
+vừa thêm. Tách header/footer/sidebar và đổi trang sang PHP là bước tiếp
+theo. Các action đăng nhập, giỏ hàng, CRUD và seed do thành viên phụ trách
+làm sau. Không tạo tài khoản hoặc dữ liệu sản phẩm mẫu trong schema.sql.
+
+2. CHẠY TRÊN MÁY CỦA NHÓM
+- Chuẩn bị PHP 8.2 có extension pdo_mysql và MySQL 8.0.
+- Nếu dùng XAMPP: kiểm tra server DB thực tế; MariaDB không phải MySQL.
+  Chỉ ghi hỗ trợ MariaDB trong báo cáo khi đã chạy thử trên phiên bản đó.
+- Mở MySQL Workbench, kết nối server của bạn, mở database/schema.sql
+  và chạy toàn bộ file. File tạo database luxeoptic và 6 bảng trống.
+  Import một lần vào database mới; không chạy lại để cập nhật schema cũ.
+  Không xóa database đang có dữ liệu để xử lý lỗi "table already exists".
+- Sao chép config/database.example.php thành config/database.php.
+  Sửa host, port, username, password theo máy bạn. Không commit database.php.
+- Nếu đặt dự án tại htdocs/BTLWEB1: base_url là /BTLWEB1.
+- Nếu dùng PHP built-in server từ D:\BTLWEB1: base_url là chuỗi rỗng ''.
+  Mở terminal tại D:\BTLWEB1 rồi chạy:
+      php scripts/check-foundation.php
+      php -S 127.0.0.1:8000
+  Hiện tại xem frontend ở http://127.0.0.1:8000/index.html.
+  Khi chuyển trang sang PHP sẽ dùng index.php. Live Server không chạy PHP.
+- Nếu báo "could not find driver": bật extension pdo_mysql trong php.ini.
+- Nếu báo không kết nối: kiểm tra MySQL đang chạy, tên DB, cổng/tài khoản.
+  Chi tiết lỗi nằm trong log PHP; không đưa mật khẩu lên GitHub/chat.
+
+3. CÁCH CÁC THÀNH VIÊN DÙNG NỀN TẢNG
+Đầu trang gốc, trước mọi HTML:
+    require_once __DIR__ . '/includes/bootstrap.php';
+Trong actions hoặc admin:
+    require_once __DIR__ . '/../includes/bootstrap.php';
+Trong admin/actions:
+    require_once __DIR__ . '/../../includes/bootstrap.php';
+
+Trang khách cần đăng nhập: require_login();
+Trang/action quản trị: require_admin();
+Action POST: verify_csrf(); rồi kiểm tra dữ liệu/nghiệp vụ trước khi ghi DB.
+verify_csrf() chặn cả phương thức khác POST (405) và token sai/thiếu (403).
+Không dùng quyền chỉ ở menu để thay thế kiểm tra trong action.
+
+Trong form POST:
+    <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
+Khi hiện văn bản người dùng nhập: <?= e($value) ?>
+Khi hiện giá: <?= money((int) $product['price']) ?>
+Khi tạo link: <?= e(url('products.php')) ?>
+Truy vấn có input: dùng $pdo->prepare(...) và execute([...]).
+
+Sau xử lý:
+    flash('success', 'Đã lưu.');
+    redirect('admin/products.php');
+redirect() nhận đường dẫn nội bộ, tự ghép BASE_URL và kết thúc chương trình.
+Không truyền nguyên URL hoặc trực tiếp $_GET['return'] vào redirect().
+Người 2 dùng danh sách cho phép: cart => cart.php, home => index.php.
+Người 4 khi yêu cầu đăng nhập tại checkout chuyển auth.php?return=cart.
+
+Header đọc thông báo một lần:
+    foreach (get_flashes() as $message) {
+        echo '<p>' . e($message['message']) . '</p>';
+    }
+get_flashes() là hàm hỗ trợ thêm; flash(type, message) giữ đúng chữ ký đã chốt.
+
+4. SESSION
+user_id: chỉ ID. current_user() đọc lại DB, không trả password_hash;
+tài khoản bị khóa/xóa được bỏ user_id và không qua được kiểm tra đăng nhập.
+cart: mặc định []; product_id => quantity, không lưu giá từ trình duyệt.
+csrf_token: tạo khi gọi csrf_token(), giữ ổn định cho các form cùng phiên.
+voucher_code: chỉ tạo khi khách áp dụng mã hợp lệ, không đặt sẵn.
+checkout_token: người 4 tạo/kiểm tra/đổi sau đặt hàng, độc lập với CSRF.
+Người 2 phải session_regenerate_id(true) sau đăng nhập/đăng xuất;
+không xóa giỏ chỉ vì đăng xuất.
+
+5. NGHIỆP VỤ VẪN PHẢI KIỂM TRA TẠI CÁC ACTION
+Giá > 0; old_price >= price; quantity 1..99, không vượt stock;
+tính tiền từ DB; giao dịch tạo/hủy đơn và khóa hàng trong transaction.
+Schema không tự thực hiện các quy tắc này hoặc thay thế kiểm tra PHP.
+Không render products.description trực tiếp trước khi người 5 triển khai
+HTML Purifier đúng quy ước editor. e() dành cho văn bản, không thay Purifier.
+
+6. GIT
+.gitignore đã loại cấu hình riêng và vendor Composer khỏi Git.
+assets/vendor/quill không bị loại. File .htaccess trong uploads/products
+được phép commit; người 5 tạo và kiểm thử rule chặn script khi làm upload.
+Không push cấu hình test, dữ liệu thử hay mật khẩu.
+Repo: https://github.com/BaoGia171/luxeoptic-web
+Giao diện gốc nằm trên main, tag frontend-v1.
+Nền tảng PHP, schema và ERD nằm trên feature/php-foundation.
+Các thành viên lấy nền tảng chung sau khi PR nhánh này được review/merge;
+không chỉ clone main rồi cho rằng đã có phần PHP.

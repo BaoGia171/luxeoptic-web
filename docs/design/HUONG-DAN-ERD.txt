@@ -1,0 +1,17 @@
+ERD LUXEOPTIC
+
+01-erd.drawio: file gốc, sửa được từng bảng, cột, chữ và đường quan hệ.
+01-erd.png: ảnh tổng quan để xem nhanh hoặc chèn báo cáo.
+
+Mở https://app.diagrams.net rồi chọn File > Open from > Device,
+chọn 01-erd.drawio. Có thể mở bằng draw.io Desktop.
+Khi đổi schema, cập nhật cả file drawio và xuất lại PNG.
+
+Đã đối chiếu với database/schema.sql: 6 bảng, 67 cột, 5 khóa ngoại.
+Sơ đồ thể hiện khóa chính, khóa ngoại, UNIQUE, NULL, kiểu dữ liệu,
+ENUM, các index và ON DELETE. Bảng cha có 0..N bản ghi con;
+mỗi bản ghi con thuộc đúng 1 bản ghi cha do FK đều NOT NULL.
+
+Chú ý: schema dùng ON DELETE CASCADE cho product_images, nhưng nghiệp vụ
+Admin vẫn ẩn sản phẩm (is_active = 0), không xóa vật lý sản phẩm đã bán.
+Quan hệ orders-products được triển khai bằng bảng trung gian order_items.
