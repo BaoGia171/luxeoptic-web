@@ -4,15 +4,13 @@
 
 Trang phải nạp `includes/bootstrap.php` trước mọi HTML. Header và footer chỉ
 chứa phần giao diện tương ứng; trang tự giữ `<head>`, CSS, JS và phần nội dung.
-`index.php` là trang đã tích hợp mẫu. Dữ liệu sản phẩm trên trang này vẫn là
-giao diện mẫu, chưa phải danh sách lấy từ database.
+`index.php` đã lấy sản phẩm nổi bật từ database. Các trang thương mại mới dùng `includes/shop.php` để nạp cùng header/footer/sidebar; không có bộ dữ liệu JavaScript riêng.
 
 ```php
 <?php
 require_once __DIR__ . '/includes/bootstrap.php';
 $activeNav = 'home';
-// TV4 truyền tổng số lượng từ giỏ hàng session vào $cartCount.
-$cartCount = 0;
+// Header tự lấy tổng số lượng từ giỏ Session.
 ?>
 <!-- Giữ doctype, head và thẻ body của trang -->
 <?php require __DIR__ . '/includes/header.php'; ?>
@@ -32,9 +30,7 @@ lọc dữ liệu hay ghi đè tiêu đề; khi không truyền biến, không m
 | Chống ánh sáng xanh | products.php?category=chong-anh-sang-xanh | chong-anh-sang-xanh |
 | Hàng mới | products.php?sort=newest | newest |
 
-Các trang PHP đích do thành viên tương ứng triển khai, chưa có đầy đủ trong
-nhánh nền tảng. Bản HTML demo vẫn dùng `.html` và không được coi là bộ lọc thật.
-Không nạp `cart-store.js` trên các trang đã chuyển sang giỏ hàng session PHP.
+Các trang PHP đã được ghép trong nhánh codex/complete-tv3-tv6. Các file HTML mô phỏng, cart-store.js và products-data.js đã gỡ khỏi nhánh tích hợp.
 
 ## Sidebar Admin
 

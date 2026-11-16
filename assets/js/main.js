@@ -59,28 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 4. Chuyển Tab Đăng nhập / Đăng ký (Auth Switcher)
-  const tabLogin = document.getElementById('tabLogin');
-  const tabRegister = document.getElementById('tabRegister');
-  const formLogin = document.getElementById('formLogin');
-  const formRegister = document.getElementById('formRegister');
-
-  if (tabLogin && tabRegister && formLogin && formRegister) {
-    tabLogin.addEventListener('click', function () {
-      tabLogin.classList.add('active', 'border-b-2', 'border-primary', 'font-bold');
-      tabRegister.classList.remove('active', 'border-b-2', 'border-primary', 'font-bold');
-      formLogin.classList.remove('hidden');
-      formRegister.classList.add('hidden');
-    });
-
-    tabRegister.addEventListener('click', function () {
-      tabRegister.classList.add('active', 'border-b-2', 'border-primary', 'font-bold');
-      tabLogin.classList.remove('active', 'border-b-2', 'border-primary', 'font-bold');
-      formRegister.classList.remove('hidden');
-      formLogin.classList.add('hidden');
-    });
-  }
-
   // Menu trên điện thoại và máy tính bảng.
   const menuButton = document.querySelector('.menu-toggle');
   const menu = document.getElementById('siteMenu');

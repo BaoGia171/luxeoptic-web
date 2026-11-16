@@ -1,6 +1,8 @@
 <?php
 // Nap bootstrap.php truoc partial nay. TV3 truyen $activeNav; TV4 truyen $cartCount.
 $activeNav = $activeNav ?? '';
+$cartCount = array_sum(array_map('intval', $_SESSION['cart'] ?? []));
+$headerUser = current_user();
 ?>
 <header class="site-header">
     <div class="container header-inner">
@@ -22,17 +24,17 @@ $activeNav = $activeNav ?? '';
         <a href="<?= e(url('products.php?sort=newest')) ?>" class="nav-link<?= $activeNav === 'newest' ? ' active' : '' ?>"<?= $activeNav === 'newest' ? ' aria-current="page"' : '' ?>>Hàng mới</a>
       </nav>
 
-      <!-- Utilities (Search, Wishlist, Account, Cart) -->
+      <!-- Search, account and session cart -->
       <div class="header-actions">
         <button type="button" class="menu-toggle" aria-controls="siteMenu" aria-expanded="false" aria-label="Mở menu">
           <span class="material-symbols-outlined">menu</span>
         </button>
-        <div class="search-box">
+        <form class="search-box" method="get" action="<?= e(url('products.php')) ?>">
           <span class="material-symbols-outlined text-gray-500 text-lg">search</span>
-          <input type="text" placeholder="Tìm kiếm gọng kính, mã SKU...">
-        </div>
+          <input name="q" aria-label="Tìm kiếm" type="search" placeholder="Tìm kiếm gọng kính, mã SKU..."><button type="submit" aria-label="Tìm kiếm">→</button>
+        </form>
         
-        <a href="<?= e(url('auth.php')) ?>" class="action-icon" title="Tài khoản">
+        <a href="<?= e(url($headerUser ? 'profile.php' : 'auth.php')) ?>" class="action-icon" title="<?= $headerUser ? 'Hồ sơ của tôi' : 'Đăng nhập' ?>">
           <span class="material-symbols-outlined text-2xl">account_circle</span>
         </a>
 

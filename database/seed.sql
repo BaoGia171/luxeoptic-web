@@ -36,7 +36,7 @@ VALUES
 '<p>Thiết kế tối giản cao cấp.</p>',
 1,0),
 
-(4,'LX-AT-AV01','LX-AT-AV01',
+(4,'LX-AT-AV01','aviator-titanium-gold-01',
 'Aviator Titanium Gold 01',
 1350000,1650000,20,
 'Vàng','Titanium',

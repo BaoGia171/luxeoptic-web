@@ -37,37 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Xử lý giả lập chọn ảnh upload và hiện preview
-  const imageInput = document.getElementById('productImageInput');
-  const previewContainer = document.getElementById('imagePreviewContainer');
 
-  if (imageInput && previewContainer) {
-    imageInput.addEventListener('change', function () {
-      if (this.files && this.files.length > 0) {
-        for (let i = 0; i < Math.min(this.files.length, 5); i++) {
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            const div = document.createElement('div');
-            div.className = 'relative w-20 h-20 border border-gray-200 bg-white p-1 rounded';
-            div.innerHTML = `
-              <img src="${e.target.result}" class="w-full h-full object-contain" />
-              <button type="button" aria-label="Xóa ảnh xem trước" class="absolute negative-top-1 negative-right-1 bg-red-600 text-white w-4 h-4 rounded-full text-xs flex items-center justify-center">&times;</button>
-            `;
-            div.querySelector('button').addEventListener('click', function () {
-              div.remove();
-            });
-            previewContainer.appendChild(div);
-          };
-          reader.readAsDataURL(this.files[i]);
-        }
-      }
-    });
-  }
-
-  // Thông báo cập nhật thành công
-  window.notifySuccess = function (msg) {
-    alert(msg || 'Thao tác thành công!');
-  };
 });
 
 // Thu gọn menu quản trị trên màn hình nhỏ.

@@ -18,7 +18,7 @@ verify_csrf();
 
 // Lấy mã voucher người dùng nhập.
 $voucherCode = strtoupper(
-    trim((string) ($_POST['voucher_code'] ?? ''))
+    trim(is_string($_POST['voucher_code'] ?? null) ? $_POST['voucher_code'] : '')
 );
 
 // Kiểm tra giỏ hàng có sản phẩm.

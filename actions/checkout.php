@@ -4,7 +4,7 @@ declare(strict_types=1);
 // File: actions/checkout.php
 // Người phụ trách: Phạm Văn Đạt
 
-require_once __DIR__ . '/../includes/bootstrap.php';
+require_once __DIR__ . '/../includes/shop.php';
 
 // Chỉ cho phép POST.
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -53,7 +53,7 @@ foreach ($checkoutFields as $field) {
 
 
 // Kiểm tra token chống gửi đơn trùng.
-$submittedToken = (string) ($_POST['checkout_token'] ?? '');
+$submittedToken = input_text($_POST, 'checkout_token');
 $sessionToken = (string) ($_SESSION['checkout_token'] ?? '');
 
 if (
@@ -66,14 +66,14 @@ if (
 }
 
 // Lấy thông tin người nhận.
-$recipientName = trim((string) ($_POST['recipient_name'] ?? ''));
-$recipientPhone = trim((string) ($_POST['recipient_phone'] ?? ''));
-$recipientEmail = trim((string) ($_POST['recipient_email'] ?? ''));
-$province = trim((string) ($_POST['province'] ?? ''));
-$district = trim((string) ($_POST['district'] ?? ''));
-$addressDetail = trim((string) ($_POST['address_detail'] ?? ''));
-$note = trim((string) ($_POST['note'] ?? ''));
-$paymentMethod = trim((string) ($_POST['payment_method'] ?? ''));
+$recipientName = input_text($_POST, 'recipient_name');
+$recipientPhone = input_text($_POST, 'recipient_phone');
+$recipientEmail = strtolower(input_text($_POST, 'recipient_email'));
+$province = input_text($_POST, 'province');
+$district = input_text($_POST, 'district');
+$addressDetail = input_text($_POST, 'address_detail');
+$note = input_text($_POST, 'note');
+$paymentMethod = input_text($_POST, 'payment_method');
 
 // Chuẩn hóa số điện thoại Việt Nam.
 $recipientPhone = preg_replace(
@@ -93,7 +93,7 @@ if (
     mb_strlen($recipientName) < 2 ||
     mb_strlen($recipientName) > 100
 ) {
-    $errors[] = 'Họ tên phải có từ 2 đến 100 ký tự.';
+    $errors['recipient_name'] = 'Họ tên phải có từ 2 đến 100 ký tự.';
 }
 
 if (!preg_match('/^0[0-9]{9}$/', $recipientPhone)) {
@@ -104,37 +104,37 @@ if (
     !filter_var($recipientEmail, FILTER_VALIDATE_EMAIL) ||
     mb_strlen($recipientEmail) > 150
 ) {
-    $errors[] = 'Email không hợp lệ.';
+    $errors['recipient_email'] = 'Email không hợp lệ.';
 }
 
 if ($province === '' || mb_strlen($province) > 100) {
-    $errors[] = 'Tỉnh/thành phố không hợp lệ.';
+    $errors['province'] = 'Tỉnh/thành phố không hợp lệ.';
 }
 
 if ($district === '' || mb_strlen($district) > 100) {
-    $errors[] = 'Quận/huyện không hợp lệ.';
+    $errors['district'] = 'Quận/huyện không hợp lệ.';
 }
 
 if (
     $addressDetail === '' ||
     mb_strlen($addressDetail) > 255
 ) {
-    $errors[] = 'Địa chỉ chi tiết không hợp lệ.';
+    $errors['address_detail'] = 'Địa chỉ chi tiết không hợp lệ.';
 }
 
 if (mb_strlen($note) > 1000) {
-    $errors[] = 'Ghi chú không được quá 1000 ký tự.';
+    $errors['note'] = 'Ghi chú không được quá 1000 ký tự.';
 }
 
 if (!in_array($paymentMethod, ['cod', 'bank_transfer'], true)) {
-    $errors[] = 'Phương thức thanh toán không hợp lệ.';
+    $errors['payment_method'] = 'Phương thức thanh toán không hợp lệ.';
 }
 
 // Kiểm tra giỏ hàng.
 $cart = $_SESSION['cart'] ?? [];
 
 if (!is_array($cart) || empty($cart)) {
-    $errors[] = 'Giỏ hàng đang trống.';
+    $errors['cart'] = 'Giỏ hàng đang trống.';
 }
 
 // Chuẩn hóa ID và số lượng.
@@ -163,7 +163,7 @@ if (is_array($cart)) {
             $validQuantity === false ||
             $validQuantity === null
         ) {
-            $errors[] = 'Giỏ hàng chứa dữ liệu không hợp lệ.';
+            $errors['cart'] = 'Giỏ hàng chứa dữ liệu không hợp lệ.';
             break;
         }
 
@@ -256,7 +256,7 @@ try {
             'product_id' => (int) $product['id'],
             'product_name' => $product['name'],
             'product_sku' => $product['sku'],
-            'product_image' => $product['image_path'],
+            'product_image' => $product['image_path'] ?? 'assets/images/no-image.svg',
             'product_color' => $product['color'],
             'unit_price' => $price,
             'quantity' => $quantity,

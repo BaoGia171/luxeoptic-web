@@ -1,0 +1,10 @@
+{
+  "require": {
+    "php": ">=8.2",
+    "ext-pdo": "*",
+    "ext-mbstring": "*",
+    "ext-fileinfo": "*",
+    "ezyang/htmlpurifier": "^4.18",
+    "ext-dom": "*"
+  }
+}

@@ -45,10 +45,7 @@
         <div>
           <h4 class="footer-title">Đăng Ký Nhận Ưu Đãi 10%</h4>
           <p class="text-xs text-gray-400 mb-3">Nhận thông tin bộ sưu tập độc bản và các sự kiện riêng tư của LuxeOptic.</p>
-          <form class="flex gap-1 mb-4" data-action="index-action-1">
-            <input type="email" placeholder="Nhập địa chỉ email..." required class="h-10 px-3 text-xs bg-gray-900 border border-gray-700 text-white w-full outline-none focus-border-secondary">
-            <button type="submit" class="btn btn-secondary btn-sm px-4">GỬI</button>
-          </form>
+          <p class="text-xs">Đăng ký nhận tin chưa hỗ trợ trong bản demo.</p>
           
         </div>
       </div>

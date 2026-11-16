@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram name="03-sitemap">
+    <mxGraphModel page="1" pageWidth="1440" pageHeight="1060">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e0" value="" style="edgeStyle=none;endArrow=block;strokeColor=#526b79;" edge="1" parent="1" source="home" target="catalog">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="710" y="250" />
+              <mxPoint x="230" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e1" value="" style="edgeStyle=none;endArrow=block;strokeColor=#526b79;" edge="1" parent="1" source="home" target="account">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=none;endArrow=block;strokeColor=#526b79;" edge="1" parent="1" source="account" target="admin">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=none;endArrow=block;strokeColor=#526b79;" edge="1" parent="1" source="catalog" target="detail">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=none;endArrow=block;strokeColor=#526b79;" edge="1" parent="1" source="catalog" target="compare">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="15" y="360" />
+              <mxPoint x="15" y="710" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="" style="edgeStyle=none;endArrow=block;strokeColor=#526b79;" edge="1" parent="1" source="detail" target="cart">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="" style="edgeStyle=none;endArrow=block;strokeColor=#526b79;" edge="1" parent="1" source="account" target="profile">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="950" y="360" />
+              <mxPoint x="950" y="710" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" value="" style="edgeStyle=none;endArrow=block;strokeColor=#526b79;" edge="1" parent="1" source="profile" target="orders">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" value="" style="edgeStyle=none;endArrow=block;strokeColor=#526b79;" edge="1" parent="1" source="cart" target="orders">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="975" y="540" />
+              <mxPoint x="975" y="880" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" value="" style="edgeStyle=none;endArrow=block;strokeColor=#526b79;" edge="1" parent="1" source="admin" target="management">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="title" value="SITEMAP — LUXEOPTIC" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=30;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;text;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="20" width="1380" height="60" />
+        </mxCell>
+        <mxCell id="home" value="Trang chủ&#10;index.php" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;rounded=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="520" y="115" width="380" height="90" />
+        </mxCell>
+        <mxCell id="catalog" value="Danh sách sản phẩm&#10;products.php&#10;Tìm / lọc / sắp xếp / phân trang" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;rounded=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="300" width="400" height="120" />
+        </mxCell>
+        <mxCell id="account" value="Đăng nhập / Đăng ký&#10;auth.php" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;rounded=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="520" y="300" width="380" height="120" />
+        </mxCell>
+        <mxCell id="admin" value="Quản trị (chỉ Admin)&#10;admin/index.php" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;rounded=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1010" y="300" width="400" height="120" />
+        </mxCell>
+        <mxCell id="detail" value="Chi tiết sản phẩm&#10;product-detail.php?id=…" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;rounded=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="490" width="400" height="100" />
+        </mxCell>
+        <mxCell id="compare" value="So sánh hai gọng&#10;compare.php?id1=…&amp;id2=…" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;rounded=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="660" width="400" height="100" />
+        </mxCell>
+        <mxCell id="cart" value="Giỏ hàng &amp; đặt hàng&#10;cart.php" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;rounded=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="520" y="490" width="380" height="100" />
+        </mxCell>
+        <mxCell id="profile" value="Hồ sơ cá nhân&#10;profile.php" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;rounded=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="520" y="660" width="380" height="100" />
+        </mxCell>
+        <mxCell id="orders" value="Lịch sử / chi tiết đơn của mình&#10;my-orders.php?id=…" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;rounded=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="520" y="830" width="380" height="100" />
+        </mxCell>
+        <mxCell id="management" value="admin/products.php — Sản phẩm&#10;admin/categories.php — Danh mục&#10;admin/orders.php — Đơn hàng&#10;admin/users.php — Tài khoản" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;rounded=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1010" y="490" width="400" height="270" />
+        </mxCell>
+        <mxCell id="note" value="Mũi tên thể hiện đường điều hướng chính, không phải quan hệ dữ liệu.&#10;Giỏ dùng được khi chưa đăng nhập; đặt hàng / hồ sơ / lịch sử cần đăng nhập.&#10;Chatbot là khung nổi trên trang khách; actions/*.php là xử lý, không phải trang giao diện." style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=20;fontColor=#173549;strokeColor=#526b79;fillColor=#f1f6f8;text;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="945" width="1380" height="100" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

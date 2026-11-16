@@ -60,7 +60,7 @@
     message.textContent = 'Khi cúi nhẹ đầu, gọng nên nằm yên trên mũi. Nếu hai bên thái dương bị ép hoặc càng kính tì sau tai, bạn nên thử mẫu khác để so sánh độ thoải mái.';
   });
   question('Có thể đổi số lượng trong giỏ không?', message => {
-    message.textContent = 'Có. Mở giỏ hàng rồi bấm dấu cộng hoặc trừ bên cạnh mẫu kính để đổi số lượng. Muốn bỏ hẳn mẫu đó, bạn bấm biểu tượng thùng rác.';
+    message.textContent = 'Có. Mở giỏ hàng rồi nhập số lượng mới và bấm Cập nhật. Muốn bỏ mẫu khỏi giỏ, bạn bấm Xóa.';
   });
   async function productAnswer(field, message) {
     message.textContent = 'Đang tra thông tin mẫu kính…';

@@ -15,5 +15,9 @@ try {
     // Chi ghi chi tiet vao log server, khong hien tai khoan DB ra trinh duyet.
     error_log('LuxeOptic database: ' . $exception->getMessage());
     http_response_code(503);
+    if (defined('JSON_RESPONSE') && JSON_RESPONSE) {
+        header('Content-Type: application/json; charset=utf-8');
+        exit(json_encode(['error'=>'Không lấy được thông tin mẫu này']));
+    }
     exit('Không kết nối được database. Hãy kiểm tra cấu hình và dịch vụ MySQL.');
 }
