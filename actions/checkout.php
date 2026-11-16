@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 verify_csrf();
 
 // Bắt buộc đăng nhập trước khi đặt hàng.
-require_login();
 
 $user = current_user();
 
@@ -27,6 +26,31 @@ if (!$user || empty($_SESSION['user_id'])) {
 }
 
 $userId = (int) $_SESSION['user_id'];
+
+
+// Lưu dữ liệu khách vừa nhập để khôi phục nếu checkout thất bại.
+// Chỉ lưu các trường giao nhận, không lưu giá hoặc tổng tiền.
+$checkoutFields = [
+    'recipient_name',
+    'recipient_phone',
+    'recipient_email',
+    'province',
+    'district',
+    'address_detail',
+    'note',
+    'payment_method',
+];
+
+$_SESSION['checkout_old_input'] = [];
+
+foreach ($checkoutFields as $field) {
+    $value = $_POST[$field] ?? '';
+
+    $_SESSION['checkout_old_input'][$field] = is_string($value)
+        ? trim($value)
+        : '';
+}
+
 
 // Kiểm tra token chống gửi đơn trùng.
 $submittedToken = (string) ($_POST['checkout_token'] ?? '');
@@ -73,7 +97,7 @@ if (
 }
 
 if (!preg_match('/^0[0-9]{9}$/', $recipientPhone)) {
-    $errors[] = 'Số điện thoại không hợp lệ.';
+    $errors['recipient_phone'] = 'Số điện thoại không hợp lệ.';
 }
 
 if (
@@ -147,10 +171,18 @@ if (is_array($cart)) {
     }
 }
 
+
 if (!empty($errors)) {
-    flash('error', implode(' ', $errors));
+    $_SESSION['checkout_errors'] = $errors;
+
+    flash(
+        'error',
+        'Thông tin đặt hàng chưa hợp lệ. Vui lòng kiểm tra các trường được báo lỗi.'
+    );
+
     redirect('cart.php');
 }
+
 
 // Sắp xếp ID để khóa sản phẩm theo cùng thứ tự.
 ksort($cartQuantities, SORT_NUMERIC);
@@ -386,11 +418,18 @@ try {
         }
     }
 
-    // Chỉ commit khi mọi thao tác thành công.
-    $pdo->commit();
 
-    // Xóa giỏ và voucher SAU KHI commit.
-    unset($_SESSION['cart'], $_SESSION['voucher_code']);
+// Chỉ commit khi mọi thao tác thành công.
+$pdo->commit();
+
+// Chỉ xóa dữ liệu sau khi đơn hàng đã lưu thành công.
+unset(
+    $_SESSION['cart'],
+    $_SESSION['voucher_code'],
+    $_SESSION['checkout_old_input'],
+    $_SESSION['checkout_errors']
+);
+
 
     // Vô hiệu hóa token cũ để tránh gửi đơn lần hai.
     unset($_SESSION['checkout_token']);
@@ -399,20 +438,26 @@ try {
 
     redirect('my-orders.php?id=' . $orderId);
 
+
 } catch (Throwable $exception) {
+
+    // Hoàn tác giao dịch nếu chưa commit.
     if ($pdo->inTransaction()) {
         $pdo->rollBack();
     }
 
-    if ($exception instanceof RuntimeException) {
-        flash('error', $exception->getMessage());
-    } else {
-        error_log($exception->getMessage());
-        flash(
-            'error',
-            'Đặt hàng thất bại. Vui lòng thử lại sau.'
-        );
-    }
+    // Ghi lỗi chi tiết vào log máy chủ, không hiển thị cho khách.
+    error_log(
+        '[LuxeOptic Checkout] ' .
+        get_class($exception) . ': ' .
+        $exception->getMessage()
+    );
+
+    // Chỉ hiển thị thông báo chung, không tiết lộ lỗi SQL.
+    flash(
+        'error',
+        'Không thể hoàn tất đơn hàng. Vui lòng kiểm tra giỏ hàng và thử lại.'
+    );
 
     redirect('cart.php');
 }

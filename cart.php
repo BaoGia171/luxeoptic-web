@@ -183,10 +183,13 @@ $csrf = csrf_token();
         </h1>
     </div>
 
-    <?php
-    // Hàm flash() theo tài liệu nhóm dùng để ghi thông báo.
-    // Phần đọc/hiển thị flash sẽ ghép với nền tảng chung.
-    ?>
+
+<?php foreach (get_flashes() as $message): ?>
+    <div role="alert" class="cart-flash">
+        <?= e((string) ($message['message'] ?? '')) ?>
+    </div>
+<?php endforeach; ?>
+
 
     <?php if ($cartError !== null): ?>
         <p role="alert"><?= e($cartError) ?></p>
@@ -381,10 +384,37 @@ $csrf = csrf_token();
                     </p>
                 </div>
 
-                
+
 <?php if ($canCheckout): ?>
 
-    <?php $checkoutUser = current_user(); ?>
+    <?php $checkoutUser = current_user();
+
+$checkoutOldInput = $_SESSION['checkout_old_input'] ?? [];
+
+$checkoutErrors = $_SESSION['checkout_errors'] ?? [];
+
+if (!is_array($checkoutErrors)) {
+    $checkoutErrors = [];
+}
+
+unset($_SESSION['checkout_errors']);
+
+
+if (!is_array($checkoutOldInput)) {
+    $checkoutOldInput = [];
+}
+
+$oldCheckoutValue = static function (
+    string $field,
+    string $default = ''
+) use ($checkoutOldInput): string {
+    $value = $checkoutOldInput[$field] ?? $default;
+
+    return is_string($value) ? $value : $default;
+};
+?>
+
+
 
     <?php if ($checkoutUser === null): ?>
 
@@ -435,7 +465,7 @@ $csrf = csrf_token();
                         class="form-control"
                         maxlength="100"
                         minlength="2"
-                        value="<?= e($checkoutUser['full_name'] ?? '') ?>"
+                        value="<?= e($oldCheckoutValue('recipient_name', (string) ($checkoutUser['full_name'] ?? ''))) ?>"
                         autocomplete="name"
                         required>
                 </div>
@@ -452,10 +482,17 @@ $csrf = csrf_token();
                         name="recipient_phone"
                         class="form-control"
                         maxlength="20"
-                        value="<?= e($checkoutUser['phone'] ?? '') ?>"
+                        value="<?= e($oldCheckoutValue('recipient_phone', (string) ($checkoutUser['phone'] ?? ''))) ?>"
                         autocomplete="tel"
                         placeholder="0912345678"
                         required>
+
+<?php if (!empty($checkoutErrors['recipient_phone'])): ?>
+    <p class="field-error" role="alert">
+        <?= e((string) $checkoutErrors['recipient_phone']) ?>
+    </p>
+<?php endif; ?>
+
                 </div>
 
                 <div class="mb-4">
@@ -470,7 +507,7 @@ $csrf = csrf_token();
                         name="recipient_email"
                         class="form-control"
                         maxlength="150"
-                        value="<?= e($checkoutUser['email'] ?? '') ?>"
+                        value="<?= e($oldCheckoutValue('recipient_email', (string) ($checkoutUser['email'] ?? ''))) ?>"
                         autocomplete="email"
                         required>
                 </div>
@@ -487,6 +524,7 @@ $csrf = csrf_token();
                         name="province"
                         class="form-control"
                         maxlength="100"
+                        value="<?= e($oldCheckoutValue('province')) ?>"
                         placeholder="Ví dụ: TP. Hồ Chí Minh"
                         required>
                 </div>
@@ -503,6 +541,7 @@ $csrf = csrf_token();
                         name="district"
                         class="form-control"
                         maxlength="100"
+                        value="<?= e($oldCheckoutValue('district')) ?>"
                         placeholder="Nhập quận hoặc huyện"
                         required>
                 </div>
@@ -519,6 +558,7 @@ $csrf = csrf_token();
                         name="address_detail"
                         class="form-control"
                         maxlength="255"
+                        value="<?= e($oldCheckoutValue('address_detail')) ?>"
                         placeholder="Số nhà, tên đường, phường/xã"
                         required>
                 </div>
@@ -535,7 +575,7 @@ $csrf = csrf_token();
                         class="form-control"
                         maxlength="1000"
                         rows="3"
-                        placeholder="Ghi chú thêm cho đơn hàng"></textarea>
+                        placeholder="Ghi chú thêm cho đơn hàng"><?= e($oldCheckoutValue('note')) ?>
                 </div>
 
                 <div class="border-t border-light pt-4 mt-6">
@@ -549,7 +589,7 @@ $csrf = csrf_token();
                                 type="radio"
                                 name="payment_method"
                                 value="cod"
-                                checked
+                                <?= $oldCheckoutValue('payment_method', 'cod') === 'cod' ? 'checked' : '' ?>
                                 required>
 
                             Thanh toán khi nhận hàng (COD)
@@ -561,7 +601,8 @@ $csrf = csrf_token();
                             <input
                                 type="radio"
                                 name="payment_method"
-                                value="bank_transfer">
+                                value="bank_transfer"
+                                <?= $oldCheckoutValue('payment_method', 'cod') === 'bank_transfer' ? 'checked' : '' ?>>
 
                             Chuyển khoản ngân hàng thủ công
                         </label>
