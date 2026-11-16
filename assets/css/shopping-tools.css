@@ -1,0 +1,128 @@
+.frame-compare {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+.frame-compare summary { cursor: pointer; font-weight: 600; }
+.frame-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin-top: 1rem; }
+.frame-table :is(th, td) {
+  text-align: left;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+  padding: .65rem;
+  border-bottom: 1px solid var(--border-light);
+}
+.frame-table th:first-child { width: 20%; }
+.frame-table select {
+  width: 100%;
+  padding: .5rem .25rem;
+  color: var(--text-primary);
+  background: var(--bg-main);
+  border: 1px solid var(--border-light);
+}
+.frame-table img { width: 100%; max-height: 12rem; object-fit: contain; }
+.frame-table + p:not(:empty) { margin-top: .75rem; color: var(--text-secondary); }
+@media (max-width: 767px) {
+  .frame-table :is(th, td) { padding: .4rem .2rem; font-size: .85rem; }
+}
+.shopping-help {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .65rem;
+  position: fixed;
+  z-index: 60;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  color: var(--text-primary);
+}
+.shopping-help [hidden] { display: none; }
+.shopping-help button { cursor: pointer; font: inherit; }
+.help-toggle, .help-avatar {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--theme-button-bg);
+  color: var(--theme-button-text);
+}
+.help-toggle {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border: 1px solid var(--color-secondary);
+  box-shadow: var(--shadow-card);
+}
+.help-toggle[aria-expanded="false"]::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 2px solid var(--color-secondary);
+  border-radius: inherit;
+  pointer-events: none;
+  animation: help-pulse 3s ease-out infinite;
+}
+@keyframes help-pulse {
+  0% { opacity: .85; transform: scale(1); }
+  62%, 100% { opacity: 0; transform: scale(1.32); }
+}
+.help-panel {
+  order: -1;
+  width: min(23rem, calc(100vw - 2.5rem));
+  height: min(29rem, calc(100dvh - 10rem));
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 1.1rem;
+  box-shadow: var(--shadow-card);
+  transform-origin: bottom right;
+  animation: chat-open 230ms ease-out;
+}
+@keyframes chat-open { from { opacity: 0; transform: translateY(8px) scale(.97); } }
+.help-panel header {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .65rem .9rem;
+  border-bottom: 1px solid var(--border-light);
+}
+.help-avatar { width: 34px; height: 34px; font: 1.25rem var(--font-headline); }
+.help-panel h2 { font: 1.35rem var(--font-headline); }
+.help-close { margin-left: auto; background: transparent; color: inherit; border: 0; width: 40px; height: 40px; }
+.help-thread { flex: 1; min-height: 4rem; overflow: auto; overscroll-behavior: contain; padding: .9rem; }
+.help-bubble {
+  width: fit-content;
+  max-width: 88%;
+  margin: 0 0 .6rem;
+  padding: .6rem .8rem;
+  border-radius: 1rem 1rem 1rem .2rem;
+  background: var(--bg-surface-container);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+.help-bubble.from-customer {
+  margin-left: auto;
+  background: var(--theme-button-bg);
+  color: var(--theme-button-text);
+  border-radius: 1rem 1rem .2rem 1rem;
+}
+.help-options { display: flex; flex-wrap: wrap; gap: .4rem; flex-direction: column; align-items: flex-start; margin: .4rem 0 .85rem; }
+.help-options button { border-radius: 1rem; padding: .45rem .75rem; background: var(--bg-main); color: var(--text-primary); border: 1px solid var(--border-light); }
+.shopping-help button {
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+.help-close { border-radius: 50%; }
+@media (hover: hover) and (pointer: fine) {
+  .help-toggle:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 0 0 4px var(--color-secondary-light), var(--shadow-card); }
+  .help-options button:hover { transform: translateX(3px); background: var(--color-secondary-light); border-color: var(--border-focus); }
+  .help-close:hover { background: var(--bg-surface-container); }
+}
+.shopping-help button:active { transform: scale(.97); }
+.shopping-help :focus-visible { outline: 2px solid var(--border-focus); outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) {
+  .help-toggle::after, .help-panel { animation: none; }
+  .help-toggle::after { display: none; }
+  .shopping-help button:is(:hover, :active) { transform: none; }
+}

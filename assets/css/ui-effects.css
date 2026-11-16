@@ -1,0 +1,126 @@
+/* Hiệu ứng giao diện. Không thay đổi kích thước hay logic mua hàng. */
+.btn, .action-icon, .category-card, .product-card, .auth-social-button {
+  transition: transform 250ms ease, box-shadow 250ms ease,
+    background-color 250ms ease, border-color 250ms ease, color 250ms ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--color-secondary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms ease;
+}
+.nav-link.active::after, .nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.btn .material-symbols-outlined, .category-card .material-symbols-outlined {
+  transition: transform 250ms ease;
+}
+.product-thumb img, .category-card img {
+  transition: transform 600ms ease;
+}
+.category-card { overflow: hidden; }
+.footer-links a { display: inline-block; transition: color 200ms ease, transform 200ms ease; }
+.form-control { transition: border-color 200ms ease, box-shadow 200ms ease; }
+.form-control:focus { box-shadow: 0 0 0 3px var(--color-secondary-light); }
+.btn:focus-visible, .category-card:focus-visible, .action-icon:focus-visible {
+  outline: 2px solid var(--color-secondary-hover);
+  outline-offset: 4px;
+}
+
+/* Chỉ áp dụng chuyển động hover trên thiết bị có chuột. */
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover::after { transform: scaleX(1); }
+  .btn:not(:disabled):not([aria-disabled="true"]):hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card);
+  }
+  .btn:hover .material-symbols-outlined, .category-card:hover .material-symbols-outlined {
+    transform: translateX(4px);
+  }
+  .action-icon:hover { transform: translateY(-3px); }
+  .category-card:hover, .product-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-secondary);
+    box-shadow: var(--shadow-card);
+  }
+  .product-card:hover .product-thumb img, .category-card:hover img { transform: scale(1.06); }
+  .auth-social-button:hover { transform: translateY(-2px); }
+  .footer-links a:hover { transform: translateX(4px); }
+}
+.btn:not(:disabled):active { transform: translateY(0); }
+
+/* Header hiện nhẹ từ trên xuống một lần khi mở trang. */
+.site-header { animation: header-enter 1000ms cubic-bezier(.22,1,.36,1) backwards; }
+@keyframes header-enter {
+  from { opacity: 0; translate: 0 -20px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+/* Hero xuất hiện lần lượt, không chạy lặp liên tục. */
+.home-hero .max-w-2xl > * { animation: ui-enter 700ms ease backwards; }
+.home-hero .max-w-2xl > :nth-child(2) { animation-delay: 100ms; }
+.home-hero .max-w-2xl > :nth-child(3) { animation-delay: 200ms; }
+.home-hero .max-w-2xl > :nth-child(4) { animation-delay: 300ms; }
+.reveal-item {
+  transition: opacity 700ms ease-out, translate 700ms cubic-bezier(.22,1,.36,1),
+    transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+}
+.reveal-pending:not(:focus-within) { opacity: 0; translate: 0 24px; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item.reveal-pending { opacity: 1; translate: none; }
+}
+@keyframes ui-enter {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tôn trọng chế độ giảm chuyển động; nội dung luôn đọc được. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .btn:hover, .action-icon:hover, .category-card:hover, .product-card:hover,
+  .auth-social-button:hover, .footer-links a:hover,
+  .product-card:hover .product-thumb img, .category-card:hover img,
+  .btn:hover .material-symbols-outlined, .category-card:hover .material-symbols-outlined {
+    transform: none;
+  }
+}
+
+.page-start-marker {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+.back-to-top {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--color-secondary);
+  border-radius: 50%;
+  background: var(--theme-button-bg);
+  color: var(--theme-button-text);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+}
+body > .back-to-top { position: fixed; bottom: 5.5rem; right: 1rem; z-index: 59; }
+.shopping-help .back-to-top { order: -2; margin-right: 3px; font-size: 24px; }
+.back-to-top[hidden] { display: none; }
+.back-to-top:focus-visible { outline: 2px solid var(--border-focus); }
+@media (hover: hover) {
+  .back-to-top:hover { transform: translateY(-2px); }
+}
