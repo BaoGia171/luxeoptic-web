@@ -37,7 +37,7 @@
             <li><a href="<?= e(url('products.php?category=gong-kinh-can')) ?>">Gọng Titanium cao cấp</a></li>
             <li><a href="<?= e(url('products.php?category=gong-kinh-can')) ?>">Gọng Acetate thủ công</a></li>
             <li><a href="<?= e(url('products.php?category=chong-anh-sang-xanh')) ?>">Tròng chống ánh sáng xanh</a></li>
-            <li><a href="<?= e(url('products.php?sort=newest')) ?>">Phiên bản giới hạn Atelier</a></li>
+            <li><a href="<?= e(url('products.php?category=phien-ban-gioi-han')) ?>">Phiên bản giới hạn Atelier</a></li>
           </ul>
         </div>
 

@@ -60,9 +60,9 @@ function page_end(array $scripts=[]): void {
     ?></main><?php if (!empty($GLOBALS['shop_admin'])) echo '</div>'; if (empty($GLOBALS['shop_admin'])) require __DIR__.'/footer.php'; ?>
     <?php foreach (['main','ui-effects', ...($GLOBALS['shop_admin']?['admin']:['chatbot']), ...$scripts] as $js): ?><script src="<?= e(url('assets/js/'.$js.'.js')) ?>" <?= $js==='chatbot' && basename($_SERVER['SCRIPT_NAME'])==='product-detail.php' ? 'data-product-detail' : '' ?> defer></script><?php endforeach ?></body></html><?php
 }
-function product_card(array $p): void {
+function product_card(array $p, bool $compare=true): void {
     $link=url('product-detail.php?id='.$p['id']); ?>
-    <article class="product-card"><a href="<?= e($link) ?>"><img class="catalog-image" src="<?= e(image_url($p['image'])) ?>" alt="<?= e($p['name']) ?>" loading="lazy"></a><div class="product-info"><p class="uppercase-spaced"><?= e($p['material']) ?></p><h2><a href="<?= e($link) ?>"><?= e($p['name']) ?></a></h2><p><?= e($p['color']) ?></p><div class="product-bottom"><strong><?= money((int)$p['price']) ?></strong><a class="btn btn-primary" href="<?= e($link) ?>">Xem chi tiết</a></div><label class="compare-pick"><input type="checkbox" name="compare" value="<?= (int)$p['id'] ?>"> Chọn so sánh</label></div></article>
+    <article class="product-card"><a href="<?= e($link) ?>"><img class="catalog-image" src="<?= e(image_url($p['image'])) ?>" alt="<?= e($p['name']) ?>" loading="lazy"></a><div class="product-info"><p class="uppercase-spaced"><?= e($p['material']) ?></p><h2><a href="<?= e($link) ?>"><?= e($p['name']) ?></a></h2><p><?= e($p['color']) ?></p><div class="product-bottom"><strong><?= money((int)$p['price']) ?></strong><a class="btn btn-primary" href="<?= e($link) ?>">Xem chi tiết</a></div><?php if($compare): ?><label class="compare-pick"><input type="checkbox" name="compare" value="<?= (int)$p['id'] ?>"> Chọn so sánh</label><?php endif ?></div></article>
     <?php
 }
 function form_field(string $name, string $label, array $values, array $errors=[], string $type='text', bool $required=true): void {

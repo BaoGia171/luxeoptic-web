@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__ . '/includes/shop.php';
 $activeNav = 'home';
+$homeCategories = query_rows('SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id=c.id AND p.is_active=1) AS product_count FROM categories c WHERE c.is_active=1 ORDER BY c.sort_order,c.id');
+$categoryImages = ['kinh-ram'=>'cat-sunglasses.jpg','gong-kinh-can'=>'cat-optical.jpg','chong-anh-sang-xanh'=>'cat-blueblock.jpg','phien-ban-gioi-han'=>'cat-unisex.jpg'];
+$heroProduct = query_rows(product_select().' WHERE p.sku=? AND p.is_active=1 AND c.is_active=1', ['LX-AT-AV01'])[0] ?? null;
+$featuredProducts = query_rows(product_select().' WHERE p.is_active=1 AND c.is_active=1 AND p.is_featured=1 ORDER BY p.created_at DESC,p.id DESC LIMIT 4');
+$totalVisible = array_sum(array_column($homeCategories,'product_count'));
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -46,8 +51,8 @@ $activeNav = 'home';
             <a href="products.php" class="btn btn-secondary shadow-lg">
               Khám Phá Bộ Sưu Tập <span class="material-symbols-outlined text-base">arrow_forward</span>
             </a>
-            <a href="products.php?id=LX-AT-AV01" class="btn btn-outline border-white text-white hover-bg-white hover-text-black">
-              Xem Kính Aviator Gold 01
+            <a href="<?= e(url($heroProduct ? 'product-detail.php?id='.$heroProduct['id'] : 'products.php')) ?>" class="btn btn-outline border-white text-white hover-bg-white hover-text-black">
+              <?= $heroProduct ? 'Xem '.e($heroProduct['name']) : 'Xem các mẫu kính' ?>
             </a>
           </div>
         </div>
@@ -113,57 +118,13 @@ $activeNav = 'home';
         </div>
 
         <div class="grid grid-cols-1 small-grid-cols-2 desktop-grid-cols-4 gap-6">
-          <!-- Category 1 -->
-          <a href="products.php?category=kinh-ram" class="group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
-            <div class="aspect-4-3 bg-surface-low overflow-hidden mb-4">
-              <img src="assets/images/cat-sunglasses.jpg" alt="Kính Râm" class="w-full h-full object-cover group-hover-scale-105 transition-transform duration-500">
-            </div>
-            <span class="badge badge-dark self-start mb-2">Bán chạy nhất</span>
-            <h3 class="font-headline text-xl mb-1">Kính Râm</h3>
-            <p class="text-xs text-muted mb-4">Tròng chống lóa UV400 phân cực cao cấp mạ gương.</p>
-            <span class="font-label text-11px uppercase tracking-wider text-primary font-semibold mt-auto flex items-center gap-1 group-hover-text-secondary">
-              Khám Phá (18 SP) <span class="material-symbols-outlined text-xs">arrow_forward</span>
-            </span>
+          <?php foreach($homeCategories as $category): ?>
+          <a href="<?= e(url('products.php?category='.$category['slug'])) ?>" class="group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
+            <div class="aspect-4-3 bg-surface-low overflow-hidden mb-4"><img src="<?= e(image_url('assets/images/'.($categoryImages[$category['slug']]??'no-image.svg'))) ?>" alt="<?= e($category['name']) ?>" class="w-full h-full object-cover group-hover-scale-105 transition-transform duration-500"></div>
+            <h3 class="font-headline text-xl mb-1"><?= e($category['name']) ?></h3><p class="text-xs text-muted mb-4"><?= e($category['description']??'') ?></p>
+            <span class="font-label text-11px uppercase tracking-wider text-primary font-semibold mt-auto">Khám phá (<?= (int)$category['product_count'] ?> mẫu)</span>
           </a>
-
-          <!-- Category 2 -->
-          <a href="products.php?category=gong-kinh-can" class="group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
-            <div class="aspect-4-3 bg-surface-low overflow-hidden mb-4">
-              <img src="assets/images/cat-optical.jpg" alt="Gọng Kính Cận" class="w-full h-full object-cover group-hover-scale-105 transition-transform duration-500">
-            </div>
-            <span class="badge badge-gold self-start mb-2">Titanium Nhật</span>
-            <h3 class="font-headline text-xl mb-1">Gọng Kính Cận</h3>
-            <p class="text-xs text-muted mb-4">Gọng siêu nhẹ từ 4.8g cho trải nghiệm êm ái cả ngày.</p>
-            <span class="font-label text-11px uppercase tracking-wider text-primary font-semibold mt-auto flex items-center gap-1 group-hover-text-secondary">
-              Khám Phá (14 SP) <span class="material-symbols-outlined text-xs">arrow_forward</span>
-            </span>
-          </a>
-
-          <!-- Category 3 -->
-          <a href="products.php?category=chong-anh-sang-xanh" class="group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
-            <div class="aspect-4-3 bg-surface-low overflow-hidden mb-4">
-              <img src="assets/images/cat-blueblock.jpg" alt="Chống Ánh Sáng Xanh" class="w-full h-full object-cover group-hover-scale-105 transition-transform duration-500">
-            </div>
-            <span class="badge badge-dark self-start mb-2">Bảo vệ mắt</span>
-            <h3 class="font-headline text-xl mb-1">Chống Ánh Sáng Xanh</h3>
-            <p class="text-xs text-muted mb-4">Bảo vệ mắt tối ưu trước máy tính và điện thoại thông minh.</p>
-            <span class="font-label text-11px uppercase tracking-wider text-primary font-semibold mt-auto flex items-center gap-1 group-hover-text-secondary">
-              Khám Phá (10 SP) <span class="material-symbols-outlined text-xs">arrow_forward</span>
-            </span>
-          </a>
-
-          <!-- Category 4 -->
-          <a href="products.php?category=unisex" class="group relative bg-white border border-light p-4 flex flex-col hover-border-primary transition-all">
-            <div class="aspect-4-3 bg-surface-low overflow-hidden mb-4">
-              <img src="assets/images/cat-unisex.jpg" alt="Kính Unisex" class="w-full h-full object-cover group-hover-scale-105 transition-transform duration-500">
-            </div>
-            <span class="badge badge-gold self-start mb-2">Atelier Limited</span>
-            <h3 class="font-headline text-xl mb-1">Kính Unisex</h3>
-            <p class="text-xs text-muted mb-4">Phong cách phi giới tính, góc cạnh điêu khắc thời thượng.</p>
-            <span class="font-label text-11px uppercase tracking-wider text-primary font-semibold mt-auto flex items-center gap-1 group-hover-text-secondary">
-              Khám Phá (6 SP) <span class="material-symbols-outlined text-xs">arrow_forward</span>
-            </span>
-          </a>
+          <?php endforeach ?>
         </div>
       </div>
     </section>
@@ -178,135 +139,10 @@ $activeNav = 'home';
         </div>
 
         <div class="catalog-grid">
-          <?php foreach(query_rows(product_select().' WHERE p.is_active=1 AND c.is_active=1 AND p.is_featured=1 ORDER BY p.created_at DESC,p.id DESC LIMIT 4') as $product) product_card($product); ?>
-        </div></div></section>
-
-    <!-- Card 1: Aviator Titanium Gold 01 -->
-          <div class="product-card">
-            <div class="product-thumb">
-              <div class="product-badge-group">
-                <span class="badge badge-gold">Best Seller</span>
-                <span class="badge badge-sale">-18%</span>
-              </div>
-              <button class="product-wishlist-btn" title="Yêu thích">
-                <span class="material-symbols-outlined text-sm">favorite</span>
-              </button>
-              <a href="products.php?id=LX-AT-AV01">
-                <img src="assets/images/aviator-main.jpg" alt="Aviator Titanium Gold 01">
-              </a>
-            </div>
-            <div class="product-info">
-              <span class="product-series">Atelier Titanium Series</span>
-              <h3 class="product-title"><a href="products.php?id=LX-AT-AV01">Aviator Titanium Gold 01</a></h3>
-              <div class="product-swatches">
-                <span class="swatch-secondary swatch-dot active" title="Vàng Gold 18K"></span>
-                <span class="swatch-primary swatch-dot" title="Đen Matte"></span>
-                <span class="swatch-silver swatch-dot" title="Bạc Platinum"></span>
-              </div>
-              <div class="product-price-row">
-                <div>
-                  <span class="product-price">1.350.000đ</span>
-                  <span class="product-old-price">1.650.000đ</span>
-                </div>
-                <a href="products.php?id=LX-AT-AV01" class="btn btn-primary btn-sm">Xem Chi Tiết</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2: Titanium Minimalist Noir -->
-          <div class="product-card">
-            <div class="product-thumb">
-              <div class="product-badge-group">
-                <span class="badge badge-dark">Mới Về</span>
-              </div>
-              <button class="product-wishlist-btn" title="Yêu thích">
-                <span class="material-symbols-outlined text-sm">favorite</span>
-              </button>
-              <a href="products.php?id=titanium-minimalist-noir">
-                <img src="assets/images/round-noir.jpg" alt="Titanium Minimalist Noir">
-              </a>
-            </div>
-            <div class="product-info">
-              <span class="product-series">Bauhaus Minimal Series</span>
-              <h3 class="product-title"><a href="products.php?id=titanium-minimalist-noir">Titanium Minimalist Noir</a></h3>
-              <div class="product-swatches">
-                <span class="swatch-primary swatch-dot active" title="Đen"></span>
-                <span class="swatch-secondary swatch-dot" title="Vàng"></span>
-              </div>
-              <div class="product-price-row">
-                <div>
-                  <span class="product-price">1.150.000đ</span>
-                </div>
-                <a href="products.php?id=titanium-minimalist-noir" class="btn btn-primary btn-sm">Xem Chi Tiết</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3: Cat-Eye Havana Acetate -->
-          <div class="product-card">
-            <div class="product-thumb">
-              <div class="product-badge-group">
-                <span class="badge badge-sale">-15%</span>
-              </div>
-              <button class="product-wishlist-btn" title="Yêu thích">
-                <span class="material-symbols-outlined text-sm">favorite</span>
-              </button>
-              <a href="products.php?id=cat-eye-havana-acetate">
-                <img src="assets/images/cat-eye.jpg" alt="Cat-Eye Havana Acetate">
-              </a>
-            </div>
-            <div class="product-info">
-              <span class="product-series">Italian Acetate Couture</span>
-              <h3 class="product-title"><a href="products.php?id=cat-eye-havana-acetate">Cat-Eye Havana Acetate</a></h3>
-              <div class="product-swatches">
-                <span class="swatch-tortoise swatch-dot active" title="Đồi mồi"></span>
-                <span class="swatch-primary swatch-dot" title="Đen tuyền"></span>
-              </div>
-              <div class="product-price-row">
-                <div>
-                  <span class="product-price">980.000đ</span>
-                  <span class="product-old-price">1.150.000đ</span>
-                </div>
-                <a href="products.php?id=cat-eye-havana-acetate" class="btn btn-primary btn-sm">Xem Chi Tiết</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 4: Round Blue-Blocker Silver -->
-          <div class="product-card">
-            <div class="product-thumb">
-              <div class="product-badge-group">
-                <span class="badge badge-dark">Chống Ánh Sáng Xanh</span>
-              </div>
-              <button class="product-wishlist-btn" title="Yêu thích">
-                <span class="material-symbols-outlined text-sm">favorite</span>
-              </button>
-              <a href="products.php?id=round-blue-blocker-silver">
-                <img src="assets/images/blue-blocker.jpg" alt="Round Blue-Blocker Silver">
-              </a>
-            </div>
-            <div class="product-info">
-              <span class="product-series">Digital Optical Shield</span>
-              <h3 class="product-title"><a href="products.php?id=round-blue-blocker-silver">Round Blue-Blocker Silver</a></h3>
-              <div class="product-swatches">
-                <span class="swatch-silver swatch-dot active" title="Bạc"></span>
-                <span class="swatch-secondary swatch-dot" title="Vàng"></span>
-              </div>
-              <div class="product-price-row">
-                <div>
-                  <span class="product-price">850.000đ</span>
-                </div>
-                <a href="products.php?id=round-blue-blocker-silver" class="btn btn-primary btn-sm">Xem Chi Tiết</a>
-              </div>
-            </div>
-          </div>
+          <?php foreach($featuredProducts as $product) product_card($product, false); ?>
         </div>
-
-        <div class="text-center mt-12">
-          <a href="products.php" class="btn btn-outline border-black px-10">
-            Xem Toàn Bộ 48 Mẫu Kính Mắt <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </a>
-        </div>
+        <?php if(!$featuredProducts): ?><p class="text-center">Chưa có sản phẩm nổi bật.</p><?php endif ?>
+        <div class="text-center mt-12"><a href="<?= e(url('products.php')) ?>" class="btn btn-outline border-black px-10">Xem toàn bộ <?= (int)$totalVisible ?> mẫu kính</a></div>
       </div>
     </section>
 
@@ -322,8 +158,8 @@ $activeNav = 'home';
           Trải nghiệm không gian Atelier trưng bày độc bản tại trung tâm Hà Nội & TP. Hồ Chí Minh với dịch vụ đo khúc xạ quang học chuẩn y khoa quốc tế.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="products.php" class="btn btn-secondary">Đặt Lịch Thử Kính Tại Nhà</a>
-          <a href="auth.php" class="btn btn-outline border-white text-white hover-bg-white hover-text-black">Đăng nhập để mua sắm</a>
+          <a href="products.php" class="btn btn-secondary">Khám phá các mẫu kính</a>
+          <a href="<?= e(url(current_user() ? 'profile.php' : 'auth.php')) ?>" class="btn btn-outline border-white text-white hover-bg-white hover-text-black"><?= current_user() ? 'Tài khoản của tôi' : 'Đăng nhập để mua sắm' ?></a>
         </div>
       </div>
     </section>

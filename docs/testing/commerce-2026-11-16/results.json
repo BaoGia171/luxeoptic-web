@@ -54,6 +54,18 @@
       "result": "PASS"
     },
     {
+      "name": "homepage has only DB featured cards and no stale sample product links",
+      "result": "PASS"
+    },
+    {
+      "name": "all homepage product links resolve to visible detail",
+      "result": "PASS"
+    },
+    {
+      "name": "homepage name and price follow database changes",
+      "result": "PASS"
+    },
+    {
       "name": "customer denied /admin/products.php",
       "result": "PASS"
     },

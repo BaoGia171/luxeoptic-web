@@ -178,6 +178,16 @@ def main():
         check('hidden product denied in detail and chatbot',guest.request('/product-detail.php?id='+str(pid))[0]==404 and guest.request('/actions/product-info.php?id='+str(pid))[0]==404)
         sql('UPDATE products SET is_active=1 WHERE id=?',[pid])
         check('comparison data uses DB',sample['name'] in guest.request('/compare.php?id1='+str(pid)+'&id2=2')[2])
+        home=guest.request('/index.php')[2]
+        featured=sql('SELECT p.id,p.name,p.price FROM products p JOIN categories c ON c.id=p.category_id WHERE p.is_active=1 AND c.is_active=1 AND p.is_featured=1 ORDER BY p.created_at DESC,p.id DESC LIMIT 4')
+        check('homepage has only DB featured cards and no stale sample product links',home.count('class="product-card"')==len(featured) and 'products.php?id=' not in home and '48 Mẫu' not in home and 'category=unisex' not in home)
+        ids=set(re.findall(r'product-detail.php\?id=(\d+)',home))
+        check('all homepage product links resolve to visible detail',bool(ids) and all(guest.request('/product-detail.php?id='+i)[0]==200 for i in ids))
+        sql('UPDATE products SET name=?,price=? WHERE id=?',['HOME_SYNC_TEST',987654,featured[0]['id']])
+        changed=guest.request('/index.php')[2]
+        check('homepage name and price follow database changes','HOME_SYNC_TEST' in changed and '987.654' in changed)
+        # Restore seed values to keep the downstream fixture deterministic.
+        sql('UPDATE products SET name=?,price=? WHERE id=?',[featured[0]['name'],featured[0]['price'],featured[0]['id']])
         # Permissions on all TV5/TV6 pages/actions, independent of UI visibility.
         for path in ['/admin/products.php','/admin/categories.php','/admin/orders.php']:
             check('customer denied '+path,customer.request(path)[0]==403)
