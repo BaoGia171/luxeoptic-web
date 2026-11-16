@@ -5,6 +5,11 @@ const fs=require('node:fs'), path=require('node:path');
  const browser=await chromium.launch({executablePath:process.env.COMMERCE_BROWSER,headless:true});
  const results=[], output=process.env.COMMERCE_ARTIFACTS, base=process.env.COMMERCE_BASE;
  const check=(name,ok)=>{results.push({name,result:ok?'PASS':'FAIL'});console.log((ok?'PASS':'FAIL')+': '+name);};
+ const capture=async(page,options)=>{
+  await page.evaluate(async()=>{window.scrollTo(0,0);await Promise.all([...document.images].map(img=>{img.loading='eager';return img.decode().catch(()=>{});}));});
+  await page.screenshot(options);
+ };
+
  try {
  for(const width of [375,768,1024,1440]){
   const context=await browser.newContext({viewport:{width,height:950},reducedMotion:'reduce'});
@@ -12,7 +17,7 @@ const fs=require('node:fs'), path=require('node:path');
   for(const route of ['/index.php','/products.php','/product-detail.php?id=2','/compare.php?id1=1&id2=2','/cart.php']){
    const r=await page.goto(base+route);await page.waitForLoadState('domcontentloaded');
    check(`UI ${width} ${route}: renders without page overflow`,r.status()===200&&await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-   if(width===375||width===1440)await page.screenshot({path:path.join(output,route.split('?')[0].slice(1,-4)+'-'+width+'.png'),fullPage:true});
+   if(width===375||width===1440)await capture(page,{path:path.join(output,route.split('?')[0].slice(1,-4)+'-'+width+'.png'),fullPage:true});
   }
   await page.goto(base+'/products.php');
   await page.locator('[name=compare]').nth(0).check();await page.locator('[name=compare]').nth(1).check();
@@ -34,13 +39,13 @@ const fs=require('node:fs'), path=require('node:path');
   check(`UI ${width}: filled cart no page overflow`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   await page.locator('[name=payment_method][value=bank_transfer]').check();
   check(`UI ${width}: payment border follows selected radio`,await page.locator('.payment-option:has(:checked)').count()===1);
-  if(width===375||width===1440)await page.screenshot({path:path.join(output,'checkout-'+width+'.png'),fullPage:true});
+  if(width===375||width===1440)await capture(page,{path:path.join(output,'checkout-'+width+'.png'),fullPage:true});
   for(const route of ['/admin/products.php','/admin/categories.php','/admin/orders.php','/my-orders.php']){
    await page.goto(base+route);
    check(`UI ${width} ${route}: no page overflow`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-   if(width===375||width===1440)await page.screenshot({path:path.join(output,route.replaceAll('/','-').replace('.php','')+'-'+width+'.png'),fullPage:true});
+   if(width===375||width===1440)await capture(page,{path:path.join(output,route.replaceAll('/','-').replace('.php','')+'-'+width+'.png'),fullPage:true});
   }
-  if(width===1440){await page.goto(base+'/admin/orders.php?id=2');await page.screenshot({path:path.join(output,'order-detail-1440.png'),fullPage:true});}
+  if(width===1440){await page.goto(base+'/admin/orders.php?id=2');await capture(page,{path:path.join(output,'order-detail-1440.png'),fullPage:true});}
   await page.goto(base+'/admin/products.php?edit=15');
   check(`UI ${width}: local Quill editor loaded`,await page.locator('.ql-editor').isVisible());
   if(width===1440){
@@ -56,7 +61,7 @@ const fs=require('node:fs'), path=require('node:path');
   if(width<1024){await page.locator('.admin-menu-toggle').click();check(`UI ${width}: shared admin menu opens`,await page.locator('#adminMenu').evaluate(el=>el.classList.contains('sidebar-open')));await page.locator('.sidebar-close').click();}
   await page.evaluate(()=>document.documentElement.dataset.theme='dark');
   check(`UI ${width}: dark admin retains layout`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-  if(width===1440)await page.screenshot({path:path.join(output,'admin-editor-dark.png'),fullPage:true});
+  if(width===1440)await capture(page,{path:path.join(output,'admin-editor-dark.png'),fullPage:true});
   check(`UI ${width}: no JavaScript errors`,errors.length===0);
   await context.close();
  }
