@@ -6,6 +6,6 @@
 @media(max-width:1023px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.commerce-columns{grid-template-columns:1fr}.management-header{flex-wrap:wrap}.detail-grid{gap:20px}}
 @media(max-width:767px){.catalog-grid,.form-grid,.detail-grid{grid-template-columns:1fr}.commerce-main{padding-top:24px}.panel{padding:16px}.section-heading h1{font-size:30px}.management-header nav{gap:12px}.product-info h2{min-height:0}.commerce-table{min-width:560px}.form-actions .btn{flex:1}.filters{padding:12px}}
 
-.admin-main .commerce-main{width:100%;max-width:none;padding:24px;box-sizing:border-box}.admin-main{min-width:0}.editor-shell .ql-toolbar{background:var(--bg-surface-low)}.editor-shell .ql-stroke{stroke:var(--text-primary)}.editor-shell .ql-fill{fill:var(--text-primary)}.editor-shell .ql-picker{color:var(--text-primary)}
+.admin-main .commerce-main{width:100%;max-width:none;padding:24px;box-sizing:border-box}.admin-main{min-width:0}.commerce-main .ql-toolbar{background:var(--bg-surface-low)}.commerce-main .ql-toolbar .ql-stroke{stroke:var(--text-primary)}.commerce-main .ql-toolbar .ql-fill{fill:var(--text-primary)}.commerce-main .ql-toolbar .ql-picker{color:var(--text-primary)}
 
 .commerce-columns > *{min-width:0}@media(max-width:1023px){.commerce-columns{grid-template-columns:minmax(0,1fr)}}
