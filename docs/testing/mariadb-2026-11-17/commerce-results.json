@@ -1,0 +1,638 @@
+{
+  "date": "2026-11-17",
+  "checks": [
+    {
+      "name": "catalog displays 12 of 14 seeded products",
+      "result": "PASS"
+    },
+    {
+      "name": "second catalog page has 2 products",
+      "result": "PASS"
+    },
+    {
+      "name": "out-of-range page clamps to final",
+      "result": "PASS"
+    },
+    {
+      "name": "invalid price range is rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "category kinh-ram",
+      "result": "PASS"
+    },
+    {
+      "name": "category gong-kinh-can",
+      "result": "PASS"
+    },
+    {
+      "name": "category chong-anh-sang-xanh",
+      "result": "PASS"
+    },
+    {
+      "name": "category phien-ban-gioi-han",
+      "result": "PASS"
+    },
+    {
+      "name": "detail name/price matches selected product",
+      "result": "PASS"
+    },
+    {
+      "name": "missing product is 404",
+      "result": "PASS"
+    },
+    {
+      "name": "chatbot reads current DB values",
+      "result": "PASS"
+    },
+    {
+      "name": "hidden product denied in detail and chatbot",
+      "result": "PASS"
+    },
+    {
+      "name": "comparison data uses DB",
+      "result": "PASS"
+    },
+    {
+      "name": "homepage has only DB featured cards and no stale sample product links",
+      "result": "PASS"
+    },
+    {
+      "name": "all homepage product links resolve to visible detail",
+      "result": "PASS"
+    },
+    {
+      "name": "homepage name and price follow database changes",
+      "result": "PASS"
+    },
+    {
+      "name": "customer denied /admin/products.php",
+      "result": "PASS"
+    },
+    {
+      "name": "customer denied /admin/categories.php",
+      "result": "PASS"
+    },
+    {
+      "name": "customer denied /admin/orders.php",
+      "result": "PASS"
+    },
+    {
+      "name": "GET denied /admin/actions/product-save.php",
+      "result": "PASS"
+    },
+    {
+      "name": "customer POST denied /admin/actions/product-save.php",
+      "result": "PASS"
+    },
+    {
+      "name": "CSRF denied /admin/actions/product-save.php",
+      "result": "PASS"
+    },
+    {
+      "name": "GET denied /admin/actions/product-delete.php",
+      "result": "PASS"
+    },
+    {
+      "name": "customer POST denied /admin/actions/product-delete.php",
+      "result": "PASS"
+    },
+    {
+      "name": "CSRF denied /admin/actions/product-delete.php",
+      "result": "PASS"
+    },
+    {
+      "name": "GET denied /admin/actions/product-image-delete.php",
+      "result": "PASS"
+    },
+    {
+      "name": "customer POST denied /admin/actions/product-image-delete.php",
+      "result": "PASS"
+    },
+    {
+      "name": "CSRF denied /admin/actions/product-image-delete.php",
+      "result": "PASS"
+    },
+    {
+      "name": "GET denied /admin/actions/category-save.php",
+      "result": "PASS"
+    },
+    {
+      "name": "customer POST denied /admin/actions/category-save.php",
+      "result": "PASS"
+    },
+    {
+      "name": "CSRF denied /admin/actions/category-save.php",
+      "result": "PASS"
+    },
+    {
+      "name": "GET denied /admin/actions/category-delete.php",
+      "result": "PASS"
+    },
+    {
+      "name": "customer POST denied /admin/actions/category-delete.php",
+      "result": "PASS"
+    },
+    {
+      "name": "CSRF denied /admin/actions/category-delete.php",
+      "result": "PASS"
+    },
+    {
+      "name": "GET denied /admin/actions/order-status.php",
+      "result": "PASS"
+    },
+    {
+      "name": "customer POST denied /admin/actions/order-status.php",
+      "result": "PASS"
+    },
+    {
+      "name": "CSRF denied /admin/actions/order-status.php",
+      "result": "PASS"
+    },
+    {
+      "name": "category create persists",
+      "result": "PASS"
+    },
+    {
+      "name": "duplicate category slug rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "cannot delete nonempty category",
+      "result": "PASS"
+    },
+    {
+      "name": "product create with two images",
+      "result": "PASS"
+    },
+    {
+      "name": "server HTML sanitizer strips script and unsafe URL, preserves formatting",
+      "result": "PASS"
+    },
+    {
+      "name": "images persisted and files exist",
+      "result": "PASS"
+    },
+    {
+      "name": "product edit persists",
+      "result": "PASS"
+    },
+    {
+      "name": "negative price rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "fake image rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "oversize image rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "five image limit includes existing images",
+      "result": "PASS"
+    },
+    {
+      "name": "image deletion removes only selected file",
+      "result": "PASS"
+    },
+    {
+      "name": "last active image cannot be deleted",
+      "result": "PASS"
+    },
+    {
+      "name": "new cart has zero total",
+      "result": "PASS"
+    },
+    {
+      "name": "same item accumulates quantity",
+      "result": "PASS"
+    },
+    {
+      "name": "quantity beyond stock rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "invalid delivery retained with field error",
+      "result": "PASS"
+    },
+    {
+      "name": "checkout creates order and stock decrements",
+      "result": "PASS"
+    },
+    {
+      "name": "server computes voucher and ignores client price",
+      "result": "PASS"
+    },
+    {
+      "name": "checkout token replay does not duplicate",
+      "result": "PASS"
+    },
+    {
+      "name": "cart clears only after success",
+      "result": "PASS"
+    },
+    {
+      "name": "other customer cannot read order",
+      "result": "PASS"
+    },
+    {
+      "name": "other customer cannot cancel order",
+      "result": "PASS"
+    },
+    {
+      "name": "old order retains purchased name/price",
+      "result": "PASS"
+    },
+    {
+      "name": "cancel twice restores stock exactly once",
+      "result": "PASS"
+    },
+    {
+      "name": "cannot skip order states",
+      "result": "PASS"
+    },
+    {
+      "name": "COD completion marks paid atomically",
+      "result": "PASS"
+    },
+    {
+      "name": "completed is terminal",
+      "result": "PASS"
+    },
+    {
+      "name": "unpaid bank transfer cannot ship",
+      "result": "PASS"
+    },
+    {
+      "name": "paid order cannot cancel",
+      "result": "PASS"
+    },
+    {
+      "name": "paid transfer can ship",
+      "result": "PASS"
+    },
+    {
+      "name": "admin cancel confirmed restores once",
+      "result": "PASS"
+    },
+    {
+      "name": "checkout rollback has no partial order/stock change and retains cart",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent checkout last unit creates exactly one order and never negative stock",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent cancellation restores stock only once",
+      "result": "PASS"
+    },
+    {
+      "name": "upload DB failure cleans new files and product row",
+      "result": "PASS"
+    },
+    {
+      "name": "cancellation DB failure rolls back status and stock together",
+      "result": "PASS"
+    },
+    {
+      "name": "three cancel versus payment races never produce cancelled-paid or wrong stock",
+      "result": "PASS"
+    },
+    {
+      "name": "combined category price and sort match database",
+      "result": "PASS"
+    },
+    {
+      "name": "literal wildcard does not return all products",
+      "result": "PASS"
+    },
+    {
+      "name": "sort injection is ignored",
+      "result": "PASS"
+    },
+    {
+      "name": "cart empty voucher cannot activate",
+      "result": "PASS"
+    },
+    {
+      "name": "checkout guest returns through login to cart",
+      "result": "PASS"
+    },
+    {
+      "name": "malformed product ID handled",
+      "result": "PASS"
+    }
+  ],
+  "scope": "Catalog, admin products/uploads, checkout and order state regression",
+  "php": "8.2.12",
+  "mysql": "10.4.32-MariaDB",
+  "ui": [
+    {
+      "name": "UI 375 /index.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375 /products.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375 /product-detail.php?id=2: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375 /compare.php?id1=1&id2=2: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375 /cart.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375: comparison picks two distinct frames",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375: comparison can remove frame",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375: chatbot retains both responses",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375: checkout form and session badge work",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375: filled cart no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375: payment border follows selected radio",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375 /admin/products.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375 /admin/categories.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375 /admin/orders.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375 /my-orders.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375: local Quill editor loaded",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375: shared admin menu opens",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375: dark admin retains layout",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 375: no JavaScript errors",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768 /index.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768 /products.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768 /product-detail.php?id=2: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768 /compare.php?id1=1&id2=2: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768 /cart.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768: comparison picks two distinct frames",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768: comparison can remove frame",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768: chatbot retains both responses",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768: checkout form and session badge work",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768: filled cart no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768: payment border follows selected radio",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768 /admin/products.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768 /admin/categories.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768 /admin/orders.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768 /my-orders.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768: local Quill editor loaded",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768: shared admin menu opens",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768: dark admin retains layout",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 768: no JavaScript errors",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024 /index.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024 /products.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024 /product-detail.php?id=2: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024 /compare.php?id1=1&id2=2: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024 /cart.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024: comparison picks two distinct frames",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024: comparison can remove frame",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024: chatbot retains both responses",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024: checkout form and session badge work",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024: filled cart no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024: payment border follows selected radio",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024 /admin/products.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024 /admin/categories.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024 /admin/orders.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024 /my-orders.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024: local Quill editor loaded",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024: dark admin retains layout",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1024: no JavaScript errors",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440 /index.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440 /products.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440 /product-detail.php?id=2: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440 /compare.php?id1=1&id2=2: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440 /cart.php: renders without page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440: comparison picks two distinct frames",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440: comparison can remove frame",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440: chatbot retains both responses",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440: checkout form and session badge work",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440: filled cart no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440: payment border follows selected radio",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440 /admin/products.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440 /admin/categories.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440 /admin/orders.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440 /my-orders.php: no page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440: local Quill editor loaded",
+      "result": "PASS"
+    },
+    {
+      "name": "Quill save and reload retains bold italic bullet and link",
+      "result": "PASS"
+    },
+    {
+      "name": "Public detail keeps sanitized editor formatting",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440: dark admin retains layout",
+      "result": "PASS"
+    },
+    {
+      "name": "UI 1440: no JavaScript errors",
+      "result": "PASS"
+    }
+  ]
+}

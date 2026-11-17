@@ -1,10 +1,10 @@
 # LuxeOptic — Website bán mắt kính (Nhóm 10)
 
-PHP 8.2 + PDO/MySQL 8.0, HTML/CSS/JavaScript thuần. Bản tích hợp hoàn thiện TV3–TV6 dùng chung nền tảng TV1 và tài khoản TV2. Không dùng Tailwind hoặc framework frontend/backend.
+PHP 8.2 + PDO/MySQL 8.0 hoặc MariaDB 10.4.32, HTML/CSS/JavaScript thuần. Bản tích hợp hoàn thiện TV3–TV6 dùng chung nền tảng TV1 và tài khoản TV2. Không dùng Tailwind hoặc framework frontend/backend.
 
 ## Cài và chạy
 
-1. Cài PHP 8.2/Apache (có thể dùng XAMPP), **MySQL 8.0**, Composer. Kiểm tra `php -v`; trên Windows có thể dùng `C:\xampp\php\php.exe`. Bật `pdo_mysql`, `mbstring`, `fileinfo`, `dom` trong php.ini của cả CLI và Apache. Khởi động lại Apache khi đổi php.ini.
+1. Cài PHP 8.2/Apache (có thể dùng XAMPP), **MySQL 8.0 hoặc MariaDB 10.4.32 đi kèm XAMPP**, Composer. Kiểm tra `php -v`; trên Windows có thể dùng `C:\xampp\php\php.exe`. Bật `pdo_mysql`, `mbstring`, `fileinfo`, `dom` trong php.ini của cả CLI và Apache. Khởi động lại Apache khi đổi php.ini.
 2. Tại thư mục dự án chạy `composer install` để lấy **HTML Purifier 4.19.1** đúng composer.lock. Không tự chạy composer update. `vendor/` không commit Git nhưng **phải có trong ZIP nộp bài**.
 3. Trên database mới: import `database/schema.sql`, chọn database `luxeoptic`, rồi import `database/seed.sql`. Seed chạy **một lần** trên schema rỗng: 4 danh mục, 14 sản phẩm, ảnh đã commit; một mẫu hết hàng. Không chạy lại seed trên dữ liệu đang dùng.
 4. Tạo tài khoản MySQL riêng cho ứng dụng với quyền SELECT, INSERT, UPDATE, DELETE trên `luxeoptic.*`. Dùng tài khoản quản trị DB chỉ để import/cấp quyền, không ghi mật khẩu thật vào repo.
@@ -69,7 +69,7 @@ python scripts/test-tv2.py --php C:/xampp/php/php.exe --mysqld C:/mysql/bin/mysq
 python scripts/test-upload-apache.py --xampp C:/xampp
 ```
 
-Thêm `--playwright <đường-dẫn-package-playwright> --browser <đường-dẫn-chrome>` để kiểm tra UI. Chỉ công cụ kiểm thử cần Python/Node/Playwright, website không phụ thuộc chúng. MySQL 8.0 là môi trường đã thử; **chưa xác nhận MariaDB**.
+Thêm `--playwright <đường-dẫn-package-playwright> --browser <đường-dẫn-chrome>` để kiểm tra UI. Chỉ công cụ kiểm thử cần Python/Node/Playwright, website không phụ thuộc chúng. Đã kiểm thử MySQL 8.0.46 và MariaDB 10.4.32 của XAMPP. Trên MariaDB đạt 81 ca nghiệp vụ, 76 ca UI và 38 ca tài khoản; xem `docs/testing/MARIADB-2026-11-17.md`.
 
 ## Bản nộp
 

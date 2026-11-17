@@ -80,6 +80,8 @@ def main():
     php = str(Path(args.php).resolve())
     mysqld = str(Path(args.mysqld).resolve())
     mysql_base = str(Path(mysqld).parent.parent)
+    version = subprocess.check_output([mysqld, '--version'], text=True, creationflags=flags)
+    is_mariadb = 'MariaDB' in version
     processes, handles, checks = [], [], []
     report = {'date': time.strftime('%Y-%m-%d'), 'checks': checks,
               'scope': 'Catalog, admin products/uploads, checkout and order state regression'}
@@ -119,13 +121,20 @@ def main():
     try:
         init_log = open(temp / 'mysql-init.log', 'w', encoding='utf-8')
         handles.append(init_log)
-        subprocess.run([mysqld, '--no-defaults', '--initialize-insecure',
-                        '--basedir=' + mysql_base, '--datadir=' + str(temp / 'mysql-data')],
-                       stdout=init_log, stderr=init_log, check=True, creationflags=flags)
+        if is_mariadb:
+            # Create an isolated data directory without installing a Windows service.
+            installer = Path(mysql_base) / 'bin/mysql_install_db.exe'
+            init_command = [str(installer), '--datadir=' + str(temp / 'mysql-data'),
+                            '--port=' + str(mysql_port)]
+        else:
+            init_command = [mysqld, '--no-defaults', '--initialize-insecure',
+                            '--basedir=' + mysql_base, '--datadir=' + str(temp / 'mysql-data')]
+        subprocess.run(init_command, stdout=init_log, stderr=init_log,
+                       check=True, creationflags=flags)
         log = open(temp / 'mysql.log', 'w', encoding='utf-8'); handles.append(log)
         processes.append(subprocess.Popen([mysqld, '--no-defaults', '--basedir=' + mysql_base,
             '--datadir=' + str(temp / 'mysql-data'), '--bind-address=127.0.0.1',
-            '--port=' + str(mysql_port), '--mysqlx=0'], stdout=log, stderr=log, creationflags=flags))
+            '--port=' + str(mysql_port)] + ([] if is_mariadb else ['--mysqlx=0']), stdout=log, stderr=log, creationflags=flags))
         for attempt in range(60):
             try:
                 with socket.create_connection(('127.0.0.1', mysql_port), timeout=1):
@@ -357,6 +366,16 @@ def main():
         report['checks']=checks
     finally:
         (temp/'results.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+        # mysqld may leave a child process on Windows; shut down this isolated port first.
+        admin_cli = Path(mysql_base) / 'bin/mysqladmin.exe'
+        if admin_cli.exists():
+            try:
+                subprocess.run([str(admin_cli), '--no-defaults', '--host=127.0.0.1',
+                                '--port=' + str(mysql_port), '--user=root', 'shutdown'],
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                               timeout=15, creationflags=flags)
+            except subprocess.TimeoutExpired:
+                pass
         for proc in reversed(processes):
             proc.terminate()
             try:proc.wait(timeout=10)

@@ -1,0 +1,306 @@
+[
+  {
+    "name": "UI 375 /index.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375 /products.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375 /product-detail.php?id=2: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375 /compare.php?id1=1&id2=2: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375 /cart.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375: comparison picks two distinct frames",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375: comparison can remove frame",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375: chatbot retains both responses",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375: checkout form and session badge work",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375: filled cart no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375: payment border follows selected radio",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375 /admin/products.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375 /admin/categories.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375 /admin/orders.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375 /my-orders.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375: local Quill editor loaded",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375: shared admin menu opens",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375: dark admin retains layout",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 375: no JavaScript errors",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768 /index.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768 /products.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768 /product-detail.php?id=2: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768 /compare.php?id1=1&id2=2: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768 /cart.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768: comparison picks two distinct frames",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768: comparison can remove frame",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768: chatbot retains both responses",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768: checkout form and session badge work",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768: filled cart no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768: payment border follows selected radio",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768 /admin/products.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768 /admin/categories.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768 /admin/orders.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768 /my-orders.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768: local Quill editor loaded",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768: shared admin menu opens",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768: dark admin retains layout",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 768: no JavaScript errors",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024 /index.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024 /products.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024 /product-detail.php?id=2: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024 /compare.php?id1=1&id2=2: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024 /cart.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024: comparison picks two distinct frames",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024: comparison can remove frame",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024: chatbot retains both responses",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024: checkout form and session badge work",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024: filled cart no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024: payment border follows selected radio",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024 /admin/products.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024 /admin/categories.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024 /admin/orders.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024 /my-orders.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024: local Quill editor loaded",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024: dark admin retains layout",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1024: no JavaScript errors",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440 /index.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440 /products.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440 /product-detail.php?id=2: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440 /compare.php?id1=1&id2=2: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440 /cart.php: renders without page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440: comparison picks two distinct frames",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440: comparison can remove frame",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440: chatbot retains both responses",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440: checkout form and session badge work",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440: filled cart no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440: payment border follows selected radio",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440 /admin/products.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440 /admin/categories.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440 /admin/orders.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440 /my-orders.php: no page overflow",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440: local Quill editor loaded",
+    "result": "PASS"
+  },
+  {
+    "name": "Quill save and reload retains bold italic bullet and link",
+    "result": "PASS"
+  },
+  {
+    "name": "Public detail keeps sanitized editor formatting",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440: dark admin retains layout",
+    "result": "PASS"
+  },
+  {
+    "name": "UI 1440: no JavaScript errors",
+    "result": "PASS"
+  }
+]

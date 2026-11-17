@@ -1,0 +1,162 @@
+{
+  "date": "2026-11-17",
+  "checks": [
+    {
+      "name": "register valid and ignore injected role/status",
+      "result": "PASS"
+    },
+    {
+      "name": "phone normalized and password stored hashed",
+      "result": "PASS"
+    },
+    {
+      "name": "register rejects duplicate email",
+      "result": "PASS"
+    },
+    {
+      "name": "register rejects duplicate normalized phone",
+      "result": "PASS"
+    },
+    {
+      "name": "register rejects invalid email",
+      "result": "PASS"
+    },
+    {
+      "name": "register rejects short password",
+      "result": "PASS"
+    },
+    {
+      "name": "register rejects mismatched confirmation",
+      "result": "PASS"
+    },
+    {
+      "name": "register requires CSRF",
+      "result": "PASS"
+    },
+    {
+      "name": "register rejects GET",
+      "result": "PASS"
+    },
+    {
+      "name": "guest cannot read profile",
+      "result": "PASS"
+    },
+    {
+      "name": "guest cannot read admin users",
+      "result": "PASS"
+    },
+    {
+      "name": "incorrect password does not authenticate",
+      "result": "PASS"
+    },
+    {
+      "name": "customer login rejects external return",
+      "result": "PASS"
+    },
+    {
+      "name": "login regenerates session ID",
+      "result": "PASS"
+    },
+    {
+      "name": "customer can read own profile",
+      "result": "PASS"
+    },
+    {
+      "name": "customer cannot read admin users",
+      "result": "PASS"
+    },
+    {
+      "name": "customer cannot POST admin user save",
+      "result": "PASS"
+    },
+    {
+      "name": "profile updates own allowed fields only",
+      "result": "PASS"
+    },
+    {
+      "name": "profile update requires CSRF",
+      "result": "PASS"
+    },
+    {
+      "name": "logout rejects GET",
+      "result": "PASS"
+    },
+    {
+      "name": "logout rejects wrong CSRF",
+      "result": "PASS"
+    },
+    {
+      "name": "logout returns home and removes authentication",
+      "result": "PASS"
+    },
+    {
+      "name": "logout regenerates session and preserves cart/voucher",
+      "result": "PASS"
+    },
+    {
+      "name": "profile protected after logout",
+      "result": "PASS"
+    },
+    {
+      "name": "phone login returns to cart",
+      "result": "PASS"
+    },
+    {
+      "name": "admin login reaches users",
+      "result": "PASS"
+    },
+    {
+      "name": "admin can read own profile",
+      "result": "PASS"
+    },
+    {
+      "name": "cannot block self",
+      "result": "PASS"
+    },
+    {
+      "name": "cannot demote last active admin",
+      "result": "PASS"
+    },
+    {
+      "name": "admin creates customer",
+      "result": "PASS"
+    },
+    {
+      "name": "admin save rejects unsupported role",
+      "result": "PASS"
+    },
+    {
+      "name": "admin blocks customer",
+      "result": "PASS"
+    },
+    {
+      "name": "blocked existing session loses access",
+      "result": "PASS"
+    },
+    {
+      "name": "blocked customer cannot login",
+      "result": "PASS"
+    },
+    {
+      "name": "admin unblocks customer",
+      "result": "PASS"
+    },
+    {
+      "name": "admin can update own profile",
+      "result": "PASS"
+    },
+    {
+      "name": "admin search/filter returns matching account",
+      "result": "PASS"
+    },
+    {
+      "name": "create-admin CLI endpoint blocked on web",
+      "result": "PASS"
+    }
+  ],
+  "scope": "HTTP + database regression; no claim to reproduce original 95 tests",
+  "php": "8.2.12",
+  "mysql": "10.4.32-MariaDB",
+  "passed": 38,
+  "total": 38
+}
