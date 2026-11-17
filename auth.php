@@ -207,7 +207,7 @@ $tabClasses = static fn (bool $active): string => $active
             <div class="flex items-center gap-2">
               <input type="checkbox" id="agreeTerms" name="agree_terms" value="1" required class="accent-black"
                      <?= !empty($registerOld['agree_terms']) ? 'checked' : '' ?><?= user_field_attrs($registerState, 'agree_terms', 'register') ?>>
-              <label for="agreeTerms" class="cursor-pointer">Tôi đồng ý với <a href="#" class="underline font-semibold">Điều khoản thành viên Atelier</a></label>
+              <label for="agreeTerms" class="cursor-pointer">Tôi đồng ý với <a href="<?= e(url('information.php#terms')) ?>" target="_blank" rel="noopener" class="underline font-semibold">Điều khoản thành viên Atelier</a></label>
             </div>
             <?= user_field_error($registerState, 'agree_terms', 'register') ?>
           </div>
@@ -221,8 +221,8 @@ $tabClasses = static fn (bool $active): string => $active
       <!-- Footer Info -->
       <div class="auth-footer text-11px text-muted">
         <div class="flex gap-4">
-          <a href="#" class="hover-underline">Điều khoản</a>
-          <a href="#" class="hover-underline">Quyền riêng tư</a>
+          <a href="<?= e(url('information.php#terms')) ?>" target="_blank" rel="noopener" class="hover-underline">Điều khoản</a>
+          <a href="<?= e(url('information.php#privacy')) ?>" target="_blank" rel="noopener" class="hover-underline">Quyền riêng tư</a>
         </div>
       </div>
 

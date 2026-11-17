@@ -1,9 +1,72 @@
 <?php
-require __DIR__.'/../includes/admin-commerce.php';require_admin();$id=positive_id($_GET['edit']??0);
-$item=$id?(query_rows('SELECT * FROM categories WHERE id=?',[$id])[0]??null):['is_active'=>1,'sort_order'=>0];if(!$item && $id){http_response_code(404);exit('Danh mục không tồn tại.');}
-$errors=$_SESSION['admin_errors']??[];$values=$_SESSION['admin_old']??$item;unset($_SESSION['admin_errors'],$_SESSION['admin_old']);
-$total=(int)query_rows('SELECT COUNT(*) n FROM categories')[0]['n'];[$page,$pages,$offset]=paginate($total,10);$rows=query_rows('SELECT * FROM categories ORDER BY sort_order,id LIMIT 10 OFFSET '.$offset);
-page_start('Quản lý danh mục',true); ?>
-<div class="panel table-scroll"><table class="commerce-table"><thead><tr><th>Tên</th><th>Slug</th><th>Thứ tự</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody><?php foreach($rows as $c): ?><tr><td><?= e($c['name']) ?></td><td><?= e($c['slug']) ?></td><td><?= (int)$c['sort_order'] ?></td><td><?= $c['is_active']?'Hiển thị':'Ẩn' ?></td><td><a class="btn" href="?edit=<?= (int)$c['id'] ?>">Sửa</a><form class="inline-form" method="post" action="<?= e(url('admin/actions/category-delete.php')) ?>" data-confirm="Xóa danh mục trống này?"><?php csrf_input() ?><input type="hidden" name="id" value="<?= (int)$c['id'] ?>"><button class="btn">Xóa</button></form></td></tr><?php endforeach ?></tbody></table></div><?php pagination($total,$page,$pages); ?>
-<form class="panel" method="post" action="<?= e(url('admin/actions/category-save.php')) ?>"><h2><?= $id?'Sửa':'Thêm' ?> danh mục</h2><?php csrf_input() ?><input type="hidden" name="id" value="<?= $id ?>"><div class="form-grid"><?php foreach(['name'=>'Tên danh mục','slug'=>'Slug','description'=>'Mô tả','sort_order'=>'Thứ tự'] as $key=>$label)form_field($key,$label,$values,$errors,$key==='sort_order'?'number':'text',$key!=='description'); ?></div><label><input type="checkbox" name="is_active" value="1" <?= !empty($values['is_active'])?'checked':'' ?>> Hiển thị</label><div class="form-actions"><button class="btn btn-primary">Lưu danh mục</button><a class="btn" href="<?= e(url('admin/categories.php')) ?>">Thêm mới</a></div></form>
+require __DIR__ . '/../includes/admin-commerce.php';
+require_admin();
+$id = positive_id($_GET['edit'] ?? 0);
+$item = $id
+    ? query_rows('SELECT * FROM categories WHERE id=?', [$id])[0] ?? null
+    : ['is_active' => 1, 'sort_order' => 0];
+if (!$item && $id) {
+    http_response_code(404);
+    exit('Danh mục không tồn tại.');
+}
+$errors = $_SESSION['admin_errors'] ?? [];
+$values = $_SESSION['admin_old'] ?? $item;
+unset($_SESSION['admin_errors'], $_SESSION['admin_old']);
+$total = (int) query_rows('SELECT COUNT(*) n FROM categories')[0]['n'];
+[$page, $pages, $offset] = paginate($total, 10);
+$rows = query_rows('SELECT * FROM categories ORDER BY sort_order,id LIMIT 10 OFFSET ' . $offset);
+page_start('Quản lý danh mục', true); ?>
+<div class="panel table-scroll">
+    <table class="commerce-table">
+        <thead>
+            <tr>
+                <th>Tên</th>
+                <th>Slug</th>
+                <th>Thứ tự</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody><?php foreach($rows as $c): ?><tr>
+                <td><?= e($c['name']) ?></td>
+                <td><?= e($c['slug']) ?></td>
+                <td><?= (int)$c['sort_order'] ?></td>
+                <td><?= $c['is_active']?'Hiển thị':'Ẩn' ?></td>
+                <td>
+                    <a class="btn" href="?edit=<?= (int)$c['id'] ?>">Sửa</a>
+                    <form class="inline-form" method="post"
+                        action="<?= e(url('admin/actions/category-delete.php')) ?>"
+                        data-confirm="Xóa danh mục trống này?"><?php csrf_input() ?>
+                        <input type="hidden" name="id" value="<?= (int)$c['id'] ?>">
+                        <button class="btn">Xóa</button>
+                    </form>
+                </td>
+            </tr><?php endforeach ?></tbody>
+    </table>
+</div><?php pagination($total,$page,$pages); ?>
+<form class="panel" method="post" action="<?= e(url('admin/actions/category-save.php')) ?>">
+    <h2><?= $id?'Sửa':'Thêm' ?> danh mục</h2><?php csrf_input() ?>
+    <input type="hidden" name="id" value="<?= $id ?>">
+    <div class="form-grid"><?php foreach (
+    ['name' => 'Tên danh mục', 'slug' => 'Slug', 'description' => 'Mô tả', 'sort_order' => 'Thứ tự']
+    as $key => $label
+) {
+    form_field(
+        $key,
+        $label,
+        $values,
+        $errors,
+        $key === 'sort_order' ? 'number' : 'text',
+        $key !== 'description',
+    );
+} ?></div>
+    <label>
+        <input type="checkbox" name="is_active" value="1" <?= !empty($values['is_active'])?'checked':'' ?>>
+        Hiển thị
+    </label>
+    <div class="form-actions">
+        <button class="btn btn-primary">Lưu danh mục</button>
+        <a class="btn" href="<?= e(url('admin/categories.php')) ?>">Thêm mới</a>
+    </div>
+</form>
 <?php page_end(['page-admin-categories']); ?>
