@@ -1,0 +1,212 @@
+[
+  {
+    "route": "index.php",
+    "width": 375,
+    "images": [
+      {
+        "src": "/assets/images/cat-eye.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "products.php",
+    "width": 375,
+    "images": [
+      {
+        "src": "/assets/images/img33.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/pilot-gold.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/hexagon-silver.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "product-detail.php?id=2",
+    "width": 375,
+    "images": [
+      {
+        "src": "/assets/images/cat-eye.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/cat-eye.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "product-detail.php?id=8",
+    "width": 375,
+    "images": [
+      {
+        "src": "/assets/images/hexagon-silver.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/hexagon-silver.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "product-detail.php?id=9",
+    "width": 375,
+    "images": [
+      {
+        "src": "/assets/images/pilot-gold.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/pilot-gold.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "product-detail.php?id=11",
+    "width": 375,
+    "images": [
+      {
+        "src": "/assets/images/img33.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/img33.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "compare.php?id1=8&id2=9",
+    "width": 375,
+    "images": [
+      {
+        "src": "/assets/images/hexagon-silver.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/pilot-gold.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "index.php",
+    "width": 1440,
+    "images": [
+      {
+        "src": "/assets/images/cat-eye.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "products.php",
+    "width": 1440,
+    "images": [
+      {
+        "src": "/assets/images/img33.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/pilot-gold.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/hexagon-silver.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "product-detail.php?id=2",
+    "width": 1440,
+    "images": [
+      {
+        "src": "/assets/images/cat-eye.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/cat-eye.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "product-detail.php?id=8",
+    "width": 1440,
+    "images": [
+      {
+        "src": "/assets/images/hexagon-silver.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/hexagon-silver.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "product-detail.php?id=9",
+    "width": 1440,
+    "images": [
+      {
+        "src": "/assets/images/pilot-gold.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/pilot-gold.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "product-detail.php?id=11",
+    "width": 1440,
+    "images": [
+      {
+        "src": "/assets/images/img33.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/img33.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  },
+  {
+    "route": "compare.php?id1=8&id2=9",
+    "width": 1440,
+    "images": [
+      {
+        "src": "/assets/images/hexagon-silver.jpg",
+        "ok": true
+      },
+      {
+        "src": "/assets/images/pilot-gold.jpg",
+        "ok": true
+      }
+    ],
+    "overflow": false
+  }
+]
