@@ -10,3 +10,6 @@
 Thumbs.db
 .DS_Store
 temp/
+# Python test/build cache
+__pycache__/
+*.py[cod]

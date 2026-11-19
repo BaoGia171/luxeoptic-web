@@ -26,6 +26,9 @@ $headerUser = current_user();
 
       <!-- Search, account and session cart -->
       <div class="header-actions">
+        <button type="button" class="action-icon theme-toggle" aria-label="Bật chế độ tối" aria-pressed="false" title="Bật chế độ tối">
+          <span class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
+        </button>
         <button type="button" class="menu-toggle" aria-controls="siteMenu" aria-expanded="false" aria-label="Mở menu">
           <span class="material-symbols-outlined">menu</span>
         </button>

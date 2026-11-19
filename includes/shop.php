@@ -89,7 +89,7 @@ function page_start(string $title, bool $admin=false): void {
     $GLOBALS['shop_admin']=$admin;
     ?>
 <!doctype html>
-<html lang="vi">
+<html lang="vi"<?= $admin ? ' data-theme="light"' : '' ?>>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -100,7 +100,9 @@ function page_start(string $title, bool $admin=false): void {
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <?php foreach (['style', ...($admin?['admin']:[]), 'responsive', 'shopping-tools','theme','ui-effects','commerce'] as $css): ?>
     <link rel="stylesheet" href="<?= e(url('assets/css/'.$css.'.css')) ?>"><?php endforeach ?>
+    <?php if (!$admin): ?>
     <script src="<?= e(url('assets/js/theme.js')) ?>"></script>
+    <?php endif; ?>
 </head>
 <body class="<?= $admin ? 'admin-body' : '' ?>" data-base-url="<?= e(BASE_URL) ?>">
     <?php if ($admin):
@@ -123,9 +125,9 @@ function page_end(array $scripts=[]): void {
     ?>
         </main>
         <?php if (!empty($GLOBALS['shop_admin'])) echo '</div>'; if (empty($GLOBALS['shop_admin'])) require __DIR__.'/footer.php'; ?>
-        <?php foreach (['main','ui-effects', ...($GLOBALS['shop_admin']?['admin']:['chatbot']), ...$scripts] as $js): ?>
+        <?php foreach (['main','ui-effects', ...($GLOBALS['shop_admin']?['admin']:['faq-widget']), ...$scripts] as $js): ?>
         <script src="<?= e(url('assets/js/'.$js.'.js')) ?>"
-            <?= $js==='chatbot' && basename($_SERVER['SCRIPT_NAME'])==='product-detail.php' ? 'data-product-detail' : '' ?>
+            <?= $js==='faq-widget' && basename($_SERVER['SCRIPT_NAME'])==='product-detail.php' ? 'data-product-detail' : '' ?>
             defer></script><?php endforeach ?>
 </body>
 </html><?php

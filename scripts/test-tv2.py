@@ -67,6 +67,8 @@ def main():
         parser.error('--playwright and --browser must be provided together')
     root = Path(__file__).resolve().parents[1]
     temp = Path(tempfile.mkdtemp(prefix='luxeoptic-tv2-test-'))
+    session_dir = temp / 'sessions'
+    session_dir.mkdir()
     app = temp / 'app'
     shutil.copytree(root, app, ignore=shutil.ignore_patterns('.git', 'database.php', '__pycache__'))
     if args.ui_assets:
@@ -157,7 +159,7 @@ def main():
         report['php'] = run_php('echo PHP_VERSION;').strip()
         report['mysql'] = sql('SELECT VERSION() AS v')[0]['v']
         log = open(temp / 'php.log', 'w', encoding='utf-8'); handles.append(log)
-        processes.append(subprocess.Popen([php, '-S', '127.0.0.1:' + str(web_port), '-t', str(app)],
+        processes.append(subprocess.Popen([php, '-d', 'session.save_path=' + str(session_dir), '-S', '127.0.0.1:' + str(web_port), '-t', str(app)],
             stdout=log, stderr=log, creationflags=flags))
         base = 'http://127.0.0.1:' + str(web_port)
         guest = Client(base)

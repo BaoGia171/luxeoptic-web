@@ -67,6 +67,8 @@ def main():
         parser.error('--playwright and --browser must be provided together')
     root = Path(__file__).resolve().parents[1]
     temp = Path(tempfile.mkdtemp(prefix='luxeoptic-commerce-test-'))
+    session_dir = temp / 'sessions'
+    session_dir.mkdir()
     app = temp / 'app'
     shutil.copytree(root, app, ignore=shutil.ignore_patterns('.git', 'database.php', '__pycache__'))
     if args.ui_assets:
@@ -146,7 +148,7 @@ def main():
         report['php'] = run_php('echo PHP_VERSION;').strip()
         report['mysql'] = sql('SELECT VERSION() AS v')[0]['v']
         log = open(temp / 'php.log', 'w', encoding='utf-8'); handles.append(log)
-        processes.append(subprocess.Popen([php, '-S', '127.0.0.1:' + str(web_port), '-t', str(app)],
+        processes.append(subprocess.Popen([php, '-d', 'session.save_path=' + str(session_dir), '-S', '127.0.0.1:' + str(web_port), '-t', str(app)],
             stdout=log, stderr=log, creationflags=flags))
         base = 'http://127.0.0.1:' + str(web_port)
         guest = Client(base)
@@ -263,6 +265,13 @@ def main():
             return client.request('/actions/checkout.php',data),data
         response,bad=checkout(customer,{'recipient_email':'bad'})
         body=customer.request('/cart.php')[2]
+        (temp/'invalid-delivery.html').write_text(body, encoding='utf-8')
+        (temp/'invalid-delivery-response.json').write_text(json.dumps({
+            'status': response[0], 'location': response[1].get('Location'),
+            'address_retained': '10 Test Street' in body,
+            'email_error_present': 'error-recipient_email' in body,
+            'note_field_present': '</textarea>' in body,
+        }, indent=2), encoding='utf-8')
         check('invalid delivery retained with field error','10 Test Street' in body and 'error-recipient_email' in body and '</textarea>' in body)
         oldstock=sql('SELECT stock FROM products WHERE id=?',[pid])[0]['stock']
         response,data=checkout(customer,{'total_amount':1,'price':1})
@@ -305,7 +314,7 @@ def main():
         # Two independent PHP servers simulate simultaneous purchases of the last unit.
         from concurrent.futures import ThreadPoolExecutor
         second_port=free_port()
-        processes.append(subprocess.Popen([php,'-S','127.0.0.1:'+str(second_port),'-t',str(app)],stdout=log,stderr=log,creationflags=flags))
+        processes.append(subprocess.Popen([php,'-d','session.save_path='+str(session_dir),'-S','127.0.0.1:'+str(second_port),'-t',str(app)],stdout=log,stderr=log,creationflags=flags))
         other.base='http://127.0.0.1:'+str(second_port)
         time.sleep(1)
         post(customer,'/actions/cart-remove.php',{'product_id':pid})

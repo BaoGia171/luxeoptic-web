@@ -11,6 +11,8 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false,
     ]);
+    // DATETIME defaults and NOW() must use the same timezone as PHP.
+    $pdo->exec("SET time_zone = '+07:00'");
 } catch (PDOException $exception) {
     // Chi ghi chi tiet vao log server, khong hien tai khoan DB ra trinh duyet.
     error_log('LuxeOptic database: ' . $exception->getMessage());

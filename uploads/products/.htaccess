@@ -1,4 +1,6 @@
-Options -Indexes -ExecCGI
+# InfinityFree: use rewrite rules instead of restricted Options directives.
+RewriteEngine On
+RewriteRule ^$ - [F,L]
 <FilesMatch "(?i)^(?![a-f0-9]{32}\.(jpg|png|webp)$).*$">
     Require all denied
 </FilesMatch>

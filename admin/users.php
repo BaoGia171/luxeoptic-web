@@ -133,7 +133,7 @@ function user_page_window(int $current, int $total): array
 }
 ?>
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

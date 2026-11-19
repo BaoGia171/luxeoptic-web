@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram name="TV4 - Cart and checkout">
+    <mxGraphModel page="1" pageWidth="1400" pageHeight="1000">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="boundary" value="" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=25;fontColor=#273743;strokeColor=#273743;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="370" y="115" width="660" height="760" />
+        </mxCell>
+        <mxCell id="title" value="USE CASE CHI TIẾT — GIỎ HÀNG VÀ ĐẶT HÀNG" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=34;fontColor=#273743;strokeColor=#273743;fillColor=#FFFFFF;text;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="20" width="1340" height="65" />
+        </mxCell>
+        <mxCell id="system" value="Phân hệ giỏ hàng và đặt hàng" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=28;fontColor=#273743;strokeColor=#273743;fillColor=#FFFFFF;text;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="400" y="130" width="600" height="50" />
+        </mxCell>
+        <mxCell id="guest" value="Khách chưa&#10;đăng nhập" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=25;fontColor=#273743;strokeColor=#273743;fillColor=#FFFFFF;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="130" y="395" width="90" height="140" />
+        </mxCell>
+        <mxCell id="customer" value="Khách hàng&#10;đã đăng nhập" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=25;fontColor=#273743;strokeColor=#273743;fillColor=#FFFFFF;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1180" y="395" width="90" height="140" />
+        </mxCell>
+        <mxCell id="uc1" value="UC01 — Thêm sản phẩm&#10;vào giỏ" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=25;fontColor=#273743;strokeColor=#273743;fillColor=#FFFFFF;ellipse;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="455" y="220" width="490" height="110" />
+        </mxCell>
+        <mxCell id="uc2" value="UC02 — Xem, cập nhật&#10;và xóa sản phẩm trong giỏ" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=25;fontColor=#273743;strokeColor=#273743;fillColor=#FFFFFF;ellipse;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="455" y="385" width="490" height="110" />
+        </mxCell>
+        <mxCell id="uc3" value="UC03 — Áp dụng voucher" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=25;fontColor=#273743;strokeColor=#273743;fillColor=#FFFFFF;ellipse;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="455" y="550" width="490" height="110" />
+        </mxCell>
+        <mxCell id="uc4" value="UC04 — Đặt hàng" style="html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=25;fontColor=#273743;strokeColor=#273743;fillColor=#FFFFFF;ellipse;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="455" y="715" width="490" height="110" />
+        </mxCell>
+        <mxCell id="e00" style="endArrow=none;startArrow=none;strokeColor=#273743;" edge="1" parent="1" source="guest" target="uc1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e01" style="endArrow=none;startArrow=none;strokeColor=#273743;" edge="1" parent="1" source="guest" target="uc2">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e02" style="endArrow=none;startArrow=none;strokeColor=#273743;" edge="1" parent="1" source="guest" target="uc3">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e10" style="endArrow=none;startArrow=none;strokeColor=#273743;" edge="1" parent="1" source="customer" target="uc1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e11" style="endArrow=none;startArrow=none;strokeColor=#273743;" edge="1" parent="1" source="customer" target="uc2">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e12" style="endArrow=none;startArrow=none;strokeColor=#273743;" edge="1" parent="1" source="customer" target="uc3">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e13" style="endArrow=none;startArrow=none;strokeColor=#273743;" edge="1" parent="1" source="customer" target="uc4">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="note" value="Đặt hàng yêu cầu đăng nhập. Voucher là tùy chọn, không bắt buộc để đặt hàng.&#10;Đường nối là quan hệ tương tác; trình tự xử lý nằm ở Activity Diagram." style="html=0;whiteSpace=wrap;fontFamily=Arial;fontSize=22;fontColor=#273743;strokeColor=#273743;fillColor=#FFFFFF;text;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="30" y="890" width="1340" height="90" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

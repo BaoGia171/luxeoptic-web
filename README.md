@@ -33,7 +33,7 @@ Nếu chạy PHP built-in để thử nhanh: `php -S 127.0.0.1:8080 -t .`, đặ
 DirectoryIndex index.php
 ```
 
-Giữ `uploads/products/.htaccess` trong bản clone/ZIP. Quy tắc chỉ cho phục vụ tên ảnh ngẫu nhiên 32 ký tự hex + jpg/png/webp, chặn các tên còn lại; vô hiệu handler script cho ảnh. Apache cần module mime và authz_core. Không chỉ dựa vào việc đổi đuôi file. Đặt `upload_max_filesize = 2M`, `post_max_size = 12M`, `max_file_uploads = 5` hoặc lớn hơn; ứng dụng vẫn kiểm tra lại 2MB/ảnh và tổng tối đa 5 ảnh kể cả ảnh cũ.
+Giữ `uploads/products/.htaccess` trong bản clone/ZIP. Quy tắc chỉ cho phục vụ tên ảnh ngẫu nhiên 32 ký tự hex + jpg/png/webp, chặn các tên còn lại; vô hiệu handler script cho ảnh. Apache cần các module mime, authz_core và rewrite. Không chỉ dựa vào việc đổi đuôi file. Đặt `upload_max_filesize = 2M`, `post_max_size = 12M`, `max_file_uploads = 5` hoặc lớn hơn; ứng dụng vẫn kiểm tra lại 2MB/ảnh và tổng tối đa 5 ảnh kể cả ảnh cũ.
 
 Đã kiểm tra trên Apache của XAMPP: PHP hoạt động bên ngoài uploads; probe.php/probe.phtml/probe.php.png trong uploads nhận 403, không thực thi/không lộ source; ảnh PNG hợp lệ nhận 200. Script thử chỉ tạo fixture trong thư mục tạm và xóa file probe sau thử.
 

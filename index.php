@@ -226,6 +226,6 @@ $totalVisible = array_sum(array_column($homeCategories, 'product_count'));
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui-effects.js"></script>
-    <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/faq-widget.js"></script>
 </body>
 </html>

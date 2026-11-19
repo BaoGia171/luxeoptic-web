@@ -17,6 +17,7 @@ LoadModule authz_core_module modules/mod_authz_core.so
 LoadModule authz_host_module modules/mod_authz_host.so
 LoadModule mime_module modules/mod_mime.so
 LoadModule dir_module modules/mod_dir.so
+LoadModule rewrite_module modules/mod_rewrite.so
 LoadFile "{x.as_posix()}/php/php8ts.dll"
 LoadModule php_module "{x.as_posix()}/php/php8apache2_4.dll"
 PHPINIDir "{x.as_posix()}/php"
